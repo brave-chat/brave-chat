@@ -1,0 +1,12 @@
+.circular-progress-root {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

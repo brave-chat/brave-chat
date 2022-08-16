@@ -1,0 +1,120 @@
+@media screen and (min-width: 960px) {
+  .auth-content {
+    width: 50%;
+    order: 1;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .auth-content {
+    padding: 50px;
+  }
+  .form-control-label-root .MuiFormControlLabel-label {
+    font-size: 12px;
+  }
+}
+@media screen and (min-width: 600px) {
+  .auth-wrap {
+    padding: 40px;
+  }
+}
+@media screen and (min-width: 960px) {
+  .auth-card {
+    flex-direction: row;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .auth-card {
+    max-width: 1050px;
+  }
+}
+@media screen and (max-width: 375px) {
+  .auth-content .title-root {
+    font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .auth-content .title-root {
+    font-size: 22px;
+  }
+}
+@media screen and (max-width: 255px) {
+  .auth-content .title-root {
+    font-size: 18px;
+  }
+}
+.auth-card {
+  border: 3px solid blue;
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  max-width: 467px;
+  width: 93%;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 3px 1px rgba(0, 0, 0, 0.12),
+    0px 1px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+}
+.auth-content {
+  width: 87.5%;
+  padding: 30px;
+  background-color: rgba(2, 2, 2, 0.2);
+}
+
+.auth-content .title-root {
+  margin-bottom: 14px;
+}
+
+.text-field-root .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(2, 2, 2, 1);
+}
+
+.MuiBox-root .MuiButton-outlined {
+  margin-right: 30px;
+}
+
+.textCapital {
+  text-transform: capitalize;
+}
+
+.text-acc {
+  text-align: left;
+}
+
+.text-acc a {
+  margin-left: 4px;
+}
+
+.alr-text-root {
+  text-align: center;
+}
+
+.auth-wrap {
+  width: 93%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  padding-top: 10%;
+}
+.auth-wrap::before {
+  content: "";
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 1px;
+  width: 100%;
+  height: 100%;
+}
+
+.MuiFormControl-root > .MuiInputBase-root {
+  width: 93%;
+}
+
+.MuiFormControl-root > .MuiBox-root {
+  width: 93%;
+}
