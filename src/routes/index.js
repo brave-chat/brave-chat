@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import PageLoader from "../components/PageLoader";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import ChatFooter from "../components/ChatFooter";
 
 const AppRoutes = () => {
   // TODO: implement redirect to chat if user if signed in
@@ -26,6 +27,15 @@ const AppRoutes = () => {
               <div className="signup">
                 {<Register />}
                 {/*lazy(() => import('../pages/Register'))*/}
+              </div>
+            }
+          ></Route>
+          <Route
+            path="/chat"
+            element={
+              <div className="chat">
+                {<ChatFooter />}
+                {/*lazy(() => import('../pages/ChatFooter'))*/}
               </div>
             }
           ></Route>
