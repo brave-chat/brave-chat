@@ -1,0 +1,322 @@
+@media screen and (min-width: 960px) {
+  .user-sub-title {
+    font-size: 12px;
+  }
+  .menu-root .MuiMenu-list {
+    padding: 24px;
+  }
+}
+
+.chat-cell-item {
+  padding: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.chat-cell-item:hover,
+.chat-cell-item .active {
+  background-color: rgba(2, 2, 2, 0.04);
+}
+
+.title-root {
+  position: relative;
+}
+.chat-cell-item:hover .title-root,
+.chat-cell-item .active .title-root {
+  color: #fff;
+}
+
+.chat-cell-info {
+  width: calc(100% - 40px);
+  padding-left: 16px;
+}
+
+.chat-des-root {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  padding-right: 10;
+  width: calc(100% - 24px);
+}
+
+.nav-count {
+  background-color: rgba(0, 0, 0, 0.06);
+  color: #fff;
+  padding: 2px;
+  border-radius: 50%;
+  margin-left: auto;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  line-height: 19px;
+}
+
+.chat-avatar-root {
+  position: relative;
+}
+
+.status-dot {
+  position: relative;
+}
+.status-dot .MuiBadge-badge {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: solid 1px #fff;
+  position: absolute;
+  right: 4px;
+  top: 6px;
+  z-index: 1;
+}
+
+.badge-online {
+  background-color: #8dcd03;
+}
+.badge-busy {
+  background-color: #ff8c00;
+}
+.badge-offline {
+  background-color: #c1c1c1;
+}
+
+.chat-cell-header {
+  background-color: rgba(2, 2, 2, 0.04);
+  border-bottom: 1px solid rgba(2, 2, 2, 0.04);
+  padding: 13px;
+  font-weight: bold;
+  font-size: 15px;
+  text-transform: uppercase;
+  color: rgb(253, 253, 253);
+  letter-spacing: 1.5px;
+  border-top: 2px solid grey;
+  border-bottom: 2px solid grey;
+}
+.perfect-scroll-bar-root {
+  height: calc(100vh - 30px);
+}
+
+.profile-list-root {
+  position: relative;
+}
+.profile-list-root li {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+.profile-list-root li .MuiListItem-gutters {
+  padding: 10px 0;
+}
+.profile-list-root
+  li
+  .MuiListItem-gutters" {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 0px;
+}
+.profile-list-root li .MuiTypography-body2" {
+  font-size: 16px;
+}
+
+.sign-out-root {
+  border-bottom: 0 none !important;
+  font-size: 14px;
+  letter-spacing: 1.25;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding-top: 20px !important;
+  padding-bottom: 0 !important;
+}
+.sign-out-root .MuiListItemText-primary {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.text-color div span {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.list-icon-root {
+  min-width: 10px;
+  margin-right: 20px;
+}
+.list-icon-root .MuiSvgIcon-root {
+  fontsize: 18px;
+}
+
+.list-item-action {
+  right: 0px;
+  color: #000;
+}
+.MuiIconButton-root,
+.MuiSvgIcon-root {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.profile-list-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5;
+  color: rgba(0, 0, 0, 0.6);
+  padding-top: 14px;
+  padding-bottom: 8px;
+}
+
+.personal-list-root {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.personal-list-root li {
+  align-items: flex-end;
+}
+.personal-list-root li .MuiListItemText-multiline {
+  margin: 0px;
+}
+.personal-list-root li .MuiListItemText-primary {
+  color: rgba(0, 0, 0, 0.38);
+  font-size: 12px;
+  letter-spacing: 0.4;
+}
+.personal-list-root .list-icon-root {
+  margin-bottom: 2px;
+}
+.profile-status-dot {
+  width: 16px;
+  height: 16px;
+  background-color: #8dcd03;
+  border-radius: 50%;
+}
+
+.user-root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 12px;
+  color: rgba(0, 0, 0, 1);
+}
+.header-avatar-root {
+  cursor: pointer;
+  position: relative;
+}
+.header-status-dot {
+  width: 16px;
+  height: 16px;
+  background-color: #8dcd03;
+  border-radius: 50%;
+  border: solid 1px #fff;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  z-index: 1;
+}
+
+.user-info {
+  margin-left: 16px;
+  transition: all 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+}
+.user-title {
+  color: rgb(255, 255, 255);
+  margin-bottom: 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+}
+.user-title .MuiSvgIcon-root {
+  margin-left: 16px;
+}
+.user-sub-title {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.4;
+}
+
+.search-root {
+  position: relative;
+  width: 100%;
+}
+.search-root .MuiSvgIcon-root {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 20px;
+  color: rgba(255, 255, 255, 1);
+  padding-bottom: 10px;
+}
+.search-root .MuiInputBase-root {
+  width: 100%;
+  padding-bottom: 10px;
+}
+.search-root .MuiInputBase-input {
+  height: 36px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  color: rgba(255, 255, 255, 1);
+  box-sizing: border-box;
+  padding: 5px 15px 5px 35px;
+  transition: all 0.3s ease;
+  font-size: 12px;
+}
+.search-root .MuiInputBase-input:focus {
+  border-color: rgba(255, 255, 255, 0.87);
+}
+
+.menu-root .MuiMenu-list {
+  padding: 16px;
+}
+
+.menu-item-root {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  color: rgba(0, 0, 0, 0.38);
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.menu-item-root::hover,
+.menu-item-root .active {
+  color: rgba(0, 0, 0, 0.87);
+  background-color: transparent;
+}
+,
+.menu-item-root .MuiTouchRipple-root {
+  display: none;
+}
+
+.menu-item-root::first-child {
+  padding-top: 0px;
+}
+.menu-status-Dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+#user-popover > .MuiPaper-root {
+  background-color: #000;
+  color: #fff;
+}
+#user-popover > .MuiPaper-root > .MuiBox-root ul li {
+  color: #fff;
+}
+
+#user-popover > .MuiPaper-root > .MuiBox-root ul li p {
+  color: #fff;
+}
+#user-popover > .MuiPaper-root > .MuiBox-root p {
+  color: #fff;
+}
+
+#user-popover > .MuiPaper-root > .MuiBox-root ul li span {
+  color: #fff;
+}
+
+.MuiPaper-root > .MuiList-root {
+  background-color: #000;
+  color: #fff;
+}
