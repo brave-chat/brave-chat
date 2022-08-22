@@ -7,13 +7,16 @@ import IconButton from "@mui/material/IconButton";
 import "./style.css";
 import AttachFileIcon from "@mui/icons-material/Attachment";
 
-import { sendMediaMessage, sendTextMessage } from "../../redux/appReducer/actions";
+import {
+  sendMediaMessage,
+  sendTextMessage,
+} from "../../redux/appReducer/actions";
 import CustomTextInput from "../CustomTextInput";
-import { selectedUser, authUser} from "../../redux/appReducer/selectors";
+import { selectedUser, authUser } from "../../redux/appReducer/selectors";
 const ChatFooter = () => {
   const [message, setMessage] = useState("");
-  const receiver = useSelector(selectedUser)
-  const sender = useSelector(authUser)
+  const receiver = useSelector(selectedUser);
+  const sender = useSelector(authUser);
 
   const dispatch = useDispatch();
 

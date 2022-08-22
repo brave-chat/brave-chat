@@ -1,4 +1,4 @@
-import React, { lazy, Suspense} from "react";
+import React, { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import PageLoader from "../components/PageLoader";
 import Login from "../pages/Login";
