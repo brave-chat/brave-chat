@@ -1,13 +1,17 @@
-.div-password-field .toggle-button-password {
-  z-index: 9;
-  height: 55px;
-  width: 60px;
-  right: -2px;
-  border-radius: 0px;
-  border: 2px solid blue;
-  background-color: #000;
+.div-password-field .toggle-button-password > * {
+  color: #000;
+  border: none;
+  margin-right: 10px;
 }
 
-.div-password-field .toggle-button-password:hover {
-  background-color: #000;
+.div-password-field
+  .MuiBox-root
+  .MuiInputAdornment-root
+  .MuiIconButton-root
+  .MuiSvgIcon-root {
+  border: none;
+  color: #000;
+  width: 35px;
+  height: 39px;
+  margin-left: -10px;
 }

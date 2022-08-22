@@ -12,6 +12,11 @@ import { JWTAuth } from "../../redux/appReducer/actions";
 import CustomPasswordInput from "../CustomPassword";
 import AppTextInput from "../AppTextInput";
 import DialogContent from "@mui/material/DialogContent";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import PersonIcon from "@mui/icons-material/Person";
+import MailIcon from "@mui/icons-material/Mail";
 import { isValidEmail } from "../Helper";
 import "../SignIn/style.css";
 
@@ -55,7 +60,7 @@ const SignUp = () => {
               display="flex"
               flexDirection={{ xs: "column", md: "row" }}
               alignItems="center"
-              mb={{ xs: 6, ml: 5 }}
+              mb={{ xs: 5.5, ml: 1 }}
             >
               <GridContainer>
                 <Grid item xs={12} sm={5.5}>
@@ -71,6 +76,19 @@ const SignUp = () => {
                       setFirstNameError("");
                     }}
                     helperText={firstNameError}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment
+                          position="start"
+                          variant="standard"
+                          sx={6}
+                        >
+                          <IconButton aria-label="First Name" edge="end">
+                            <PermIdentityIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -86,37 +104,60 @@ const SignUp = () => {
                       setLastNameError("");
                     }}
                     helperText={lastNameError}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment
+                          position="start"
+                          variant="standard"
+                          sx={6}
+                        >
+                          <IconButton aria-label="Last Name" edge="end">
+                            <PersonIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </Grid>
               </GridContainer>
             </Box>
 
-            <Box mb={{ xs: 6, md: 5 }}>
-
+            <Box mb={{ xs: 3, ml: 1 }}>
               <GridContainer>
                 <Grid item xs={12} sm={12}>
-                <AppTextInput
-                  fullWidth
-                  size={""}
-                  className="text-field-root"
-                  variant="outlined"
-                  label="Email Address"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    setEmailError("");
-                  }}
-                  helperText={emailError}
-                />
+                  <AppTextInput
+                    fullWidth
+                    size={""}
+                    className="text-field-root"
+                    variant="outlined"
+                    label="Email Address"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      setEmailError("");
+                    }}
+                    helperText={emailError}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment
+                          position="start"
+                          variant="standard"
+                          sx={6}
+                        >
+                          <IconButton aria-label="Email" edge="end">
+                            <MailIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
                 </Grid>
               </GridContainer>
             </Box>
 
-            <Box mb={{ xs: 6, md: 5 }}>
-
+            <Box mb={{ xs: 3, ml: 1 }}>
               <GridContainer>
                 <Grid item xs={12} sm={12}>
-
                   <CustomPasswordInput
                     password={password}
                     setPassword={setPassword}
@@ -131,9 +172,7 @@ const SignUp = () => {
               display="flex"
               alignItems="center"
               justifyContent="space-between"
-
-              mb={6}
-
+              mb={{ xs: 5, ml: 2 }}
             >
               <Button onClick={onSubmit} variant="contained" color="primary">
                 {"Sign Up"}
@@ -144,7 +183,6 @@ const SignUp = () => {
               Have an account?
               <NavLink to="/login">Sign In</NavLink>
             </Typography>
-
           </DialogContent>
           <ContentLoader />
         </Box>
