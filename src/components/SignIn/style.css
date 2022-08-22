@@ -12,11 +12,6 @@
     font-size: 12px;
   }
 }
-@media screen and (min-width: 600px) {
-  .auth-wrap {
-    padding: 40px;
-  }
-}
 @media screen and (min-width: 960px) {
   .auth-card {
     flex-direction: row;
@@ -44,28 +39,33 @@
   }
 }
 .auth-card {
-  border: 3px solid blue;
+  border: 2px solid blue;
   position: absolute;
   top: 50%;
   z-index: 3;
-  max-width: 467px;
+  max-width: 478px;
   width: 93%;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 3px 1px rgba(0, 0, 0, 0.12),
     0px 1px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-  background-color: #fff;
-  color: rgba(0, 0, 0, 0.6);
+  border-radius: 16px;
+  background-color: #000;
+  color: #fff;
   display: flex;
-  flex-direction: column;
 }
 .auth-content {
   width: 87.5%;
   padding: 30px;
-  background-color: rgba(2, 2, 2, 0.2);
+  background-color: #000;
+  border-radius: 16px;
 }
-
+.MuiFormControl-root .css-1sumxir-MuiFormLabel-root-MuiInputLabel-root {
+  color: #fff;
+  line-height: 1em;
+}
 .auth-content .title-root {
   margin-bottom: 14px;
+  margin-left: 22px;
+  margin-top: 22px;
 }
 
 .text-field-root .MuiOutlinedInput-notchedOutline {
@@ -93,7 +93,7 @@
 }
 
 .auth-wrap {
-  width: 93%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;

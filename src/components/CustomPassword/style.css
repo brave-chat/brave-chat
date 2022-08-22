@@ -1,36 +1,13 @@
 .div-password-field .toggle-button-password {
-  margin-top: 16px;
   z-index: 9;
-  margin-left: -93px;
-  height: 56px;
-  border: 1px solid #000;
+  height: 55px;
+  width: 60px;
+  right: -2px;
   border-radius: 0px;
+  border: 2px solid blue;
   background-color: #000;
-  color: #fff;
 }
 
 .div-password-field .toggle-button-password:hover {
   background-color: #000;
-}
-
-@media screen and (max-width: 538px) {
-  .div-password-field .toggle-button-password {
-    margin-left: -90px;
-  }
-}
-@media screen and (max-width: 481px) {
-  .div-password-field .toggle-button-password {
-    margin-left: -85px;
-  }
-}
-
-@media screen and (max-width: 378px) {
-  .div-password-field .toggle-button-password {
-    margin-left: -80px;
-  }
-}
-@media screen and (max-width: 287px) {
-  .div-password-field .toggle-button-password {
-    margin-left: -77px;
-  }
 }

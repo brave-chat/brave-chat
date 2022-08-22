@@ -1,21 +1,48 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Box } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import ContentLoader from "../ContentLoader";
+import GridContainer from "../GridContainer";
+import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { NavLink } from "react-router-dom";
+import { JWTAuth } from "../../redux/appReducer/actions";
 import CustomPasswordInput from "../CustomPassword";
+import AppTextInput from "../AppTextInput";
+import DialogContent from "@mui/material/DialogContent";
+import { isValidEmail } from "../Helper";
 import "../SignIn/style.css";
 
 const SignUp = () => {
-  const [name, setName] = useState("");
+  const [firstName, setFisrtName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onSubmit = () => {
-    // TODO: implement redux submit reducer
-  };
+  const [firstNameError, setFirstNameError] = useState("");
+  const [lastNameError, setLastNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
+  const dispatch = useDispatch();
+
+  const onSubmit = () => {
+    if (!firstName) {
+      setFirstNameError("First Name is required!");
+    } else if (!lastName) {
+      setLastNameError("Last Name is required!");
+    } else if (!email) {
+      setEmailError("Email is required!");
+    } else if (!isValidEmail(email)) {
+      setEmailError("Email address must be valid!");
+    } else if (!password) {
+      setPasswordError("Password is required!");
+    } else {
+      dispatch(JWTAuth.onRegister({ firstName, lastName, email, password }));
+    }
+  };
   return (
     <Box className="auth-wrap">
       <Box className="auth-card">
@@ -23,51 +50,103 @@ const SignUp = () => {
           <Typography component="div" variant="h4" className="title-root">
             Create an account
           </Typography>
-          <form>
-            <Box mb={2}>
-              <TextField
-                label="Username"
-                fullWidth
-                onChange={(event) => setName(event.target.value)}
-                defaultValue={name}
-                margin="normal"
-                variant="outlined"
-                className="text-field-root"
-              />
-            </Box>
-            <Box mb={2}>
-              <TextField
-                label="Email"
-                fullWidth
-                onChange={(event) => setEmail(event.target.value)}
-                defaultValue={email}
-                margin="normal"
-                variant="outlined"
-                className="text-field-root"
-              />
+          <DialogContent dividers>
+            <Box
+              display="flex"
+              flexDirection={{ xs: "column", md: "row" }}
+              alignItems="center"
+              mb={{ xs: 6, ml: 5 }}
+            >
+              <GridContainer>
+                <Grid item xs={12} sm={5.5}>
+                  <AppTextInput
+                    fullWidth
+                    size={""}
+                    className="text-field-root full-width-text-box"
+                    variant="outlined"
+                    label="First Name"
+                    value={firstName}
+                    onChange={(e) => {
+                      setFisrtName(e.target.value);
+                      setFirstNameError("");
+                    }}
+                    helperText={firstNameError}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <AppTextInput
+                    fullWidth
+                    size={""}
+                    className="text-field-root full-width-text-box"
+                    variant="outlined"
+                    label="Last Name"
+                    value={lastName}
+                    onChange={(e) => {
+                      setLastName(e.target.value);
+                      setLastNameError("");
+                    }}
+                    helperText={lastNameError}
+                  />
+                </Grid>
+              </GridContainer>
             </Box>
 
-            <CustomPasswordInput
-              password={password}
-              setPassword={setPassword}
-            />
+            <Box mb={{ xs: 6, md: 5 }}>
+
+              <GridContainer>
+                <Grid item xs={12} sm={12}>
+                <AppTextInput
+                  fullWidth
+                  size={""}
+                  className="text-field-root"
+                  variant="outlined"
+                  label="Email Address"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setEmailError("");
+                  }}
+                  helperText={emailError}
+                />
+                </Grid>
+              </GridContainer>
+            </Box>
+
+            <Box mb={{ xs: 6, md: 5 }}>
+
+              <GridContainer>
+                <Grid item xs={12} sm={12}>
+
+                  <CustomPasswordInput
+                    password={password}
+                    setPassword={setPassword}
+                    helperText={passwordError}
+                    setPasswordError={setPasswordError}
+                  />
+                </Grid>
+              </GridContainer>
+            </Box>
 
             <Box
               display="flex"
               alignItems="center"
               justifyContent="space-between"
-              mb={3}
+
+              mb={6}
+
             >
               <Button onClick={onSubmit} variant="contained" color="primary">
                 {"Sign Up"}
               </Button>
             </Box>
-          </form>
 
-          <Typography className="text-acc">
-            Have an account?
-            <NavLink to="/login">Sign In</NavLink>
-          </Typography>
+            <Typography className="text-acc">
+              Have an account?
+              <NavLink to="/login">Sign In</NavLink>
+            </Typography>
+
+          </DialogContent>
+          <ContentLoader />
         </Box>
       </Box>
     </Box>
