@@ -7,11 +7,11 @@ import clsx from "clsx";
 
 const ChatUserCell = ({ data, currentUser, onContactSelect }) => {
   const getBadgeStatusClass = () => {
-    if (data.status === "online") {
+    if (data.chat_status === "online") {
       return "badge-online";
     }
 
-    if (data.status === "away") {
+    if (data.chat_status === "away") {
       return "badge-away";
     }
 
@@ -21,7 +21,7 @@ const ChatUserCell = ({ data, currentUser, onContactSelect }) => {
   return (
     <Box
       className={clsx("chat-cell-item", {
-        active: currentUser && currentUser.id === data.id,
+        active: currentUser && currentUser.email === data.email,
       })}
       onClick={() => onContactSelect(data)}
     >
@@ -30,7 +30,7 @@ const ChatUserCell = ({ data, currentUser, onContactSelect }) => {
           classes={{ root: "status-dot", badge: getBadgeStatusClass() }}
           variant="dot"
         >
-          <CustomAvatar src={data.profile_pic} alt={data.name} />
+          <CustomAvatar src={data.profile_picture} alt={data.first_name} />
         </Badge>
       </Box>
       <Box className="chat-cell-info">
@@ -40,7 +40,7 @@ const ChatUserCell = ({ data, currentUser, onContactSelect }) => {
             variant="subtitle2"
             className="title-root"
           >
-            {data.name}
+            {data.first_name}
           </Typography>
           <Box color="text.secondary" fontSize={12} ml="auto">
             {data.lastMessageTime}

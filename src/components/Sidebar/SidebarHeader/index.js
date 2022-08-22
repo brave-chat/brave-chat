@@ -6,14 +6,27 @@ import SearchIcon from "@mui/icons-material/Search";
 import "../style.css";
 import Popover from "@mui/material/Popover";
 import ProfileDetail from "../ProfileDetail";
+import { uploadProfilePicture } from "../../../redux/appReducer/actions";
+import { useDropzone } from "react-dropzone";
+import IconButton from "@mui/material/IconButton";
+import { useDispatch } from "react-redux";
 
 const SidebarHeader = ({ user, searchText, setSearchText }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [userStatus, setUserStatus] = React.useState(user.status);
+  const [userStatus, setUserStatus] = React.useState(user.chat_status);
 
+  const dispatch = useDispatch();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: "image/*",
+    multiple: false,
+    onDrop: (file) => {
+      dispatch(uploadProfilePicture(file));
+    },
+  });
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -46,10 +59,10 @@ const SidebarHeader = ({ user, searchText, setSearchText }) => {
         </Box>
         <Box className={clsx("user-info", "custom-user-info")}>
           <Typography className="user-title" component="h3" variant="h6">
-            {user.name}
+            {user.first_name}
           </Typography>
           <Typography className="user-sub-title" component="span">
-            {user.profile_status}
+            {user.bio}
           </Typography>
         </Box>
       </Box>
@@ -79,13 +92,17 @@ const SidebarHeader = ({ user, searchText, setSearchText }) => {
       >
         <Box p={{ xs: 4, md: 6 }}>
           <Box className="user-root">
-            <CustomAvatar src={user.profile_picture} onClick={handleClick} />
+
+          <input {...getInputProps()} />
+          <IconButton className="icon-btn-root" {...getRootProps()}>
+            <CustomAvatar src={user.profile_picture} />
+          </IconButton>
             <Box className={clsx("user-info", "custom-user-info")}>
               <Typography className="user-title" component="h3" variant="h6">
-                {user.name}
+                {user.first_name}
               </Typography>
               <Typography className="user-sub-title" component="span">
-                {user.profile_status.substring(0, 30) + "..."}
+                {user.bio.substring(0, 30) + "..."}
               </Typography>
             </Box>
           </Box>

@@ -140,6 +140,10 @@
   min-width: 10px;
   margin-right: 20px;
 }
+.list-icon-root:hover{
+  cursor: pointer;
+}
+
 .list-icon-root .MuiSvgIcon-root {
   fontsize: 18px;
 }

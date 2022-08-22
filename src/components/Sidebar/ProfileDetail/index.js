@@ -7,7 +7,7 @@ import ListItemText from "@mui/material/ListItemText";
 import FlagIcon from "@mui/icons-material/Flag";
 import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 import IconButton from "@mui/material/IconButton";
-import SettingsIcon from "@mui/icons-material/Settings";
+import EditIcon from '@mui/icons-material/Edit';
 import DialpadIcon from "@mui/icons-material/Dialpad";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Typography from "@mui/material/Typography";
@@ -17,6 +17,8 @@ import PersonIcon from "@mui/icons-material/Person";
 import Button from "@mui/material/Button";
 import clsx from "clsx";
 import UserStatus from "../UserStatus";
+import { useDispatch } from "react-redux";
+import { JWTAuth, setCurrentUserStatus } from "../../../redux/appReducer/actions";
 import "../style.css";
 
 const ProfileDetail = ({
@@ -40,13 +42,15 @@ const ProfileDetail = ({
     setAnchorEl(null);
     if (currentUser) {
       setUserStatus(status);
+      dispatch(setCurrentUserStatus(status))
     }
   };
 
   const dispatch = useDispatch();
 
   const onSubmit = () => {
-    // dispatch logout
+    dispatch(JWTAuth.onLogout());
+    window.location.reload();
   }
   const getStatusColor = () => {
     switch (userStatus.toLowerCase()) {
@@ -74,30 +78,10 @@ const ProfileDetail = ({
           <ListItemText className="text-color" primary={userStatus} />
         </ListItem>
         <ListItem className="pointer">
-          <ListItemIcon className="list-icon-root">
-            <FlagIcon />
+          <ListItemIcon className="list-icon-root" onClick={() => {console.log(111111111)}}>
+            <EditIcon />
           </ListItemIcon>
-          <ListItemText
-            className="text-color"
-            primary={user.profile_status.substring(0, 20) + "..."}
-          />
-          <ListItemSecondaryAction className="list-item-action">
-            <IconButton edge="end" aria-label="delete">
-              {currentUser && <CloseIcon color="#000" />}
-            </IconButton>
-          </ListItemSecondaryAction>
-        </ListItem>
-        <ListItem className="pointer">
-          <ListItemIcon className="list-icon-root">
-            <DialpadIcon />
-          </ListItemIcon>
-          <ListItemText className="text-color" primary="My Account" />
-        </ListItem>
-        <ListItem className="pointer">
-          <ListItemIcon className="list-icon-root">
-            <SettingsIcon />
-          </ListItemIcon>
-          <ListItemText className="text-color" primary="Settings" />
+          <ListItemText className="text-color" primary="Edit" />
         </ListItem>
       </List>
 
@@ -110,8 +94,8 @@ const ProfileDetail = ({
           </ListItemIcon>
           <ListItemText
             className="text-color"
-            primary="Name"
-            secondary={user.name}
+            primary="First Name"
+            secondary={user.first_name}
           />
         </ListItem>
         <ListItem>
@@ -120,8 +104,8 @@ const ProfileDetail = ({
           </ListItemIcon>
           <ListItemText
             className="text-color"
-            primary="Username"
-            secondary={user.name}
+            primary="Last Name"
+            secondary={user.first_name}
           />
         </ListItem>
         <ListItem>
@@ -131,7 +115,7 @@ const ProfileDetail = ({
           <ListItemText
             className="text-color"
             primary="Email Address"
-            secondary={user.name}
+            secondary={user.email}
           />
         </ListItem>
         <ListItem>
@@ -141,7 +125,7 @@ const ProfileDetail = ({
           <ListItemText
             className="text-color"
             primary="Phone Number"
-            secondary={user.name}
+            secondary={user.phone_number}
           />
         </ListItem>
         {currentUser && (

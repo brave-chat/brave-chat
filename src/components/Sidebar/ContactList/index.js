@@ -6,23 +6,23 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import NoRecordFound from "../NoRecordFound";
 import "../style.css";
 
-const ContactList = ({ contacts, currentUser, width, onContactSelect }) => {
+const ContactList = ({ contacts, currentUser }) => {
   const generateHeaderList = () => {
     if (contacts.length === 0) {
       return [];
     }
     let contactList = [];
-    let isFavourite = true;
-    contactList = [{ id: "header-0", header: true, title: "Favourite" }];
+    let isFavourite = "true";
+    contactList = [{ id: "header-0", header: true, title: "Favourites" }];
 
     contacts.map((contact) => {
-      if (isFavourite !== contact.favourite) {
+      if (contact.favourite != isFavourite) {
         contactList = contactList.concat({
           id: "header-" + contactList.length,
           header: true,
           title: "Contacts",
         });
-        isFavourite = false;
+        isFavourite = "false";
       }
       contactList = contactList.concat(contact);
 
@@ -38,17 +38,16 @@ const ContactList = ({ contacts, currentUser, width, onContactSelect }) => {
         renderRow={(data) => {
           if (data.header) {
             return (
-              <Box key={data.id} className="chat-cell-header">
+              <Box key={data.pk} className="chat-cell-header">
                 {data.title}
               </Box>
             );
           } else {
             return (
               <ContactCell
-                key={data.id}
+                key={data.pk}
                 data={data}
                 currentUser={currentUser}
-                onContactSelect={onContactSelect}
               />
             );
           }
