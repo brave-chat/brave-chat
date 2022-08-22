@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useDropzone } from "react-dropzone";
 
 import SendIcon from "@mui/icons-material/Send";
@@ -6,14 +7,19 @@ import IconButton from "@mui/material/IconButton";
 import "./style.css";
 import AttachFileIcon from "@mui/icons-material/Attachment";
 
+import { sendMediaMessage, sendTextMessage } from "../../redux/appReducer/actions";
 import CustomTextInput from "../CustomTextInput";
-
+import { selectedUser, authUser} from "../../redux/appReducer/selectors";
 const ChatFooter = () => {
   const [message, setMessage] = useState("");
+  const receiver = useSelector(selectedUser)
+  const sender = useSelector(authUser)
+
+  const dispatch = useDispatch();
 
   const onSendMessage = () => {
     if (message) {
-      // TODO: dispatch this event
+      dispatch(sendTextMessage(sender, receiver, message));
       setMessage("");
     }
   };
@@ -30,14 +36,13 @@ const ChatFooter = () => {
           metaData: { type: file.type, size: file.size },
         };
       });
-      // TODO: dispatch this event
+      dispatch(sendMediaMessage(files));
     },
   });
 
   const handleKeyPress = (event) => {
-    const message = event.target.value.trim();
     if (event.key === "Enter" && !event.shiftKey && message) {
-      // TODO: dispatch this event
+      dispatch(sendTextMessage(sender, receiver, message));
       event.preventDefault();
       setMessage("");
     }
