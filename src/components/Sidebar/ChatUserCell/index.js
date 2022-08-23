@@ -47,7 +47,7 @@ const ChatUserCell = ({ data, currentUser, onContactSelect }) => {
           </Box>
         </Box>
         <Box display="flex" alignItems="center">
-          <Typography className="chat-des-root">{data.lastMessage}</Typography>
+          <Typography className="chat-root">{data.lastMessage}</Typography>
           {data.unreadMessage && (
             <Box component="span" className="nav-count">
               {data.unreadMessage}

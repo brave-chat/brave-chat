@@ -55,7 +55,7 @@ const ContactCell = ({ data, currentUser }) => {
             {data.first_name}
           </Typography>
         </Box>
-        <Typography className="chat-des-root">{data.bio}</Typography>
+        <Typography className="chat-root">{data.bio}</Typography>
       </Box>
     </Box>
   );

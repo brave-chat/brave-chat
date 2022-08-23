@@ -19,6 +19,7 @@ import clsx from "clsx";
 import UserStatus from "../UserStatus";
 import { useDispatch } from "react-redux";
 import { JWTAuth, setCurrentUserStatus } from "../../../redux/appReducer/actions";
+import EditPersonalInformation from "../../EditInfo"
 import "../style.css";
 
 const ProfileDetail = ({
@@ -29,6 +30,7 @@ const ProfileDetail = ({
   setUserStatus,
 }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [edit, setEdit] = React.useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -36,6 +38,10 @@ const ProfileDetail = ({
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleEditClose = () => {
+    setEdit(false);
   };
 
   const updateStatus = (status) => {
@@ -51,6 +57,9 @@ const ProfileDetail = ({
   const onSubmit = () => {
     dispatch(JWTAuth.onLogout());
     window.location.reload();
+  }
+  const handleEdit = () => {
+    setEdit(true);
   }
   const getStatusColor = () => {
     switch (userStatus.toLowerCase()) {
@@ -77,15 +86,15 @@ const ProfileDetail = ({
           </ListItemIcon>
           <ListItemText className="text-color" primary={userStatus} />
         </ListItem>
-        <ListItem className="pointer">
-          <ListItemIcon className="list-icon-root" onClick={() => {console.log(111111111)}}>
+      </List>
+      <Typography className="profile-list-title">Personal Information</Typography>
+        {currentUser && <ListItem className="pointer">
+          <ListItemIcon className="list-icon-root" onClick={handleEdit}>
             <EditIcon />
           </ListItemIcon>
           <ListItemText className="text-color" primary="Edit" />
-        </ListItem>
-      </List>
-
-      <Typography className="profile-list-title">Personal Detail</Typography>
+        </ListItem>}
+      
 
       <List dense className={clsx("personal-list-root", "personal-list-root")}>
         <ListItem>
@@ -130,9 +139,11 @@ const ProfileDetail = ({
         </ListItem>
         {currentUser && (
           <ListItem className="sign-out-root">
-            <Button variant="contained" color="error" onClick={onSubmit}>
-              Sign Out
-            </Button>
+            <Box mt={3}>
+              <Button variant="contained" color="error" onClick={onSubmit}>
+                Sign Out
+              </Button>
+            </Box>
           </ListItem>
         )}
       </List>
@@ -143,6 +154,7 @@ const ProfileDetail = ({
         statusColor={getStatusColor()}
         userStatus={userStatus}
       />
+      <EditPersonalInformation open={edit} onCloseDialog={handleEditClose} />
     </Box>
   );
 };

@@ -15,13 +15,18 @@
   cursor: pointer;
 }
 
+.add-contact, .add-room{
+  cursor: pointer;
+}
+
 .chat-cell-item:hover,
 .chat-cell-item .active {
-  background-color: rgba(2, 2, 2, 0.04);
+  background-color: #000;
 }
 
 .title-root {
   position: relative;
+  font-size: 22px;
 }
 .chat-cell-item:hover .title-root,
 .chat-cell-item .active .title-root {
@@ -33,7 +38,7 @@
   padding-left: 16px;
 }
 
-.chat-des-root {
+.chat-root {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -42,6 +47,48 @@
   padding-right: 10;
   width: calc(100% - 24px);
 }
+
+
+.room-cell-item {
+  padding: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.room-cell-item:hover,
+.room-cell-item .active {
+  cursor: pointer;
+}
+
+.room-cell-item:hover .title-root,
+.room-cell-item .active .title-root {
+  color: lightgrey;
+}
+
+.room-cell-item .title-root,
+.room-cell-item .active .title-root {
+  color: #fff;
+  font-size: 22px;
+}
+
+.room-cell-info {
+  padding-left: 19px;
+  color: #fff;
+}
+
+.room-root {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 22px;
+  color: rgba(255, 255, 255, 0.6);
+  padding-right: 10px;
+  width: 100%;
+}
+
+
 
 .nav-count {
   background-color: rgba(0, 0, 0, 0.06);
@@ -96,7 +143,7 @@
   border-bottom: 2px solid grey;
 }
 .perfect-scroll-bar-root {
-  height: calc(100vh - 30px);
+  height: 100vh;
 }
 
 .profile-list-root {
@@ -192,13 +239,13 @@
   background-color: #8dcd03;
   border-radius: 50%;
 }
-
-.user-root {
+.side-bar-header-root{
+}
+.user-root, .room-root {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-bottom: 12px;
-  color: rgba(0, 0, 0, 1);
 }
 .header-avatar-root {
   cursor: pointer;
@@ -216,13 +263,14 @@
   z-index: 1;
 }
 
-.user-info {
+.user-info,
+.room-info {
   margin-left: 16px;
   transition: all 0.3s ease;
   opacity: 1;
   visibility: visible;
 }
-.user-title {
+.user-title, .room-title  {
   color: rgb(255, 255, 255);
   margin-bottom: 0px;
   display: flex;
@@ -230,10 +278,10 @@
   align-items: center;
   white-space: nowrap;
 }
-.user-title .MuiSvgIcon-root {
+.user-title, .room-title .MuiSvgIcon-root {
   margin-left: 16px;
 }
-.user-sub-title {
+.user-sub-title, .room-sub-title {
   font-size: 11px;
   color: rgba(255, 255, 255, 0.6);
   letter-spacing: 0.4;
@@ -302,6 +350,8 @@
   margin-right: 20px;
 }
 #user-popover > .MuiPaper-root {
+  border: 3px solid blue;
+  border-radius: 20px;
   background-color: #000;
   color: #fff;
 }

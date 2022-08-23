@@ -44,8 +44,6 @@ const SidebarHeader = ({ user, searchText, setSearchText }) => {
         return "#C1C1C1";
     }
   };
-  const open = Boolean(anchorEl);
-  const id = "user-popover";
 
   return (
     <Box className="side-bar-header-root">
@@ -75,9 +73,11 @@ const SidebarHeader = ({ user, searchText, setSearchText }) => {
         />
         <SearchIcon />
       </Box>
+        
+        
       <Popover
-        id={id}
-        open={open}
+        id={"user-popover"}
+        open={Boolean(anchorEl)}
         className="user-popover"
         anchorEl={anchorEl}
         onClose={handleClose}
