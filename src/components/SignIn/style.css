@@ -59,11 +59,7 @@
   border-radius: 16px;
 }
 
-.auth-content
-  .MuiInputAdornment-root
-  > .MuiIconButton-root
-  > .MuiSvgIcon-root
-  :not([name="dialog-root"]) {
+.auth-content .MuiInputAdornment-root > .MuiIconButton-root > .MuiSvgIcon-root :not([name="dialog-root"]){
   border-right: 2.5px solid black;
   color: #000;
   width: 35px;
