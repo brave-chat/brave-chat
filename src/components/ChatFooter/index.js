@@ -7,22 +7,24 @@ import IconButton from "@mui/material/IconButton";
 import "./style.css";
 import AttachFileIcon from "@mui/icons-material/Attachment";
 
-import {
-  sendMediaMessage,
-  sendTextMessage,
-} from "../../redux/appReducer/actions";
+import { sendMediaMessage, sendTextMessage, sendRoomTextMessage } from "../../redux/appReducer/actions";
 import CustomTextInput from "../CustomTextInput";
-import { selectedUser, authUser } from "../../redux/appReducer/selectors";
-const ChatFooter = () => {
+import { authUser} from "../../redux/appReducer/selectors";
+
+const ChatFooter = ({receiver}) => {
   const [message, setMessage] = useState("");
-  const receiver = useSelector(selectedUser);
-  const sender = useSelector(authUser);
+  const sender = useSelector(authUser)
 
   const dispatch = useDispatch();
 
   const onSendMessage = () => {
     if (message) {
-      dispatch(sendTextMessage(sender, receiver, message));
+      if (receiver.room_name){
+        dispatch(sendRoomTextMessage(sender, receiver, message));
+      }
+      if (receiver.first_name){
+        dispatch(sendTextMessage(sender, receiver, message));
+      }
       setMessage("");
     }
   };
@@ -45,7 +47,12 @@ const ChatFooter = () => {
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter" && !event.shiftKey && message) {
-      dispatch(sendTextMessage(sender, receiver, message));
+      if (receiver.room_name){
+        dispatch(sendRoomTextMessage(sender, receiver, message));
+      }
+      if (receiver.first_name){
+        dispatch(sendTextMessage(sender, receiver, message));
+      }
       event.preventDefault();
       setMessage("");
     }
