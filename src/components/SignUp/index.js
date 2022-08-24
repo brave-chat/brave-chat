@@ -13,10 +13,10 @@ import CustomPasswordInput from "../CustomPassword";
 import AppTextInput from "../AppTextInput";
 import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
-import InputAdornment from '@mui/material/InputAdornment';
-import PermIdentityIcon from '@mui/icons-material/PermIdentity';
-import PersonIcon from '@mui/icons-material/Person';
-import MailIcon from '@mui/icons-material/Mail';
+import InputAdornment from "@mui/material/InputAdornment";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import PersonIcon from "@mui/icons-material/Person";
+import MailIcon from "@mui/icons-material/Mail";
 import { isValidEmail } from "../Helper";
 import "../SignIn/style.css";
 
@@ -60,10 +60,10 @@ const SignUp = () => {
               display="flex"
               flexDirection={{ xs: "column", md: "row" }}
               alignItems="center"
-              mb={{ xs: 5.5, ml: 1 }}
+              mb={{ xs: 5.5, ml: 5.5 }}
             >
               <GridContainer>
-                <Grid item xs={12} sm={5.5}>
+                <Grid item xs={12} sm={5.75}>
                   <AppTextInput
                     fullWidth
                     size={""}
@@ -76,21 +76,22 @@ const SignUp = () => {
                       setFirstNameError("");
                     }}
                     helperText={firstNameError}
-                  
-
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start" variant="standard">
-                     <IconButton aria-label="First Name" edge="end" disabled>
-                        
-                          <PermIdentityIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  )
-                }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start" variant="standard">
+                          <IconButton
+                            aria-label="First Name"
+                            edge="end"
+                            disabled
+                          >
+                            <PermIdentityIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={5.75}>
                   <AppTextInput
                     fullWidth
                     size={""}
@@ -103,61 +104,56 @@ const SignUp = () => {
                       setLastNameError("");
                     }}
                     helperText={lastNameError}
-
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start" variant="standard">
-                     <IconButton aria-label="Last Name" edge="end" disabled>
-                        
-                          <PersonIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  )
-                }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start" variant="standard">
+                          <IconButton
+                            aria-label="Last Name"
+                            edge="end"
+                            disabled
+                          >
+                            <PersonIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </Grid>
               </GridContainer>
             </Box>
 
-            <Box 
-              mb={{ xs: 3, ml: 1 }}>
-
+            <Box mb={{ xs: 3, ml: 1 }}>
               <GridContainer>
                 <Grid item xs={12} sm={12}>
-                <AppTextInput
-                  fullWidth
-                  size={""}
-                  className="text-field-root"
-                  variant="outlined"
-                  label="Email Address"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    setEmailError("");
-                  }}
-                  helperText={emailError}
-
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start" variant="standard">
-                     <IconButton aria-label="Email" edge="end" disabled>
-                        
-                          <MailIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  )
-                }}
-                />
+                  <AppTextInput
+                    fullWidth
+                    size={""}
+                    className="text-field-root"
+                    variant="outlined"
+                    label="Email Address"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      setEmailError("");
+                    }}
+                    helperText={emailError}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start" variant="standard">
+                          <IconButton aria-label="Email" edge="end" disabled>
+                            <MailIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
                 </Grid>
               </GridContainer>
             </Box>
 
-            <Box 
-              mb={{ xs: 3, ml: 1 }}>
-
+            <Box mb={{ xs: 3, ml: 1 }}>
               <GridContainer>
                 <Grid item xs={12} sm={12}>
-
                   <CustomPasswordInput
                     password={password}
                     setPassword={setPassword}
@@ -172,10 +168,7 @@ const SignUp = () => {
               display="flex"
               alignItems="center"
               justifyContent="space-between"
-
-              
               mb={{ xs: 5, ml: 2 }}
-
             >
               <Button onClick={onSubmit} variant="contained" color="primary">
                 {"Sign Up"}
@@ -186,7 +179,6 @@ const SignUp = () => {
               Have an account?
               <NavLink to="/login">Sign In</NavLink>
             </Typography>
-
           </DialogContent>
           <ContentLoader />
         </Box>
