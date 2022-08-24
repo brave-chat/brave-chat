@@ -31,7 +31,11 @@ const CustomAvatar = React.forwardRef(
       alt && phCharLength > 0
         ? alt.substr(0, phCharLength).toUpperCase()
         : null;
+    src = "http://localhost:8000/api/v1/" + src;
+    src = src.split("/").pop();
+    const fileName = src.split("/").pop();
 
+    src = `http://localhost:8000/api/v1/user/profile/${fileName}`;
     return (
       <Avatar ref={ref} className={classNames} src={src} alt={alt} {...rest}>
         {!src && !children && alt ? placeHolderChar : children}
