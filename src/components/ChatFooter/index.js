@@ -7,22 +7,27 @@ import IconButton from "@mui/material/IconButton";
 import "./style.css";
 import AttachFileIcon from "@mui/icons-material/Attachment";
 
-import { sendMediaMessage, sendTextMessage, sendRoomTextMessage } from "../../redux/appReducer/actions";
+import {
+  sendMediaMessage,
+  sendNewMediaMessage,
+  sendTextMessage,
+  sendRoomTextMessage,
+} from "../../redux/appReducer/actions";
 import CustomTextInput from "../CustomTextInput";
-import { authUser} from "../../redux/appReducer/selectors";
+import { authUser } from "../../redux/appReducer/selectors";
 
-const ChatFooter = ({receiver}) => {
+const ChatFooter = ({ receiver }) => {
   const [message, setMessage] = useState("");
-  const sender = useSelector(authUser)
+  const sender = useSelector(authUser);
 
   const dispatch = useDispatch();
 
   const onSendMessage = () => {
     if (message) {
-      if (receiver.room_name){
+      if (receiver.room_name) {
         dispatch(sendRoomTextMessage(sender, receiver, message));
       }
-      if (receiver.first_name){
+      if (receiver.first_name) {
         dispatch(sendTextMessage(sender, receiver, message));
       }
       setMessage("");
@@ -30,10 +35,11 @@ const ChatFooter = ({receiver}) => {
   };
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept: "image/*,video/*",
+    accept: "image/*",
     multiple: true,
     onDrop: (acceptedFiles) => {
       const files = acceptedFiles.map((file) => {
+        dispatch(sendNewMediaMessage(receiver.pk, file));
         return {
           preview: URL.createObjectURL(file),
           name: file.name,
@@ -47,10 +53,10 @@ const ChatFooter = ({receiver}) => {
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter" && !event.shiftKey && message) {
-      if (receiver.room_name){
+      if (receiver.room_name) {
         dispatch(sendRoomTextMessage(sender, receiver, message));
       }
-      if (receiver.first_name){
+      if (receiver.first_name) {
         dispatch(sendTextMessage(sender, receiver, message));
       }
       event.preventDefault();
