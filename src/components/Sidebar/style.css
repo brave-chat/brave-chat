@@ -15,7 +15,8 @@
   cursor: pointer;
 }
 
-.add-contact, .add-room{
+.add-contact,
+.add-room {
   cursor: pointer;
 }
 
@@ -47,7 +48,6 @@
   padding-right: 10;
   width: calc(100% - 24px);
 }
-
 
 .room-cell-item {
   padding: 16px;
@@ -87,8 +87,6 @@
   padding-right: 10px;
   width: 100%;
 }
-
-
 
 .nav-count {
   background-color: rgba(0, 0, 0, 0.06);
@@ -187,7 +185,7 @@
   min-width: 10px;
   margin-right: 20px;
 }
-.list-icon-root:hover{
+.list-icon-root:hover {
   cursor: pointer;
 }
 
@@ -239,9 +237,10 @@
   background-color: #8dcd03;
   border-radius: 50%;
 }
-.side-bar-header-root{
+.side-bar-header-root {
 }
-.user-root, .room-root {
+.user-root,
+.room-root {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -270,7 +269,8 @@
   opacity: 1;
   visibility: visible;
 }
-.user-title, .room-title  {
+.user-title,
+.room-title {
   color: rgb(255, 255, 255);
   margin-bottom: 0px;
   display: flex;
@@ -278,10 +278,12 @@
   align-items: center;
   white-space: nowrap;
 }
-.user-title, .room-title .MuiSvgIcon-root {
+.user-title,
+.room-title .MuiSvgIcon-root {
   margin-left: 16px;
 }
-.user-sub-title, .room-sub-title {
+.user-sub-title,
+.room-sub-title {
   font-size: 11px;
   color: rgba(255, 255, 255, 0.6);
   letter-spacing: 0.4;

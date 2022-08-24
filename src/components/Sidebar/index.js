@@ -3,9 +3,9 @@ import Box from "@mui/material/Box";
 import "../style.css";
 import { useDispatch, useSelector } from "react-redux";
 import SidebarHeader from "./SidebarHeader";
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ChatIcon from '@mui/icons-material/Chat';
-import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ChatIcon from "@mui/icons-material/Chat";
+import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 import {
   getChatUsers,
   getContactUsers,
@@ -45,11 +45,10 @@ const Sidebar = () => {
   };
 
   useEffect(() => {
-    console.log(value)
     if (value === 1) {
       dispatch(getChatUsers(searchText));
     }
-    if (value === 2){
+    if (value === 2) {
       dispatch(getContactUsers(searchText));
     }
     if (value === 3) {
@@ -72,8 +71,18 @@ const Sidebar = () => {
         onChange={handleChange}
       >
         <Tab icon={<ChatIcon />} className="tab-root" label="Chats" value={1} />
-        <Tab icon={<FavoriteIcon />} className="tab-root" label="Contacts" value={2} />
-        <Tab icon={<MeetingRoomIcon />} className="tab-root" label="Rooms" value={3} />
+        <Tab
+          icon={<FavoriteIcon />}
+          className="tab-root"
+          label="Contacts"
+          value={2}
+        />
+        <Tab
+          icon={<MeetingRoomIcon />}
+          className="tab-root"
+          label="Rooms"
+          value={3}
+        />
       </Tabs>
       {value === 1 ? (
         <ChatUserList
@@ -90,11 +99,8 @@ const Sidebar = () => {
             return y.first_name - x.first_name;
           })}
         />
-      ): (
-        <RoomList
-          currentUser={thisCurrentUser}
-          rooms={currentRooms}
-        />
+      ) : (
+        <RoomList currentUser={thisCurrentUser} rooms={currentRooms} />
       )}
     </Box>
   );

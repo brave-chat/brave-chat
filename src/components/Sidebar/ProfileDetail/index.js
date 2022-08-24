@@ -7,7 +7,7 @@ import ListItemText from "@mui/material/ListItemText";
 import FlagIcon from "@mui/icons-material/Flag";
 import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 import IconButton from "@mui/material/IconButton";
-import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from "@mui/icons-material/Edit";
 import DialpadIcon from "@mui/icons-material/Dialpad";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Typography from "@mui/material/Typography";
@@ -18,8 +18,11 @@ import Button from "@mui/material/Button";
 import clsx from "clsx";
 import UserStatus from "../UserStatus";
 import { useDispatch } from "react-redux";
-import { JWTAuth, setCurrentUserStatus } from "../../../redux/appReducer/actions";
-import EditPersonalInformation from "../../EditInfo"
+import {
+  JWTAuth,
+  setCurrentUserStatus,
+} from "../../../redux/appReducer/actions";
+import EditPersonalInformation from "../../EditInfo";
 import "../style.css";
 
 const ProfileDetail = ({
@@ -48,7 +51,7 @@ const ProfileDetail = ({
     setAnchorEl(null);
     if (currentUser) {
       setUserStatus(status);
-      dispatch(setCurrentUserStatus(status))
+      dispatch(setCurrentUserStatus(status));
     }
   };
 
@@ -57,10 +60,10 @@ const ProfileDetail = ({
   const onSubmit = () => {
     dispatch(JWTAuth.onLogout());
     window.location.reload();
-  }
+  };
   const handleEdit = () => {
     setEdit(true);
-  }
+  };
   const getStatusColor = () => {
     switch (userStatus.toLowerCase()) {
       case "online":
@@ -77,7 +80,10 @@ const ProfileDetail = ({
   return (
     <Box>
       <List dense className="profile-list-title">
-        <ListItem className="pointer" onClick={currentUser ? handleClick: undefined}>
+        <ListItem
+          className="pointer"
+          onClick={currentUser ? handleClick : undefined}
+        >
           <ListItemIcon className="list-icon-root">
             <Box
               className="profile-status-dot"
@@ -87,14 +93,17 @@ const ProfileDetail = ({
           <ListItemText className="text-color" primary={userStatus} />
         </ListItem>
       </List>
-      <Typography className="profile-list-title">Personal Information</Typography>
-        {currentUser && <ListItem className="pointer">
+      <Typography className="profile-list-title">
+        Personal Information
+      </Typography>
+      {currentUser && (
+        <ListItem className="pointer">
           <ListItemIcon className="list-icon-root" onClick={handleEdit}>
             <EditIcon />
           </ListItemIcon>
           <ListItemText className="text-color" primary="Edit" />
-        </ListItem>}
-      
+        </ListItem>
+      )}
 
       <List dense className={clsx("personal-list-root", "personal-list-root")}>
         <ListItem>

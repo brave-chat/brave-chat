@@ -5,12 +5,8 @@ import CustomAvatar from "../../CustomAvatar";
 import Typography from "@mui/material/Typography";
 import clsx from "clsx";
 import "../style.css";
-import {
-  selectedUser,
-} from "../../../redux/appReducer/selectors";
-import {
-  onUserSelect,
-} from "../../../redux/appReducer/actions";
+import { selectedUser } from "../../../redux/appReducer/selectors";
+import { onUserSelect } from "../../../redux/appReducer/actions";
 
 const ContactCell = ({ data, currentUser }) => {
   const dispatch = useDispatch();

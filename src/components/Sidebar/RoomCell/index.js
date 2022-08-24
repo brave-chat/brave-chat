@@ -4,12 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Typography from "@mui/material/Typography";
 import clsx from "clsx";
 import "../style.css";
-import {
-  selectedRoom,
-} from "../../../redux/appReducer/selectors";
-import {
-  onRoomSelect,
-} from "../../../redux/appReducer/actions";
+import { selectedRoom } from "../../../redux/appReducer/selectors";
+import { onRoomSelect } from "../../../redux/appReducer/actions";
 
 const RoomCell = ({ data, currentUser }) => {
   const dispatch = useDispatch();
@@ -27,10 +23,7 @@ const RoomCell = ({ data, currentUser }) => {
     >
       <Box className="room-cell-info">
         <Box display="flex" alignItems="center">
-          <Typography
-            component="div"
-            className="title-root"
-          >
+          <Typography component="div" className="title-root">
             # {data.room_name}
           </Typography>
         </Box>

@@ -73,8 +73,7 @@ const SidebarHeader = ({ user, searchText, setSearchText }) => {
         />
         <SearchIcon />
       </Box>
-        
-        
+
       <Popover
         id={"user-popover"}
         open={Boolean(anchorEl)}
@@ -92,11 +91,10 @@ const SidebarHeader = ({ user, searchText, setSearchText }) => {
       >
         <Box p={{ xs: 4, md: 6 }}>
           <Box className="user-root">
-
-          <input {...getInputProps()} />
-          <IconButton className="icon-btn-root" {...getRootProps()}>
-            <CustomAvatar src={user.profile_picture} />
-          </IconButton>
+            <input {...getInputProps()} />
+            <IconButton className="icon-btn-root" {...getRootProps()}>
+              <CustomAvatar src={user.profile_picture} />
+            </IconButton>
             <Box className={clsx("user-info", "custom-user-info")}>
               <Typography className="user-title" component="h3" variant="h6">
                 {user.first_name}
