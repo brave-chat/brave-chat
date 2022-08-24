@@ -4,13 +4,18 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import LockIcon from '@mui/icons-material/Lock';
-import AppTextInput from "../AppTextInput"
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import LockIcon from "@mui/icons-material/Lock";
+import AppTextInput from "../AppTextInput";
 import "./style.css";
 
-const CustomPasswordInput = ({ password, setPassword, helperText, setPasswordError }) => {
+const CustomPasswordInput = ({
+  password,
+  setPassword,
+  helperText,
+  setPasswordError,
+}) => {
   const [passwordType, setPasswordType] = useState("password");
   const togglePassword = () => {
     if (passwordType === "password") {
@@ -26,7 +31,7 @@ const CustomPasswordInput = ({ password, setPassword, helperText, setPasswordErr
         type={passwordType}
         fullWidth
         onChange={(e) => {
-          setPassword(e.target.value)
+          setPassword(e.target.value);
           setPasswordError("");
         }}
         defaultValue={password}
@@ -38,7 +43,12 @@ const CustomPasswordInput = ({ password, setPassword, helperText, setPasswordErr
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-             <IconButton aria-label="toggle password" className="toggle-button-password" edge="end" onClick={togglePassword}>
+              <IconButton
+                aria-label="toggle password"
+                className="toggle-button-password"
+                edge="end"
+                onClick={togglePassword}
+              >
                 {passwordType === "password" ? (
                   <VisibilityOffIcon />
                 ) : (
@@ -48,18 +58,20 @@ const CustomPasswordInput = ({ password, setPassword, helperText, setPasswordErr
             </InputAdornment>
           ),
 
-                    
-                    startAdornment: (
-                      <InputAdornment position="start" variant="standard">
-                       <IconButton aria-label="Email" className="password-field" edge="end" disabled>
-                          
-                            <LockIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    )
+          startAdornment: (
+            <InputAdornment position="start" variant="standard">
+              <IconButton
+                aria-label="Email"
+                className="password-field"
+                edge="end"
+                disabled
+              >
+                <LockIcon />
+              </IconButton>
+            </InputAdornment>
+          ),
         }}
       />
-
     </Box>
   );
 };
