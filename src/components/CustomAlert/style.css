@@ -1,0 +1,10 @@
+.swal2-popup {
+  display: flex;
+  text-align: center;
+  place-items: center;
+  border: 2px solid blue;
+}
+
+.swal2-container {
+  display: flex;
+}
