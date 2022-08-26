@@ -17,7 +17,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import LockIcon from "@mui/icons-material/Lock";
-import { addRoom } from "../../redux/appReducer/actions";
+import { addRoom } from "../../api/Axios";
 import TitleIcon from "@mui/icons-material/Title";
 import DescriptionIcon from "@mui/icons-material/Description";
 import "./style.css";
