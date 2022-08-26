@@ -8,11 +8,12 @@ import "./style.css";
 import AttachFileIcon from "@mui/icons-material/Attachment";
 
 import {
-  sendMediaMessage,
   sendNewMediaMessage,
   sendTextMessage,
   sendRoomTextMessage,
-} from "../../redux/appReducer/actions";
+} from "../../api/Axios";
+
+import { sendMediaMessage } from "../../redux/appReducer/actions";
 import CustomTextInput from "../CustomTextInput";
 import { authUser } from "../../redux/appReducer/selectors";
 
