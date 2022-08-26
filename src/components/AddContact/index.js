@@ -1,14 +1,8 @@
 import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
 import ContentLoader from "../ContentLoader";
-import Typography from "@mui/material/Typography";
-import { NavLink } from "react-router-dom";
-import CustomPasswordInput from "../CustomPassword";
-import GridContainer from "../GridContainer";
-import Grid from "@mui/material/Grid";
 import AppTextInput from "../AppTextInput";
 import DialogContent from "@mui/material/DialogContent";
 import Dialog from "@mui/material/Dialog";
@@ -16,9 +10,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import MailIcon from "@mui/icons-material/Mail";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
-import LockIcon from "@mui/icons-material/Lock";
 import { isValidEmail } from "../Helper";
-import { addContactEmail } from "../../redux/appReducer/actions";
+import { addContactEmail } from "../../api/Axios";
 import "./style.css";
 
 const AddContact = ({ open, onCloseDialog }) => {
