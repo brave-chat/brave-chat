@@ -18,10 +18,7 @@ import Button from "@mui/material/Button";
 import clsx from "clsx";
 import UserStatus from "../UserStatus";
 import { useDispatch } from "react-redux";
-import {
-  JWTAuth,
-  setCurrentUserStatus,
-} from "../../../redux/appReducer/actions";
+import { JWTAuth, setCurrentUserStatus } from "../../../api/Axios";
 import EditPersonalInformation from "../../EditInfo";
 import "../style.css";
 

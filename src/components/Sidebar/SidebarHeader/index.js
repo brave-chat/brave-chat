@@ -6,7 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import "../style.css";
 import Popover from "@mui/material/Popover";
 import ProfileDetail from "../ProfileDetail";
-import { uploadProfilePicture } from "../../../redux/appReducer/actions";
+import { uploadProfilePicture } from "../../../api/Axios";
 import { useDropzone } from "react-dropzone";
 import IconButton from "@mui/material/IconButton";
 import { useDispatch } from "react-redux";

@@ -6,12 +6,8 @@ import SidebarHeader from "./SidebarHeader";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatIcon from "@mui/icons-material/Chat";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
-import {
-  getChatUsers,
-  getContactUsers,
-  getRoomsUser,
-  onUserSelect,
-} from "../../redux/appReducer/actions";
+import { onUserSelect } from "../../redux/appReducer/actions";
+import { getChatUsers, getContactUsers, getRoomsUser } from "../../api/Axios";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import ContactList from "./ContactList";
