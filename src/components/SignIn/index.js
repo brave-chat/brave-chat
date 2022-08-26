@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
-import { JWTAuth } from "../../redux/appReducer/actions";
+import { JWTAuth } from "../../api/Axios";
 import ContentLoader from "../ContentLoader";
 import Typography from "@mui/material/Typography";
 import { NavLink } from "react-router-dom";
