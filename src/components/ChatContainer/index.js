@@ -2,12 +2,10 @@ import React, { useEffect } from "react";
 import { Box } from "@mui/material";
 import "../style.css";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getConversation,
-  getRoomConversation,
-  onUserSelect,
-  onRoomSelect,
-} from "../../redux/appReducer/actions";
+import { onUserSelect, onRoomSelect } from "../../redux/appReducer/actions";
+
+import { getConversation, getRoomConversation } from "../../api/Axios";
+
 import Conversation from "../Conversation";
 import RoomConversation from "../RoomConversation";
 import ContentHeader from "../ContentHeader";
@@ -20,13 +18,16 @@ import {
   selectedUser,
   selectedRoom,
   roomConversation,
+  authUser,
 } from "../../redux/appReducer/selectors";
 import ContentLoader from "../ContentLoader";
+import { initiateRoomSocket, initiateChatSocket } from "../../api/Socket";
 
 const ChatContainer = () => {
   const dispatch = useDispatch();
   const thisConversation = useSelector(conversation);
   const thisRoomConversation = useSelector(roomConversation);
+  const currentAuthUser = useSelector(authUser);
 
   const receiver = useSelector(selectedUser);
   const room = useSelector(selectedRoom);
@@ -34,8 +35,13 @@ const ChatContainer = () => {
     if (receiver && room) {
       dispatch(onUserSelect(null));
       dispatch(onRoomSelect(null));
-    } else if (receiver && !room) dispatch(getConversation(receiver));
-    else if (room && !receiver) dispatch(getRoomConversation(room));
+    } else if (receiver && !room) {
+      dispatch(getConversation(receiver));
+      dispatch(initiateChatSocket(currentAuthUser, receiver));
+    } else if (room && !receiver) {
+      dispatch(getRoomConversation(room));
+      dispatch(initiateRoomSocket(currentAuthUser, room));
+    }
   }, [receiver, dispatch, room]);
 
   const loadPrevious = () => {};
