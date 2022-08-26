@@ -8,7 +8,7 @@ import GridContainer from "../GridContainer";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { NavLink } from "react-router-dom";
-import { JWTAuth } from "../../redux/appReducer/actions";
+import { JWTAuth } from "../../api/Axios";
 import CustomPasswordInput from "../CustomPassword";
 import AppTextInput from "../AppTextInput";
 import DialogContent from "@mui/material/DialogContent";
