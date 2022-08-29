@@ -9,7 +9,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import { onUserSelect, setFavourite } from "../../redux/appReducer/actions";
+import { onUserSelect } from "../../redux/appReducer/actions";
 import { useDispatch } from "react-redux";
 import DropdownMenu from "../DropdownMenu";
 import ProfileDetail from "../Sidebar/ProfileDetail";
@@ -25,7 +25,7 @@ const ContentHeader = ({ user }) => {
   const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [favouriteColor, setFavouriteColor] = React.useState("primary");
+  const [favouriteColor] = React.useState("primary");
   const open = Boolean(anchorEl);
   const id = open ? "user-popover" : undefined;
   const divRef = React.useRef();

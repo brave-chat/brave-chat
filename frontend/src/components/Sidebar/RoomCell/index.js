@@ -1,10 +1,9 @@
 import React from "react";
-import { Badge, Box } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { Box } from "@mui/material";
+import { useDispatch } from "react-redux";
 import Typography from "@mui/material/Typography";
 import clsx from "clsx";
 import "../style.css";
-import { selectedRoom } from "../../../redux/appReducer/selectors";
 import { onRoomSelect } from "../../../redux/appReducer/actions";
 
 const RoomCell = ({ data, currentUser }) => {

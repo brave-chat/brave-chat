@@ -1,7 +1,7 @@
 import React from "react";
 import CustomList from "../../CustomList";
 import ContactCell from "../ContactCell";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import AddContact from "../../AddContact";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import NoRecordFound from "../NoRecordFound";

@@ -1,23 +1,69 @@
-import React, { lazy, Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { lazy, Suspense, useEffect, useState } from "react";
+import { useLocation, Routes, Route, Navigate } from "react-router-dom";
 import PageLoader from "../components/PageLoader";
+import { useSelector } from "react-redux";
+import ChatApp from "../pages/ChatApp";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import ChatFooter from "../components/ChatFooter";
+import { useDispatch } from "react-redux";
+import {
+  setCurrentUser,
+  setAuthUser,
+} from "../redux/appReducer/actions";
+
+import { setUserChat, getUserContacts, getUserRooms } from "../api/Axios";
+import { authUser } from "../redux/appReducer/selectors";
 
 const AppRoutes = () => {
-  // TODO: implement redirect to chat if user if signed in
+  const [currentAuthUser, setCurrentAuthUser] = useState(useSelector(authUser));
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      const user = JSON.parse(localStorage.getItem("user"));
+      setCurrentAuthUser(user);
+      dispatch(setCurrentUser(user));
+      dispatch(setAuthUser(user));
+      dispatch(getUserContacts());
+      dispatch(getUserRooms());
+      dispatch(setUserChat());
+    }
+    // eslint-disable-next-line
+  }, [dispatch, localStorage.getItem("user")]);
+
+  if (currentAuthUser && location.pathname === "/login") {
+    dispatch(setCurrentUser(currentAuthUser));
+    dispatch(getUserContacts());
+    dispatch(getUserRooms());
+    dispatch(setUserChat());
+    return (
+      <>
+        <Navigate to={"/chat"} replace />
+      </>
+    );
+  }
 
   return (
     <>
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route
-            path="/login"
+            exact
+            path="/"
+            element={<Navigate replace to="/login" />}
+          ></Route>
+          <Route
+            path="/chat"
             element={
-              <div className="login">
-                {<Login />}
-                {/*lazy(() => import('../pages/Login'))*/}
+              <div className="chat">
+                {/*<ChatApp />*/}
+                {currentAuthUser ? (
+                  <ChatApp />
+                ) : (
+                  <Navigate to={"/login"} replace />
+                )}
+                {/*lazy(() => import('../pages/ChatApp'))*/}
               </div>
             }
           ></Route>
@@ -31,11 +77,18 @@ const AppRoutes = () => {
             }
           ></Route>
           <Route
-            path="/chat"
+            path="/login"
             element={
-              <div className="chat">
-                {<ChatFooter />}
-                {/*lazy(() => import('../pages/ChatFooter'))*/}
+              <div className="login">
+                {<Login />}
+                {/*lazy(() => import('../pages/Login'))*/}
+              </div>
+            }
+          ></Route>
+          <Route
+            element={
+              <div className="page-404">
+                {lazy(() => import("../pages/PageNotFound"))}
               </div>
             }
           ></Route>

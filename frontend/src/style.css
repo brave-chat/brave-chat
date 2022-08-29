@@ -2,7 +2,7 @@ body {
   background-color: #2d2b2b;
 }
 
-#root {
+#root .chat {
   position: absolute;
   display: fixed;
   background-color: #2d2b2b;

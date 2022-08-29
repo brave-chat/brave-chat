@@ -17,12 +17,17 @@ import { sendMediaMessage } from "../../redux/appReducer/actions";
 import CustomTextInput from "../CustomTextInput";
 import { authUser } from "../../redux/appReducer/selectors";
 
+import EmojiPicker from "../EmojiPicker";
+import Box from '@mui/material/Box';
+
 const ChatFooter = ({ receiver }) => {
   const [message, setMessage] = useState("");
   const sender = useSelector(authUser);
 
   const dispatch = useDispatch();
-
+  const onPickEmoji = emoji => {
+    setMessage(message + emoji);
+  };
   const onSendMessage = () => {
     if (message) {
       if (receiver.room_name) {
@@ -81,6 +86,9 @@ const ChatFooter = ({ receiver }) => {
         multiline
         className="text-field-root"
       />
+      <Box mr={4} ml={0}>
+        <EmojiPicker onPickEmoji={onPickEmoji} />
+      </Box>
       <IconButton className="icon-btn-root" onClick={onSendMessage}>
         <SendIcon />
       </IconButton>

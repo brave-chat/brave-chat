@@ -7,39 +7,38 @@ import "./style.css";
 import TypingMessage from "./ReceivedMessageCell/TypingMessage";
 import ScrollToBottom from "react-scroll-to-bottom";
 
-
-const Conversation = ({ conversation, selectedUser }) => {
+const RoomConversation = ({ conversation, selectedRoom }) => {
   return (
     <Box className="chat-main-content">
       <ScrollToBottom className="messages">
         <CustomList
           data={conversation}
-          renderRow={(conversation, index) => {
-            if (conversation.type_ === "sent") {
+          renderRow={(data, index) => {
+            if (data.type_ === "sent") {
               return (
                 <div key={index}>
-                  <SentMessageCell key={index} conversation={conversation} />
+                  <SentMessageCell key={index} conversation={data} />
                 </div>
               );
             }
 
-            if (conversation.type_ === "received") {
+            if (data.type_ === "received") {
               return (
                 <div key={index}>
                   <ReceivedMessageCell
                     key={index}
-                    conversation={conversation}
-                    user={selectedUser}
+                    conversation={data}
+                    user={selectedRoom}
                   />
                 </div>
               );
             }
           }}
         />
-        <TypingMessage currentUser={selectedUser} />
+        <TypingMessage currentUser={selectedRoom} />
       </ScrollToBottom>
     </Box>
   );
 };
 
-export default Conversation;
+export default RoomConversation;

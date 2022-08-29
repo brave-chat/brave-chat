@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
@@ -15,7 +14,6 @@ import DialogContent from "@mui/material/DialogContent";
 import MailIcon from "@mui/icons-material/Mail";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
-import LockIcon from "@mui/icons-material/Lock";
 import { isValidEmail } from "../Helper";
 import "./style.css";
 

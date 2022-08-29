@@ -17,14 +17,12 @@ import {
   users,
   currentUser,
   contacts,
-  selectedUser,
   rooms,
 } from "../../redux/appReducer/selectors";
 
 const Sidebar = () => {
   const currentUsers = useSelector(users);
   let thisCurrentUser = useSelector(currentUser);
-  const thisSelectedUser = useSelector(selectedUser);
   const currentContacts = useSelector(contacts);
   const currentRooms = useSelector(rooms);
   const [value, setValue] = useState(1);

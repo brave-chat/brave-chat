@@ -1,7 +1,7 @@
 import React from "react";
 import CustomList from "../../CustomList";
 import RoomCell from "../RoomCell";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import AddRoom from "../../AddRoom";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import NoRecordFound from "../NoRecordFound";

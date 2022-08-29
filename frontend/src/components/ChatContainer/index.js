@@ -42,9 +42,8 @@ const ChatContainer = () => {
       dispatch(getRoomConversation(room));
       dispatch(initiateRoomSocket(currentAuthUser, room));
     }
-  }, [receiver, dispatch, room]);
+  }, [receiver, dispatch, room, currentAuthUser]);
 
-  const loadPrevious = () => {};
 
   if (!receiver && !room) {
     return (

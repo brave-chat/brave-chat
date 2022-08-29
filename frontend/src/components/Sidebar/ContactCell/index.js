@@ -1,11 +1,10 @@
 import React from "react";
 import { Badge, Box } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import CustomAvatar from "../../CustomAvatar";
 import Typography from "@mui/material/Typography";
 import clsx from "clsx";
 import "../style.css";
-import { selectedUser } from "../../../redux/appReducer/selectors";
 import { onUserSelect } from "../../../redux/appReducer/actions";
 
 const ContactCell = ({ data, currentUser }) => {
