@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Chat-Docs - React Chat Application.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      content="Chat is an advanced Chat Application template built using react, material-ui, Redux, etc."
+      name="description"
+    />
+    <meta content="Mahmoud Harmouch" name="author" />
+    <meta name="keywords" content="chat app documentation" />
+    <link rel="shortcut icon" href="static/images/favicon.ico" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      type="text/css"
+      id="bootstrap-style"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="static/style.css"
+      id="app-style"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+  <body data-spy="scroll" data-target=".left-side-nav" data-offset="180">
+    <header
+      class="zindex-sticky position-fixed top-0 start-0 end-0 bg-dark shadow bg-dark rounded z-index-fixed"
+    >
+      <nav
+        class="navbar navbar-expand-lg d-flex justify-content-between align-items-center navbar-dark bg-dark"
+      >
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="navbar-brand ms-2 h1 align-items-center mb-3">
+            <a href="index.html" class="text-decoration-none logo logo-light">
+              <span class="pt-2 mt-0 d-none d-lg-block">
+                <span class="text-white fw-bold fs-5 me-4 ms-3">Chat </span>
+                <span class="mt-0 badge bg-danger ms-2">React 18.2.0 </span>
+              </span>
+            </a>
+          </div>
+          <button
+            type="button"
+            class="btn btn-sm px-3 fs-1 pe-2 border border-dark hover-focus text-white fade show active d-lg-none"
+            id="menu-btn"
+          >
+            <span class="material-icons"> menu </span>
+          </button>
+        </div>
+        <div class="d-flex d-none d-sm-block">
+          <div class="d-inline-block">
+            <a
+              href="mailto:business@wiseai.dev"
+              target="_blank"
+              class="fs-6 badge bg-danger text-white text-decoration-none"
+              >Support
+            </a>
+          </div>
+          <div class="d-inline-block me-4">
+            <h5 class="d-flex ustify-content-between align-items-center pe-2">
+              <span class="badge badge-success">v0.1.0 </span>
+            </h5>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="bg-dark vertical-menu">
+      <div data-simplebar class="h-100">
+        <div class="sidebar-menu pt-3 pb-3">
+          <ul class="list-unstyled" id="side-menu">
+            <li
+              class="ps-3 pt-3 pe-2 fw-bold fs-6 text-uppercase text-white-50"
+            >
+              Frontend
+            </li>
+            <li class="d-flex">
+              <a
+                href="index.html"
+                class="d-flex waves-effect text-decoration-none fw-bold"
+              >
+                <span class="material-icons"> article </span>
+                <span class="ms-2">Introduction </span>
+              </a>
+            </li>
+            <li class="d-flex">
+              <a
+                href="demo.html"
+                class="d-flex waves-effect text-decoration-none text-grey fw-bold"
+              >
+                <span class="material-icons"> smart_display </span>
+                <span class="ms-2">Demo </span>
+              </a>
+            </li>
+            <li class="d-flex">
+              <a
+                href="installation.html"
+                class="d-flex waves-effect text-decoration-none text-grey fw-bold"
+              >
+                <span class="material-icons"> build </span>
+                <span class="ms-2">Installation </span>
+              </a>
+            </li>
+            <li class="d-flex">
+              <a
+                href="folder-structure.html"
+                class="d-flex waves-effect text-decoration-none text-grey fw-bold"
+              >
+                <span class="material-icons"> folder </span>
+                <span class="ms-2">Folder Structure </span>
+              </a>
+            </li>
+            <li class="d-flex">
+              <a
+                href="routing.html"
+                class="d-flex waves-effect text-decoration-none text-grey fw-bold"
+              >
+                <span class="material-icons"> signpost </span>
+                <span class="ms-2">Routing </span>
+              </a>
+            </li>
+            <li class="d-flex">
+              <a
+                href="create-new-page.html"
+                class="d-flex waves-effect text-decoration-none text-grey fw-bold"
+              >
+                <span class="material-icons"> note_add </span>
+                <span class="ms-2">Add New Page </span>
+              </a>
+            </li>
+            <li class="d-flex">
+              <a
+                href="global-state.html"
+                class="d-flex waves-effect text-decoration-none text-grey fw-bold"
+              >
+                <span class="material-icons"> device_hub </span>
+                <span class="ms-2">Global State </span>
+              </a>
+            </li>
+            <li class="d-flex">
+              <a
+                href="api-integration.html"
+                class="d-flex waves-effect text-decoration-none text-grey fw-bold"
+              >
+                <span class="material-icons"> api </span>
+                <span class="ms-2">Api Integration </span>
+              </a>
+            </li>
+            <li class="d-flex">
+              <a
+                href="components.html"
+                class="d-flex waves-effect text-decoration-none text-grey fw-bold"
+              >
+                <span class="material-icons"> grid_view </span>
+                <span class="ms-2">Components </span>
+              </a>
+            </li>
+            <li class="d-flex">
+              <a
+                href="dependencies.html"
+                class="d-flex waves-effect text-decoration-none text-grey fw-bold"
+              >
+                <span class="material-icons"> list </span>
+                <span class="ms-2">Dependencies </span>
+              </a>
+            </li>            <li
+              class="ps-3 pt-3 pe-2 fw-bold fs-6 text-uppercase text-white-50"
+            >
+              Backend
+            </li>
+            <li class="d-flex">
+              <a
+                href="backend-installation.html"
+                class="d-flex waves-effect text-decoration-none text-grey fw-bold"
+              >
+                <span class="material-icons"> build </span>
+                <span class="ms-2">Installation </span>
+              </a>
+            </li>
+            <li class="d-flex">
+              <a
+                href="data-models.html"
+                class="d-flex waves-effect text-decoration-none text-grey fw-bold"
+              >
+                <span class="material-icons me-0"> table </span>
+                <span class="ms-0">Data Models </span>
+              </a>
+            </li>
+            <li class="d-flex">
+              <a
+                href="create-new-api.html"
+                class="d-flex waves-effect text-decoration-none text-grey fw-bold"
+              >
+                <span class="material-icons"> note_add </span>
+                <span class="ms-2">Add New API </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="main-content g-0 g-md-1 mb-3">
+      <div class="pt-5 pb-5 ps-3 pe-3 mt-5 mb-5 ms-0 position-relative">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card mt-3">
+                <div class="card-body">
+                  <div class="d-xl-flex">
+                    <div class="w-100">
+                      <div class="p-lg-1">
+                        <div class="mb-5">
+                          <div class="mb-5">
+                            <h4 class="mt-0 mb-4 d-flex align-items-center">
+                              <span class="material-icons"> forward </span>
+                              Installation
+                            </h4>
+                            <p>
+                              This project was bootstrapped using
+                              <a
+                                href="https://create-react-app.dev/"
+                                target="_blank"
+                              >
+                                <strong>Create React App </strong>
+                              </a>
+                              meaning that it is equiped with built-in scripts
+                              that get your application up and running. This
+                              makes it easier for you to get started with React
+                              and have a working application with minimal
+                              effort. But, before running these scripts, you'll
+                              need to make sure you have the following tools
+                              installed:
+                            </p>
+                            <table class="table table-bordered mt-3">
+                              <thead>
+                                <tr>
+                                  <th>Tools</th>
+                                  <th>Version</th>
+                                  <th>Description</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>
+                                    <a
+                                      href="https://nodejs.org/en/"
+                                      target="_blank"
+                                      >Node.js
+                                    </a>
+                                  </td>
+                                  <td>v16.17.0</td>
+                                  <td>
+                                    Node.js is a JavaScript runtime that lets
+                                    you easily build fast, scalable network
+                                    applications.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <a
+                                      href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm"
+                                      target="_blank"
+                                      >npm
+                                    </a>
+                                  </td>
+                                  <td>8.15.0</td>
+                                  <td>
+                                    npm is a widely used JavaScript package
+                                    manager that makes it easy to install,
+                                    update, and manage dependencies in your
+                                    projects.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <a
+                                      href="https://yarnpkg.com/getting-started"
+                                      target="_blank"
+                                      >yarn
+                                    </a>
+                                  </td>
+                                  <td>1.22.19</td>
+                                  <td>
+                                    Like npm, Yarn is yet another JavaScript
+                                    package manager. It is a newer than npm and
+                                    offers several advantages over it, including
+                                    a slightly better performance and security.
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            Once you have git, Node.js and one of the package
+                            managers installed, you should be good to go! Now
+                            you need to fork and clone the repository:
+                            <ul>
+                              <li>Fork the Chat repo on GitHub.</li>
+                              <li>
+                                Clone your fork locally:
+                                <div class="mt-1">
+                                  <pre class="bg-dark text-white p-3">
+git clone git@github.com:your_name_here/chat.git
+</pre
+                                  >
+                                </div>
+                              </li>
+                              <li>
+                                Open the newly created directory:
+                                <div class="mt-1">
+                                  <pre class="bg-dark text-white p-3">
+cd chat
+</pre
+                                  >
+                                </div>
+                              </li>
+                            </ul>
+                            Now, in order to run the project locally or build
+                            for production use, you will need to run the
+                            following commands:
+                            <table class="table table-bordered mt-3">
+                              <thead>
+                                <tr>
+                                  <th>Command</th>
+                                  <th>Description</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>
+                                    <code>npm install </code> or
+                                    <code>yarn install </code>
+                                  </td>
+                                  <td>
+                                    This command will install everything that's
+                                    needed in the node_modules folder, so you
+                                    won't have to worry about doing it manually.
+                                    Plus, it's a lot faster than installing each
+                                    dependency individually.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <code>npm start </code> or
+                                    <code>yarn start </code>
+                                  </td>
+                                  <td>
+                                    This command will start the server at
+                                    <code>http://localhost:3000 </code> and
+                                    watch for any changes in your code. This is
+                                    a great way to develop and test your code
+                                    before putting it live.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <code>npm build </code> or
+                                    <code>yarn build </code>
+                                  </td>
+                                  <td>
+                                    This command will generate a
+                                    <code>/dist </code> directory containing all
+                                    of the files you need to deploy your
+                                    project.
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            Each of these commands serves a specific purpose and
+                            is essential for getting the project up and running
+                            smoothly. So be sure to run the commands in the
+                            order listed above.
+                            <br />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer py-3 bg-dark position-fixed mb-0 bottom-0 end-0">
+        <div class="container">
+          <div class="text-white row">
+            <div class="col-sm-6 position-absolute start-0 ms-5">
+              2022 © Mahmoud Harmouch.
+            </div>
+            <div class="col-sm-6">
+              <div
+                class="text-sm-right d-none d-sm-block position-absolute end-0 me-5"
+              >
+                Built with
+                <span class="fs-6 material-icons"> favorite </span> by
+                <a
+                  href="https://wiseai.dev/"
+                  target="_blank"
+                  class="text-decoration-none text-primary fw-bold text-danger"
+                  >Wiseai.dev
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/6.0.0-beta.0/simplebar.min.js"></script>
+    <script src="static/jquery.js"></script>
+  </body>
+</html>
