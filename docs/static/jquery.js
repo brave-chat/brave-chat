@@ -22,6 +22,5 @@
           .parent()
           .parent()
           .addClass("menu-active"));
-    })
-
+    });
 })(jQuery);

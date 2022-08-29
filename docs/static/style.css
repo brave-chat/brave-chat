@@ -166,3 +166,44 @@ body[data-sidebar="dark"] .menu-active .active {
 body[data-sidebar="dark"] .menu-active .active i {
   color: #ffffff !important;
 }
+.outer {
+  display: block;
+  text-align: center;
+}
+
+figure.embed,
+figure.embed-top,
+figure.overlay,
+figure.embed-over {
+  display: inline-block;
+  text-align: initial;
+  vertical-align: top;
+  position: relative;
+  margin: 0.5em;
+  font-size: 0.8em;
+  background: white;
+  overflow: hidden;
+}
+figure.embed img,
+figure.embed-top img,
+figure.overlay img,
+figure.embed-over img {
+  width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+figure.embed figcaption,
+figure.embed-top figcaption,
+figure.overlay figcaption,
+figure.embed-over figcaption {
+  width: 100%;
+  padding: 0.5em;
+  /* neutral theme */
+  color: rgba(50, 50, 50, 1);
+  background: rgba(200, 200, 200, 0.825);
+}
+
+figcaption {
+  display: block;
+}
