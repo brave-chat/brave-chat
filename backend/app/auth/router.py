@@ -16,8 +16,6 @@ from app.auth.crud import login_user, register_user
 
 router = APIRouter(prefix="/api/v1")
 
-# https://github.com/nsidnev/fastapi-realworld-example-app/blob/master/app/api/routes/authentication.py
-
 
 @router.post(
     "/auth/login",
