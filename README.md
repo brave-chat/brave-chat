@@ -1,5 +1,7 @@
 # A fully featured chat app built using the FARR stack.
 
+![Chat App](./docs/static/images/send-images.png "Chat App")
+
 Chat is a blazingly fast full stack chat application developed using React, MUI, Redux, FastAPI, Redis, and friends. It's designed to be developer-friendly, with code that is both standards-compliant and optimised for performance. As well as being feature-rich, this chat application is also fully responsive, meaning it will work seamlessly on a range of devices. So whether you're chatting on your desktop or your mobile, you'll always have a great experience.
 
 This chat application contain a handful list of reusable components.
