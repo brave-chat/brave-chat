@@ -8,6 +8,8 @@ This chat application contains a handful list of reusable components. You can ta
 
 ## How it works
 
+![Chat App](./docs/static/images/send-messages.png "Chat App")
+
 - Authentication/authorization is implemented using [the JWT method](https://jwt.io/introduction).
 - Text messages are sent and received in real time through WebSockets, unlike images(TODO in future releases.)
 - Images are stored on a [deta drive](https://docs.deta.sh/docs/drive/about).
