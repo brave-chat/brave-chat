@@ -16,7 +16,7 @@ The data is stored in a redis database through the [redis-om-python](https://git
 
 ### How the data is accessed:
 
-The data is accessed through various FastAPI endpoints which you can access after running the server-side FastAPI app at [http://localhost:8000](http://localhost:8000) or the docs deployed on [Herocku](https://fastapi-herock.herokuapp.com/docs#/).
+The data is accessed through various FastAPI endpoints(~ 26 endpoints) which you can access after running the server-side FastAPI app locally or you can visist the deployed docs on [Herocku](https://fastapi-herock.herokuapp.com/docs#/).
 
 ## How to run it locally?
 
@@ -39,6 +39,43 @@ $ source .venv/bin/activate
 or
 
 (.venv)$ poetry install
+```
+
+- Run the following command to generate your .env vars:
+
+```sh
+$ cp .env.example .env
+```
+
+- Create a free account on [Redis Cloud](https://redis.info/try-free-dev-to) and update your the env vars in `.env` file.
+
+```sh
+# Database
+# REDIS USER IN REDIS CLOUD
+REDIS_USERNAME=
+# DATABASE PASSWORD IN REDIS CLOUD
+REDIS_PASSWORD=
+# REDIS HOST IN REDIS CLOUD
+REDIS_HOST=
+# REDIS PORT IN REDIS CLOUD
+REDIS_PORT=
+```
+
+- Generate a secret key using openssl and update it env var in `.env` file.
+
+```sh
+$ openssl rand -hex 128
+66bf07aa6255ddf815ef9e53c52d29cdd3d72db79b552185d98c9d675b56d527feec866669ecd9f5090ed4579e1d7e095a6369c3483386b8161fe7ad25034c8565fa37f644f43f0b3b6d5768c6b09a12a7dde29391490a3fc201b796d0a569d62e1b325dcb4989154f1e2e9acbc917f7795b8ae74d1a8fd7bd7f1876ea19f6c4
+```
+
+```sh
+JWT_SECRET_KEY=66bf07aa6255ddf815ef9e53c52d29cdd3d72db79b552185d98c9d675b56d527feec866669ecd9f5090ed4579e1d7e095a6369c3483386b8161fe7ad25034c8565fa37f644f43f0b3b6d5768c6b09a12a7dde29391490a3fc201b796d0a569d62e1b325dcb4989154f1e2e9acbc917f7795b8ae74d1a8fd7bd7f1876ea19f6c4
+```
+
+- Create a free account on [Deta](https://www.deta.sh/), and update the following env var:
+
+```sh
+DETA_PROJECT_KEY=
 ```
 
 Now you can run the project locally:
@@ -79,7 +116,7 @@ For the backend part, you can refer to [this section](https://chat-docs.wiseai.d
 
 ## Deployment
 
-To make deploys work, you need to create free account on [Redis Cloud](https://redis.info/try-free-dev-to)
+To make deploys work, you need to create free account on [Redis Cloud](https://redis.info/try-free-dev-to). Due to the complex nature of the app, it is difficult to deploy the app on one server, unless building a custom infrastructure with docker and k8s.
 
 ### Google Cloud Run
 
