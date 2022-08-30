@@ -91,14 +91,10 @@ DETA_PROJECT_KEY=
 Now you can run the project locally:
 
 ```sh
-(.venv)$ make run
-
-or
-
 (.venv)$ poetry run server
 ```
 
-You can navigate to [http://localhost:8000](http://localhost:8000) to access the Swagger documentation.
+You can navigate to [http://localhost:8000/docs](http://localhost:8000/docs) to access the Swagger documentation.
 
 ![swagger docs](./docs/static/images/swagger.png "swagger docs")
 
