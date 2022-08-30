@@ -9,7 +9,6 @@ This chat application contain a handful list of reusable components.
 ## How it works
 
 
-
 ### How the data is stored:
 
 The data is stored in a redis database through the [redis-om-python](https://github.com/redis/redis-om-python) library.
@@ -17,6 +16,8 @@ The data is stored in a redis database through the [redis-om-python](https://git
 ### How the data is accessed:
 
 The data is accessed through various FastAPI endpoints(~ 26 endpoints) which you can access after running the server-side FastAPI app locally or you can visist the deployed docs on [Herocku](https://fastapi-herock.herokuapp.com/docs#/).
+
+For more info, you can refer to [this section](https://chat-docs.wiseai.dev/data-models) of the docs to better understand how the data was modeled.
 
 ## How to run it locally?
 
