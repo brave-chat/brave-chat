@@ -4,20 +4,25 @@
 
 Chat is a blazingly fast full stack chat application developed using React, MUI, Redux, FastAPI, Redis, and friends. It's designed to be developer-friendly, with code that is both standards-compliant and optimised for performance. As well as being feature-rich, this chat application is also fully responsive, meaning it will work seamlessly on a range of devices. So whether you're chatting on your desktop or your mobile, you'll always have a great experience.
 
-This chat application contain a handful list of reusable components.
-
-[Insert app screenshots](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#uploading-assets)
+This chat application contains a handful list of reusable components. You can take a look at various components in [this section](https://chat-docs.wiseai.dev/folder-structure) of the docs.
 
 ## How it works
 
+- Authentication/authorization is implemented using [the JWT method](https://jwt.io/introduction).
+- Text messages are sent and received in real time through WebSockets, unlike images(TODO in future releases.)
+- Images are stored on a [deta drive](https://docs.deta.sh/docs/drive/about).
 
 ### How the data is stored:
 
-The data is stored in a redis database through the [redis-om-python](https://github.com/redis/redis-om-python) library.
+![Data Models](./docs/static/images/tables.png "Data Models")
+
+- The data is stored in a Redis database through the [redis-om-python](https://github.com/redis/redis-om-python) library. 
+
+- Images are stored in and fetched from a [deta drive](https://docs.deta.sh/docs/drive/about).
 
 ### How the data is accessed:
 
-The data is accessed through various FastAPI endpoints(~ 26 endpoints) which you can access after running the server-side FastAPI app locally or you can visist the deployed docs on [Herocku](https://fastapi-herock.herokuapp.com/docs#/).
+The data is accessed through various FastAPI endpoints(~ 26 endpoints) which you can access after running the server-side FastAPI app locally, or by visiting the deployed docs on [Herocku](https://fastapi-herock.herokuapp.com/docs#/).
 
 For more info, you can refer to [this section](https://chat-docs.wiseai.dev/data-models) of the docs to better understand how the data was modeled.
 
@@ -131,11 +136,11 @@ TODO
 
 ### Netlify
 
-TODO
+Not possible because of websockets.
 
 ### Vercel
 
-TODO
+Not possible because of websockets.
 
 ## More Information about Redis Stack
 
