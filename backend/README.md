@@ -11,14 +11,14 @@ A blazingly fast real time chat application built using React, MUI, FastAPI, Red
 ## Installation
 
 ```sh
-python -m venv venv
-source venv/bin/activate
+python -m venv .venv
+source .venv/bin/activate
 make install
 ```
 
 ## Runnning Localhost
 
-`make run`
+`poetry run server`
 
 ## Build app
 
@@ -30,9 +30,9 @@ make install
 
 ## Access Swagger Documentation
 
-> <http://localhost:8080/docs>
+> <http://localhost:8000/docs>
 
 ## Access Redocs Documentation
 
-> <http://localhost:8080/redoc>
+> <http://localhost:8000/redocs>
 
