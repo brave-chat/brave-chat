@@ -6,14 +6,19 @@ import AddContact from "../../AddContact";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import NoRecordFound from "../NoRecordFound";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { fetchError } from "../../../redux/appReducer/actions";
+import { useDispatch } from "react-redux";
+
 import "../style.css";
 
 const ContactList = ({ contacts, currentUser }) => {
   const [addContact, setAddContact] = React.useState(false);
+  const dispatch = useDispatch();
   const handleAddContacClose = () => {
     setAddContact(false);
   };
   const handleAddContact = () => {
+    dispatch(fetchError(""));
     setAddContact(true);
   };
   return (

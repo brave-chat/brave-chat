@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { Menu, MenuItem } from "@mui/material";
 
-const DropdownMenu = ({ triggerComponent, items, onItemClick }) => {
+const DropdownMenu = ({ TriggerComponent, items, onItemClick }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [menuItems, setMenuItems] = useState([]);
   const open = Boolean(anchorEl);
@@ -29,7 +29,8 @@ const DropdownMenu = ({ triggerComponent, items, onItemClick }) => {
   return (
     <>
       <div className="pointer">
-        <triggerComponent.type {...triggerComponent.props} onClick={openMenu} />
+        {/* eslint-disable-next-line*/}
+        <TriggerComponent.type {...TriggerComponent.props} onClick={openMenu} />
       </div>
       <Menu
         anchorEl={anchorEl}

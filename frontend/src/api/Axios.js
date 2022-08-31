@@ -229,7 +229,6 @@ export const sendRoomTextMessage = (sender, room, message) => {
 
 export const addContactEmail = (email) => {
   return (dispatch) => {
-    dispatch(fetchError(""));
     dispatch(fetchStart());
     axJson.defaults.headers.common["Authorization"] =
       "Bearer " + localStorage.getItem("token");
@@ -250,6 +249,7 @@ export const addContactEmail = (email) => {
 
 export const addRoom = (roomName, roomDescription) => {
   return (dispatch) => {
+    dispatch(fetchError(""));
     dispatch(fetchStart());
     axJson.defaults.headers.common["Authorization"] =
       "Bearer " + localStorage.getItem("token");
@@ -534,6 +534,7 @@ export const JWTAuth = {
   },
   onLogout: () => {
     return (dispatch) => {
+      localStorage.clear();
       dispatch(fetchStart());
       axJson
         .get("user/logout")
@@ -542,15 +543,12 @@ export const JWTAuth = {
             dispatch(fetchSuccess(data.message));
             dispatch(setAuthUser(null));
             dispatch(setCurrentUser(null));
-            localStorage.clear();
           } else {
             dispatch(fetchError(data.message));
-            localStorage.clear();
           }
         })
         .catch(function (error) {
           dispatch(fetchError(error.message));
-          localStorage.clear();
         });
     };
   },

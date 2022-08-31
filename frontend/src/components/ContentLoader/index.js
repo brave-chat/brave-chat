@@ -13,9 +13,9 @@ const ContentLoader = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      dispatch(fetchError(""));
       dispatch(fetchSuccess(""));
-    }, 5000);
+      dispatch(fetchError(""));
+    }, 500);
   }, [dispatch, thisError, thisMessage]);
 
   return (

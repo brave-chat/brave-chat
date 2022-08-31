@@ -49,7 +49,7 @@ const ChatContainer = () => {
     return (
       <Box className="chat-box-root">
         <Box mb={2}>
-          <CustomImage src={"/images/logo.png"} />
+          <CustomImage src={"/logo192.png"} />
         </Box>
         <Typography className="chat-box-title">
           Welcome to WiseAI Chat App!
