@@ -73,8 +73,6 @@ async def startup():
 
 
 manager = ConnectionManager()
-# https://sandfishfactory.hatenablog.com/entry/2021/12/14/000000
-# https://github.com/sandfishfactory/blogapp_python/tree/main/fastapi_websocket
 
 
 @chat_app.websocket("/ws/{sender_pk}/{room_name}")

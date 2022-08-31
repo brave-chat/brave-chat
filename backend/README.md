@@ -18,7 +18,7 @@ make install
 
 ## Runnning Localhost
 
-`poetry run server`
+`make run`
 
 ## Build app
 
