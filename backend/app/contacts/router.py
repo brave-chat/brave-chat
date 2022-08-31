@@ -51,17 +51,15 @@ async def add_contact(
 
 @router.get(
     "/contact",
-    response_model=GetAllContactsResults,
     status_code=200,
     name="contacts:get-all-contacts",
     responses={
         200: {
-            "model": GetAllContactsResults,
             "description": "A list of contacts for each user.",
         },
     },
 )
-async def get_all_contacts():
+async def get_all_contacts(currentUser=Depends(get_current_active_user)):
     """
     Get all contacts grouped by users.
     """

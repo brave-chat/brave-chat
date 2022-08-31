@@ -3,6 +3,7 @@ import logging
 
 from app.auth.crud import find_existed_user
 from app.models import Contact, Conversation, User
+from app.users.schemas import UserObjectSchema
 
 logger = logging.getLogger(__name__)
 

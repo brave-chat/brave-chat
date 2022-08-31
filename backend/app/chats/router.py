@@ -90,7 +90,7 @@ async def send_message(
         },
     },
 )
-async def get_all_messages():
+async def get_all_messages(currentUser=Depends(get_current_active_user)):
     """
     Return all messages grouped by senders and receivers.
     """

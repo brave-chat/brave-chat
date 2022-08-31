@@ -128,5 +128,5 @@ async def update_user_status(
 
 
 @router.get("/users/all/get")
-async def get_all_users():
+async def get_all_users(currentUser=Depends(jwt_util.get_current_active_user)):
     return await User.find().all()
