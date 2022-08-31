@@ -169,8 +169,7 @@
                 <span class="material-icons"> list </span>
                 <span class="ms-2">Dependencies </span>
               </a>
-            </li>
-            <li
+            </li>            <li
               class="ps-3 pt-3 pe-2 fw-bold fs-6 text-uppercase text-white-50"
             >
               Backend
@@ -229,137 +228,72 @@
                           <div class="mb-5">
                             <h4 class="mt-0 mb-4 d-flex align-items-center">
                               <span class="material-icons"> forward </span>
-                              Installation
+                              Dependencies
                             </h4>
-                            
-                            <h5>Development Requirements</h5>
-                            <ul><li> Python3.9.2</li>
-                              <li> Poetry (Python Package Manager)</li></ul>
-
-                            <h5>Installation</h5>
-<div>
-                                  <xmp class="bg-dark text-white ps-4"
->
-python -m venv .venv
-source .venv/bin/activate
-make install
-                                  </xmp>
-                                </div>
-                      <h5>Runnning the project locally</h5>      
-<div>
-                                  <xmp class="bg-dark text-white ps-4"
->
-make run
-                                  </xmp>
-                                </div>       
-                      <h5>Build the app</h5>      
-<div>
-                                  <xmp class="bg-dark text-white ps-4"
->
-make build
-                                  </xmp>
-                                </div>             
-
-                            <h5>Prerequisites</h5>
-                            <p>Run the following command to generate your .env vars:</p>
-<div>
-                                  <xmp class="bg-dark text-white ps-4"
->
-cp .env.example .env
-                                  </xmp>
-                                </div>
-                            <p>Create a free account on <a
-                  href="https://redis.info/try-free-dev-to"
-                  target="_blank"
-                  class="text-decoration-none text-primary fw-bold text-danger"
-                  >Redis Cloud
-                </a> and update your the env vars in `.env` file.</p>
-<div>
-                                  <xmp class="bg-dark text-white ps-4"
->
-# Database
-# REDIS USER IN REDIS CLOUD
-REDIS_USERNAME=
-# DATABASE PASSWORD IN REDIS CLOUD
-REDIS_PASSWORD=
-# REDIS HOST IN REDIS CLOUD
-REDIS_HOST=
-# REDIS PORT IN REDIS CLOUD
-REDIS_PORT=
-                                  </xmp>
-                                </div>
-                            <p>Generate a secret key using openssl and update it env var in `.env` file:</p>
-<div>
-                                  <xmp class="bg-dark text-white ps-4"
->
-openssl rand -hex 128
-66bf07aa6255ddf815ef9e53c52d29cdd3d72db79b552185d98c9d675b56d527feec866669ecd9f5090ed4579e1d7e095a6369c3483386b8161fe7ad25034c8565fa37f644f43f0b3b6d5768c6b09a12a7dde29391490a3fc201b796d0a569d62e1b325dcb4989154f1e2e9acbc917f7795b8ae74d1a8fd7bd7f1876ea19f6c4
-
-JWT_SECRET_KEY=66bf07aa6255ddf815ef9e53c52d29cdd3d72db79b552185d98c9d675b56d527feec866669ecd9f5090ed4579e1d7e095a6369c3483386b8161fe7ad25034c8565fa37f644f43f0b3b6d5768c6b09a12a7dde29391490a3fc201b796d0a569d62e1b325dcb4989154f1e2e9acbc917f7795b8ae74d1a8fd7bd7f1876ea19f6c
-                                  </xmp>
-                                </div>
-                            <p>Create a free account on <a
-                  href="https://www.deta.sh/"
-                  target="_blank"
-                  class="text-decoration-none text-primary fw-bold text-danger"
-                  >Deta
-                </a>, and update the following env var:</p>
-<div>
-                                  <xmp class="bg-dark text-white ps-4"
->
-DETA_PROJECT_KEY=
-                                  </xmp>
-                                </div>
-                      <h5>Runnning the project locally</h5>      
-<div>
-                                  <xmp class="bg-dark text-white ps-4"
->
-make run
-                                  </xmp>
-                                </div>       
-                      <h5>Build the app</h5>      
-<div>
-                                  <xmp class="bg-dark text-white ps-4"
->
-make build
-                                  </xmp>
-                                </div>
-                      <h5>Access Swagger Documentation</h5>      
-<p>Once the app is up and running, you can access api docs using the following url:                 <a
-                  href="http://localhost:8000/docs"
-                  target="_blank"
-                  class="text-decoration-none text-primary fw-bold text-danger"
-                  >http://localhost:8000/docs
-                </a></p> 
-                            <div class="outer">
-                              <figure class="img1 embed news">
-                                <img
-                                  src="./static/images/swagger.png"
-                                  alt="Swagger docs."
-                                />
-                                <figcaption class="outer">
-                                  Swagger docs.
-                                </figcaption>
-                              </figure>
-                            </div>
-
-                      <h5>Access Swagger Documentation</h5>      
-<p>You can also access more detailed api docs using the following url:                 <a
-                  href="http://localhost:8000/redoc"
-                  target="_blank"
-                  class="text-decoration-none text-primary fw-bold text-danger"
-                  >http://localhost:8000/redocs
-                </a></p>
-                            <div class="outer">
-                              <figure class="img1 embed news">
-                                <img
-                                  src="./static/images/swagger-redocs.png"
-                                  alt="Swagger redocs."
-                                />
-                                <figcaption class="outer">
-                                  Swagger redocs.
-                                </figcaption>
-                              </figure>
+                            <p>
+                              The following is a list of dependencies that made this project possible:
+                            </p>
+                            <div class="table-responsive">
+                              <table class="table mb-0">
+                                <thead>
+                                  <tr>
+                                    <th>Dependencies</th>
+                                    <th>Url</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>Passlib</td>
+                                    <td>
+                                      <a
+                                        href="https://passlib.readthedocs.io/en/stable/install.html"
+                                        target="_blank"
+                                        >https://passlib.readthedocs.io/en/stable/index.html
+                                      </a>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>FastAPI</td>
+                                    <td>
+                                      <a
+                                        href="https://fastapi.tiangolo.com/"
+                                        target="_blank"
+                                        >https://fastapi.tiangolo.com/
+                                      </a>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>Pyjwt</td>
+                                    <td>
+                                      <a
+                                        href="https://github.com/jpadilla/pyjwt"
+                                        target="_blank"
+                                        >https://github.com/jpadilla/pyjwt
+                                      </a>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>Redis-om-python</td>
+                                    <td>
+                                      <a
+                                        href="https://github.com/redis/redis-om-python"
+                                        target="_blank"
+                                        >https://github.com/redis/redis-om-python
+                                      </a>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>deta</td>
+                                    <td>
+                                      <a
+                                        href="https://docs.deta.sh/docs/home"
+                                        target="_blank"
+                                        >https://docs.deta.sh/docs/home
+                                      </a>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
                             </div>
                           </div>
                         </div>
