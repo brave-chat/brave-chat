@@ -236,7 +236,7 @@ export const addContactEmail = (email) => {
     axJson
       .post("/contact", { contact: email })
       .then(({ data }) => {
-        if (data.data.status_code === 201) {
+        if (data.status_code === 201) {
           dispatch(fetchSuccess(data.message));
         } else {
           dispatch(fetchError(data.message));
