@@ -1,4 +1,4 @@
-# A fully featured chat app built using the FARR stack.
+# A fully featured chat app built using the FAR3 stack.
 
 ![Chat App](./docs/static/images/send-images.png "Chat App")
 
