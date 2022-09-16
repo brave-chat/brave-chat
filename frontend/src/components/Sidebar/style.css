@@ -155,12 +155,12 @@
 }
 .profile-list-root
   li
-  .MuiListItem-gutters" {
+  .MuiListItem-gutters {
         padding-top: 10px;
         padding-bottom: 10px;
         padding-left: 0px;
 }
-.profile-list-root li .MuiTypography-body2" {
+.profile-list-root li .MuiTypography-body2 {
   font-size: 16px;
 }
 

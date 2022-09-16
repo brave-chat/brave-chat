@@ -117,7 +117,6 @@
   padding-top: 10%;
 }
 .auth-wrap::before {
-  content: "";
   position: absolute;
   left: 0px;
   top: 0px;
