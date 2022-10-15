@@ -169,7 +169,8 @@
                 <span class="material-icons"> list </span>
                 <span class="ms-2">Dependencies </span>
               </a>
-            </li>            <li
+            </li>
+            <li
               class="ps-3 pt-3 pe-2 fw-bold fs-6 text-uppercase text-white-50"
             >
               Backend
@@ -237,8 +238,120 @@
                           <div class="mb-5">
                             <h4 class="mt-0 mb-4 d-flex align-items-center">
                               <span class="material-icons"> forward </span>
-                              Coming Soon...
+                              Data Tables
                             </h4>
+
+                            <p>
+                              This project uses RedisJson to do CRUD operations on its data through the <a
+                                href="https://github.com/redis/redis-om-python"
+                                target="_blank"
+                              >
+                                <strong>redis-om-python</strong>
+                              </a> library.
+
+                            </p>
+                            <div class="outer">
+                              <figure class="img1 embed news">
+                                <img
+                                  src="./static/images/tables.png"
+                                  alt="Chat App NoSQL Data tables."
+                                />
+                                <figcaption class="outer">
+                                  Chat App NoSQL Data tables.
+                                </figcaption>
+                              </figure>
+                            </div>
+                            <br />
+                            <p>
+                              There is a one to many relationship between users and contacts; a user can have multiple contacts. In NOSQL, we can create two collections, namely <strong>User</strong> and <strong>Contact</strong>. The <strong>Contact</strong> collection contains enough information to populate the contact list, a list of user.
+                            </p>
+
+                            <div class="outer">
+                              <figure class="img1 embed news">
+                                <img
+                                  src="./static/images/contact-list-view.png"
+                                  alt="Contact list view."
+                                />
+                                <figcaption class="outer">
+                                  Contact list view.
+                                </figcaption>
+                              </figure>
+                            </div><br />
+
+                            <p>
+                              Additionally, the <strong>User</strong> collection contains more information used to populate the user profile details view.
+                            </p>
+
+                            <div class="outer">
+                              <figure class="img1 embed news">
+                                <img
+                                  src="./static/images/user-info.png"
+                                  alt="User details."
+                                />
+                                <figcaption class="outer">
+                                  User details.
+                                </figcaption>
+                              </figure>
+                            </div>
+
+<br />
+
+                            <div class="alert alert-danger">
+                              <strong
+                                >Note: You can improve this approach by embedding User details within the contact list. However, this pattern didn't work in the current version of the <a
+                                href="https://github.com/redis/redis-om-python"
+                                target="_blank"
+                              >
+                                <strong>redis-om-python</strong>
+                              </a> library.
+                              </strong>
+                            </div>
+
+                            <p>
+                              Likewise, There is a many to many relationship between users and messages; a user can have multiple conversation with other users. Each conversation contains enough information to populate the chat view. In NOSQL, we can create three collections, namely <strong>User</strong>, <strong>Conversation</strong>, and <strong>Message</strong>. The <strong>Conversation</strong> collection contains enough information to populate the messages list between each sender and receiver.
+                            </p>
+                            <div class="outer">
+                              <figure class="img1 embed news">
+                                <img
+                                  src="./static/images/messages-list.png"
+                                  alt="Messages list."
+                                />
+                                <figcaption class="outer">
+                                  Messages list.
+                                </figcaption>
+                              </figure>
+                            </div>
+
+<br />
+
+                            <div class="alert alert-danger">
+                              <strong
+                                >Note: Similarly, we can improve this approach by embedding messages' details within the messages list of the conversation. However, this pattern didn't work in the current version of the <a
+                                href="https://github.com/redis/redis-om-python"
+                                target="_blank"
+                              >
+                                <strong>redis-om-python</strong>
+                              </a> library.
+                              </strong>
+                            </div>
+<br />
+
+                            <p>
+                              There is a one to many relationship between users and rooms; a user can exist in one or more rooms. There is also one to many relationship between rooms and conversations; a room can have one or multiple conversations. Each room contains enough information to populate the chat view. here, we can create three collections, namely <strong>Room</strong>, <strong>Conversation</strong>, and <strong>Message</strong>. The <strong>Room</strong> collection contains enough information to populate the messages list between a sender and multiple receivers. The only difference here from the previous users-messages model is that the receiver side of the conversation is the room itself.
+                            </p>
+                            <div class="outer">
+                              <figure class="img1 embed news">
+                                <img
+                                  src="./static/images/messages-list.png"
+                                  alt="Messages list."
+                                />
+                                <figcaption class="outer">
+                                  Messages list.
+                                </figcaption>
+                              </figure>
+                            </div>
+<br />
+
                           </div>
                         </div>
                       </div>
