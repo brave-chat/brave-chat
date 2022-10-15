@@ -169,7 +169,8 @@
                 <span class="material-icons"> list </span>
                 <span class="ms-2">Dependencies </span>
               </a>
-            </li>            <li
+            </li>
+            <li
               class="ps-3 pt-3 pe-2 fw-bold fs-6 text-uppercase text-white-50"
             >
               Backend
@@ -237,8 +238,108 @@
                           <div class="mb-5">
                             <h4 class="mt-0 mb-4 d-flex align-items-center">
                               <span class="material-icons"> forward </span>
-                              Coming Soon...
+                              Data Tables
                             </h4>
+
+                            <p>
+                              This project uses mysql to do CRUD operations on its data through the <a
+                                href="https://github.com/memsql/memsql-python"
+                                target="_blank"
+                              >
+                                <strong>memsql-python</strong>
+                              </a> library.
+
+                            </p>
+                            <div class="outer">
+                              <figure class="img1 embed news">
+                                <img
+                                  src="./static/images/relational-tables.png"
+                                  alt="Chat App NoSQL Data tables."
+                                />
+                                <figcaption class="outer">
+                                  Chat App Relational Database Tables.
+                                </figcaption>
+                              </figure>
+                            </div>
+                            <br />
+                            <p>
+                              Essentially there are <strong>seven</strong> primary tables that the app is built on: 
+                            </p>
+                            <ul>
+                              <li><strong>Users</strong>: A table that contains detailed information about each user who signs up into our chat app.</li>
+                              <li><strong>Access Tokens</strong>: A table that keeps track of unique user tokens to ensure only authorized users are logged in.</li>
+                              <li><strong>Expired Tokens</strong>: A table contains a unique ID for each expired token for security purposes.</li>
+                              <li><strong>Contacts</strong>: A table contains contacts for each user. A user must have a contact to send a message. The contact act as receiver of a message.</li>
+                              <li><strong>Conversations</strong>: A table contains sender and receiver IDs for every message sent.</li>
+                              <li><strong>Messages</strong>: In this table, each row contains message details about each conversation (e.g., type: text message or image, content of the message).</li>
+                              <li><strong>Rooms</strong>: A table contains information about each room(group); including its members, conversations between them, and a description of the room. </li>
+                            </ul>
+                            <p>
+                              There is a one to many relashionship between <strong>users</strong> and <strong>contacts</strong> tables. A user can have more than one contact.
+                            </p>
+                            <div class="outer">
+                              <figure class="img1 embed news">
+                                <img
+                                  src="./static/images/contact-list-view.png"
+                                  alt="Contact list view."
+                                />
+                                <figcaption class="outer">
+                                  Contact list view.
+                                </figcaption>
+                              </figure>
+                            </div><br />
+
+                            <p>
+                              Additionally, the <strong>users</strong> table contains enough information to populate the user profile details view.
+                            </p>
+
+                            <div class="outer">
+                              <figure class="img1 embed news">
+                                <img
+                                  src="./static/images/user-info.png"
+                                  alt="User details."
+                                />
+                                <figcaption class="outer">
+                                  User details.
+                                </figcaption>
+                              </figure>
+                            </div>
+
+<br />
+
+                            <p>
+                              There is a many to many relationship between <strong>users</strong> and <strong>messages</strong>; a user can have multiple conversation with other users. Each conversation contains enough information to populate the chat view. The <strong>conversations</strong> tables contains enough information to populate the messages list between each sender and receiver.
+                            </p>
+                            <div class="outer">
+                              <figure class="img1 embed news">
+                                <img
+                                  src="./static/images/messages-list.png"
+                                  alt="Messages list."
+                                />
+                                <figcaption class="outer">
+                                  Messages list.
+                                </figcaption>
+                              </figure>
+                            </div>
+
+<br />
+
+                            <p>
+                              There is a one to many relationship between <strong>users</strong> and <strong>rooms</strong>; a user can exist in one or more rooms. There is also one to many relationship between </strong>rooms</strong> and <strong>conversations</strong>; a room can have one or multiple conversations. Each room contains enough information to populate the chat view. The <strong>rooms</strong> table contains enough information to populate the messages list between a sender and multiple receivers. The only difference here from the previous users-messages model is that the receiver side of the conversation is the room itself.
+                            </p>
+                            <div class="outer">
+                              <figure class="img1 embed news">
+                                <img
+                                  src="./static/images/messages-list.png"
+                                  alt="Messages list."
+                                />
+                                <figcaption class="outer">
+                                  Messages list.
+                                </figcaption>
+                              </figure>
+                            </div>
+<br />
+<strong>Todo</strong>
                           </div>
                         </div>
                       </div>
