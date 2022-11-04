@@ -1,0 +1,50 @@
+.landing-header {
+  padding: 15px 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 35px;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  background: #000;
+  display: block;
+  font-size: 24px;
+  position: fixed;
+  z-index: 1020;
+}
+.inner-container {
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto 10px;
+}
+
+.nav-github-btn {
+  position: absolute;
+  right: 0;
+}
+.inner-nav-bar {
+  margin: 0px 40px 0 40px;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.site-logo img {
+  position: absolute;
+  top: -13px;
+  max-width: 100%;
+  height: 60px;
+  vertical-align: middle;
+  border-style: none;
+}
+
+.nav-bar-ul {
+  flex-basis: 100%;
+  align-items: center;
+  display: flex;
+  margin-top: 1px;
+  list-style: none;
+}
