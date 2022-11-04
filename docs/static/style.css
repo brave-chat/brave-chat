@@ -57,6 +57,15 @@
   }
 }
 
+@media (max-width: 585px) {
+  .support-btn, .div-badge, .badge  {
+    display: none;
+  }
+}
+
+.div-badge {
+  display: inline-block;
+}
 .footer {
   left: 250px;
   height: 60px;
@@ -206,4 +215,11 @@ figure.embed-over figcaption {
 
 figcaption {
   display: block;
+}
+
+iframe {
+  border: 0;
+  position: relative;
+  min-height: 40px;
+  top: 19px;
 }
