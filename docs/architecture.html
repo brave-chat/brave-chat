@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body data-spy="scroll" data-target=".left-side-nav" data-offset="180">
+    <div data-simplebar class="h-100">
+      <div id="navbar-include"></div>
+    </div>
+    <div class="main-content g-0 g-md-1 mb-3">
+      <div class="pt-5 pb-5 ps-3 pe-3 mt-5 mb-5 ms-0 position-relative">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card mt-3">
+                <div class="card-body">
+                  <div class="d-xl-flex">
+                    <div class="w-100">
+                      <div class="p-lg-1">
+                        <div class="mb-5">
+                          <div class="mb-5">
+                            <h4 class="mt-0 mb-4 d-flex align-items-center">
+                              <span class="material-icons"> forward </span>
+                              Architecture
+                            </h4>
+
+                            <div class="outer">
+                              <figure class="img1 embed news">
+                                <img
+                                  src="./static/images/architecture.png"
+                                  alt="architecture."
+                                />
+                                <figcaption class="outer">
+                                  Architecture.
+                                </figcaption>
+                              </figure>
+                            </div>
+                            <p>
+                            <h4 class="mt-0 mb-4 d-flex align-items-center">
+                              <span class="material-icons"> forward </span>
+                              What is the point of this architecture?
+                            </h4>
+
+<p>The reason why <strong>Brave Chat</strong>'s architecture uses so many different technologies is that each one addresses a different type of problem in the best way possible.
+</p>
+<p>
+                            <h4 class="mt-0 mb-4 d-flex align-items-center">
+                              <span class="material-icons"> forward </span>
+                              Why relational databases?
+                            </h4>
+For example, A key feature of relational databases is that they don’t give up on consistency, and data integrity. They also use <a class="text-decoration-none text-primary fw-bold" href="https://en.wikipedia.org/wiki/Record_locking">pessimistic locking</a> which kind of usefull when transactions that violate synchronization are simply blocked to avoid race conditions and conflicts. However, relational databases weren’t designed to be clustered, although it’s possible.</p>
+                            <h4 class="mt-0 mb-4 d-flex align-items-center">
+                              <span class="material-icons"> forward </span>
+                              Why Redis pub/sub?
+                            </h4>
+<p>I also opted to use <strong>Redis</strong> for <strong>Brave Chat</strong> because it&#39;s fast and reliable. Redis was utilized to send messages to recepients in a <strong>pub/sub</strong> fashion, so that if the user is unreachable for any reason, the messages will still exist and can be delivered as soon as the user becomes available again. This ensures that no messages are lost and that our users always receive the information they need in a timely manner.</p>
+                            <h4 class="mt-0 mb-4 d-flex align-items-center">
+                              <span class="material-icons"> forward </span>
+                              Why Deta drive?
+                            </h4>
+<p>Additionally, I chose a deta drive to save media files. The reason for this is that Deta has a free trial and provides easy-to-use APIs. This helps us keep our costs down while still providing a robust chat experience for the users of the platform.</p>
+                            <h4 class="mt-0 mb-4 d-flex align-items-center">
+                              <span class="material-icons"> forward </span>
+                              Why SingleStoreDB?
+                            </h4>
+<p><strong><a class="text-decoration-none text-primary fw-bold" href="https://www.singlestore.com/solutions/scale-your-database/">Scalability</a></strong>: The database should be able to handle new data without performance degradation so I don&#39;t have to reconsider the solution again.</p>
+<p><strong><a class="text-decoration-none text-primary fw-bold" href="https://www.singlestore.com/blog/load-balanced-failover-in-memsql-7-1/">Stability</a></strong>: The database should be able to handle failures gracefully. Data should be replicated and backed up so that it can be recovered in the event of a failure.</p>
+<p><strong><a class="text-decoration-none text-primary fw-bold" href="https://www.singlestore.com/blog/how-to-get-started-with-singlestore/">Ease of use</a></strong>: Developers with decent experience using sql database should be able to use the database without needing to be database experts. The database should have an intuitive interface that is easy to use. </p>
+<p><strong><a class="text-decoration-none text-primary fw-bold" href="https://docs.singlestore.com/db/v7.3/en/user-and-cluster-administration/maintain-your-cluster/taking-leaves-offline-without-cluster-downtime.html">Low maintenance</a></strong>: We need something that is low maintenance and will just work once we set it up. This will help us keep our costs down and ensure that our database is always up and running.</p>
+<p>SingleStore seems to be fulfilling the majority of the above requirements. That’s basically why I chose to use SingleStore for the chat application. SingleStoreDB can be clustered both for replication and for sharding, and its distributed architecture is based on a master-aggregators model.</p>
+
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div id="footer-include"></div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/6.0.0-beta.0/simplebar.min.js"></script>
+    <script src="static/jquery.js"></script>
+  </body>
+</html>
