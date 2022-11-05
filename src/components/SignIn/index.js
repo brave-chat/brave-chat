@@ -61,7 +61,6 @@ const SignIn = () => {
       dispatch(
         JWTAuth.onLogin({ email: values.email, password: values.password })
       );
-      console.log({ email: values.email, password: values.password });
     }
   };
 

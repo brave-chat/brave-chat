@@ -310,7 +310,7 @@ Navigate to [http://localhost:3000](http://localhost:3000) to explore the landin
 
 ## Running locally with Compose v2
 
-Navigate to the server repository and follow the instructions listed in that section to run both the client and the server in docker containers.
+Navigate to [the server repository](https://github.com/brave-chat/brave-chat-server) and follow the instructions listed in [this section](https://github.com/brave-chat/brave-chat-server#running-locally-with-compose-v2) to run both the client and the server in docker containers.
 
 ## Deployment
 
