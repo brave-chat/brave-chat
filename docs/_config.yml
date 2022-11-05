@@ -18,11 +18,11 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Chat
+title: Brae Chat
 email: business@wiseai.dev
 description: >- # this means to ignore newlines until "baseurl:"
-  a blazingly fast full stack chat application developed using React,
-  MUI, Redux, FastAPI, Redis, and friends.
+  A fully featured full stack chat application developed using React,
+  MUI, Redux, FastAPI, Redis, SingleStore, and friends.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: wiseaidev
