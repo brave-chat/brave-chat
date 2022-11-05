@@ -119,10 +119,8 @@
 .simplebar-height-auto-observer {
   display: block;
   opacity: 0;
-  position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
   width: 100%;
   min-height: 1px;
   min-width: 1px;
