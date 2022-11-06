@@ -92,7 +92,7 @@ const SignUp = () => {
       autoComplete="off"
       className="auth-wrap"
     >
-      {/*<ParticlesBackground />*/}
+      <ParticlesBackground />
       <Box className="auth-card">
         <Box className="auth-content">
           <Typography component="div" variant="h4" className="title-root">

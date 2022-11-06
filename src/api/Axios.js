@@ -345,7 +345,7 @@ export const addContactEmail = (email, onCloseDialog) => {
   };
 };
 
-export const addRoom = (roomName, roomDescription, onCloseDialog) => {
+export const addRoom = (roomName, roomDescription, join, onCloseDialog) => {
   return (dispatch) => {
     dispatch(fetchStart());
     axJson.defaults.headers.common["Authorization"] =
@@ -353,7 +353,11 @@ export const addRoom = (roomName, roomDescription, onCloseDialog) => {
     axJson
       .post(
         `${Server.endpoint}/room`,
-        JSON.stringify({ room_name: roomName, description: roomDescription })
+        JSON.stringify({
+          room_name: roomName,
+          description: roomDescription,
+          join: join,
+        })
       )
       .then(({ data }) => {
         if (data.status_code === 200) {
@@ -391,7 +395,7 @@ export const getUserContacts = () => {
           }
         })
         .catch(function (error) {
-          dispatch(fetchError(""));
+          dispatch(JWTAuth.onLogout());
         });
     }
   };
@@ -473,13 +477,7 @@ export const resetPassword = (
           if (data.status_code === 200) {
             dispatch(fetchSuccess(data.message));
             dispatch(onCloseDialog());
-            // dispatch(
-            //   JWTAuth.getAuthUser(
-            //     true,
-            //     localStorage.getItem("token"),
-            //     data.message
-            //   )
-            // );
+            dispatch(JWTAuth.onLogout());
           } else {
             dispatch(fetchError(data.message));
           }
@@ -528,16 +526,16 @@ export const uploadProfilePicture = (image) => {
     const formData = new FormData();
     formData.append("file", image[0]);
     dispatch(fetchStart());
-    if (localStorage.getItem("user")) {
+    const user = localStorage.getItem("user");
+    if (user) {
       axFiles.defaults.headers.common["Authorization"] =
         "Bearer " + localStorage.getItem("token");
       axFiles
         .put(`${Server.endpoint}/user/profile-image`, formData)
         .then(({ data }) => {
           if (data.status_code === 200) {
-            dispatch(fetchSuccess(data.message));
             dispatch(
-              JWTAuth.getAuthUser(true, localStorage.getItem("token"), "")
+              JWTAuth.getAuthUser(true, data.access_token, data.message)
             );
           } else {
             dispatch(fetchError(data.message));
@@ -572,6 +570,12 @@ export const SetPersonalInfo = (
         .then(({ data }) => {
           if (data.status_code === 200) {
             dispatch(fetchSuccess(data.message));
+            const user = JSON.parse(localStorage.getItem("user"));
+            user.first_name = firstName;
+            user.last_name = lastName;
+            user.bio = bio;
+            user.phone_number = phoneNumber;
+            dispatch(setCurrentUser(user));
             dispatch(onCloseDialog());
             dispatch(
               JWTAuth.getAuthUser(
@@ -591,30 +595,30 @@ export const SetPersonalInfo = (
   };
 };
 
-export const setUserChat = () => {
-  return (dispatch) => {
-    dispatch(fetchStart());
-    if (localStorage.getItem("user")) {
-      axJson.defaults.headers.common["Authorization"] =
-        "Bearer " + localStorage.getItem("token");
-      axJson
-        .get(`${Server.endpoint}/contacts/chat`, {
-          params: { user: JSON.parse(localStorage.getItem("user")).email },
-        })
-        .then(({ data }) => {
-          if (data.status_code === 200) {
-            dispatch(fetchSuccess());
-            dispatch(setChatUsers(data.result));
-          } else {
-            dispatch(fetchError(data.message));
-          }
-        })
-        .catch(function (error) {
-          dispatch(fetchError(""));
-        });
-    }
-  };
-};
+// export const setUserChat = () => {
+//   return (dispatch) => {
+//     dispatch(fetchStart());
+//     if (localStorage.getItem("user")) {
+//       axJson.defaults.headers.common["Authorization"] =
+//         "Bearer " + localStorage.getItem("token");
+//       axJson
+//         .get(`${Server.endpoint}/contacts/chat`, {
+//           params: { user: JSON.parse(localStorage.getItem("user")).email },
+//         })
+//         .then(({ data }) => {
+//           if (data.status_code === 200) {
+//             dispatch(fetchSuccess());
+//             dispatch(setChatUsers(data.result));
+//           } else {
+//             dispatch(fetchError(data.message));
+//           }
+//         })
+//         .catch(function (error) {
+//           dispatch(fetchError(""));
+//         });
+//     }
+//   };
+// };
 
 export const JWTAuth = {
   onRegister: ({ firstName, lastName, email, password }) => {
@@ -675,7 +679,7 @@ export const JWTAuth = {
             }
           })
           .catch(function (error) {
-            dispatch(fetchError(error.message));
+            dispatch(fetchError(""));
           });
       } catch (error) {
         dispatch(fetchError(""));
@@ -698,7 +702,7 @@ export const JWTAuth = {
           }
         })
         .catch(function (error) {
-          dispatch(fetchError(error.message));
+          dispatch(fetchError(""));
         });
     };
   },
@@ -722,7 +726,7 @@ export const JWTAuth = {
             // store the user in localStorage
             localStorage.setItem("user", JSON.stringify(data.user));
           } else {
-            dispatch(updateLoadUser(true));
+            dispatch(JWTAuth.onLogout());
           }
         })
         .catch(function (error) {

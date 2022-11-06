@@ -9,7 +9,7 @@ import LandingPage from "../pages/LandingPage";
 import { useDispatch } from "react-redux";
 import { setCurrentUser, setAuthUser } from "../redux/appReducer/actions";
 
-import { setUserChat, getUserContacts, getUserRooms } from "../api/Axios";
+import { getUserContacts, getUserRooms } from "../api/Axios";
 import { authUser } from "../redux/appReducer/selectors";
 
 const AppRoutes = () => {
@@ -25,7 +25,7 @@ const AppRoutes = () => {
       dispatch(setAuthUser(user));
       dispatch(getUserContacts());
       dispatch(getUserRooms());
-      dispatch(setUserChat());
+      //dispatch(setUserChat());
     }
     // eslint-disable-next-line
   }, [dispatch, localStorage.getItem("user")]);
@@ -34,7 +34,7 @@ const AppRoutes = () => {
     dispatch(setCurrentUser(currentAuthUser));
     dispatch(getUserContacts());
     dispatch(getUserRooms());
-    dispatch(setUserChat());
+    //dispatch(setUserChat());
     return (
       <>
         <Navigate to={"/chat"} replace />
@@ -53,11 +53,7 @@ const AppRoutes = () => {
           ></Route>
           <Route
             path="/landing"
-            element={
-              <div className="landing">
-                {currentAuthUser ? <ChatApp /> : <LandingPage />}
-              </div>
-            }
+            element={<div className="landing">{<LandingPage />}</div>}
           ></Route>
           <Route
             path="/chat"

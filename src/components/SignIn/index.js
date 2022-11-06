@@ -75,7 +75,7 @@ const SignIn = () => {
       autoComplete="off"
       className="auth-wrap"
     >
-      {/*<ParticlesBackground />*/}
+      <ParticlesBackground />
       <Box className="auth-card">
         <Box className="auth-content">
           <Typography

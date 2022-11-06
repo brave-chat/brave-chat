@@ -6,15 +6,15 @@ import Typography from "@mui/material/Typography";
 import clsx from "clsx";
 import moment from "moment";
 
-const ChatUserCell = ({ data, currentUser, onContactSelect }) => {
+const ChatUserCell = ({ data, currentUser, onUserSelect }) => {
   const [date, time] = data.last_message_time.split("T");
   const momentDate = moment.utc().format("YYYY-MM-DD");
   const getBadgeStatusClass = () => {
-    if (data.chat_status === "online") {
+    if (data.user_status === "online") {
       return "badge-online";
     }
 
-    if (data.chat_status === "away") {
+    if (data.user_status === "away") {
       return "badge-away";
     }
 
@@ -26,7 +26,7 @@ const ChatUserCell = ({ data, currentUser, onContactSelect }) => {
       className={clsx("chat-cell-item", {
         active: currentUser && currentUser.email === data.email,
       })}
-      onClick={() => onContactSelect(data)}
+      onClick={() => onUserSelect(data)}
     >
       <Box className="chat-avatar-root">
         <Badge

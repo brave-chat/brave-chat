@@ -26,20 +26,27 @@ const AddJoinRoom = ({ join, open, onCloseDialog }) => {
   const onSubmit = () => {
     if (!roomName) {
       setRoomError("Room name must be valid!");
-    } else if (join && !roomDescription) {
+    } else if (join) {
+      dispatch(addRoom(roomName, roomDescription, 1, onCloseDialog));
+    } else if (!join && !roomDescription) {
       setRoomDescriptionError("Provide a room description!");
     } else {
-      dispatch(addRoom(roomName, roomDescription, onCloseDialog));
+      dispatch(addRoom(roomName, roomDescription, 0, onCloseDialog));
     }
   };
 
   return (
     <Dialog open={open} onClose={onCloseDialog} className="dialog-root">
       <DialogTitle className="dialog-title-root">
-        {join ? "Create" : "Join"} a Room.
+        {join ? "Join" : "Create"} a Room.
       </DialogTitle>
       <DialogContent dividers>
-        <Box alignItems="center" m={{ xs: 6, md: 5 }}>
+        <Box
+          alignItems="center"
+          m={{ xs: 2, md: 6 }}
+          pt={{ xs: 4, md: 0 }}
+          pb={{ xs: 4, md: 0 }}
+        >
           <AppTextInput
             fullWidth
             size={""}
@@ -55,7 +62,7 @@ const AddJoinRoom = ({ join, open, onCloseDialog }) => {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start" variant="standard">
-                  <IconButton aria-label="Room" edge="end">
+                  <IconButton aria-label="Room" edge="end" disabled>
                     <TitleIcon />
                   </IconButton>
                 </InputAdornment>
@@ -64,8 +71,13 @@ const AddJoinRoom = ({ join, open, onCloseDialog }) => {
           />
         </Box>
 
-        {join ? (
-          <Box alignItems="center" m={{ xs: 6, md: 5 }}>
+        {!join ? (
+          <Box
+            alignItems="center"
+            m={{ xs: 2, md: 6 }}
+            pt={{ xs: 4, md: 0 }}
+            pb={{ xs: 4, md: 0 }}
+          >
             <AppTextInput
               fullWidth
               size={""}
@@ -81,7 +93,11 @@ const AddJoinRoom = ({ join, open, onCloseDialog }) => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start" variant="standard">
-                    <IconButton aria-label="Room Description" edge="end">
+                    <IconButton
+                      aria-label="Room Description"
+                      edge="end"
+                      disabled
+                    >
                       <DescriptionIcon />
                     </IconButton>
                   </InputAdornment>

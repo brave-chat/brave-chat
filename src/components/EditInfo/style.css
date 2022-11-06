@@ -1,5 +1,6 @@
 .dialog-root .MuiDialogContent-root {
   background-color: black;
+  overflow: hidden;
 }
 .dialog-title-root .form-control {
   font-size: 16px;
@@ -51,4 +52,14 @@
 }
 .react-tel-input .country-list .search {
   background-color: #000;
+}
+
+.phone-field {
+  width: 245%;
+}
+
+@media screen and (max-width: 390px) {
+  .phone-field {
+    width: 215%;
+  }
 }

@@ -12,17 +12,17 @@ import "../style.css";
 const RoomList = ({ rooms, currentUser }) => {
   const [addRoom, setAddRoom] = React.useState(false);
   const [joinRoom, setJoinRoom] = React.useState(false);
-  const handleAddContacClose = () => {
+  const handleAddRoomClose = () => {
     setAddRoom(false);
     setJoinRoom(false);
   };
   const handleAddRoom = () => {
-    setJoinRoom(false);
-    setAddRoom(true);
+    setJoinRoom(true);
+    setAddRoom(false);
   };
   const handleJoinRoom = () => {
-    setAddRoom(false);
-    setJoinRoom(true);
+    setAddRoom(true);
+    setJoinRoom(false);
   };
   return (
     <Box>
@@ -70,11 +70,15 @@ const RoomList = ({ rooms, currentUser }) => {
       ) : (
         <NoRecordFound />
       )}
-      <AddJoinRoom open={addRoom} onCloseDialog={handleAddContacClose} />
+      <AddJoinRoom
+        join={false}
+        open={addRoom}
+        onCloseDialog={handleAddRoomClose}
+      />
       <AddJoinRoom
         join={true}
         open={joinRoom}
-        onCloseDialog={handleAddContacClose}
+        onCloseDialog={handleAddRoomClose}
       />
     </Box>
   );

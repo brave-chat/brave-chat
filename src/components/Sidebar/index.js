@@ -28,11 +28,31 @@ const Sidebar = () => {
   const currentRooms = useSelector(rooms);
   const [value, setValue] = useState(1);
   const [searchText, setSearchText] = useState("");
+  const [nbTotalNonRead, setNbTotalNonRead] = useState(
+    currentUsers && currentUsers.length > 0
+      ? currentUsers[0].nb_total_unread_message
+      : null
+  );
+  const [previousUser, setPreviousUser] = useState();
 
   const dispatch = useDispatch();
 
-  const onContactSelect = (contact) => {
-    dispatch(onUserSelect(contact));
+  const onUserChatSelect = (user) => {
+    if (!previousUser) {
+      setNbTotalNonRead(
+        currentUsers[0].nb_total_unread_message - user.nb_unread_message
+      );
+      user.nb_unread_message = 0;
+      setPreviousUser(user);
+      dispatch(onUserSelect(user));
+      return;
+    }
+    if (previousUser.email !== user.email) {
+      setNbTotalNonRead(nbTotalNonRead - user.nb_unread_message);
+      user.nb_unread_message = 0;
+    }
+    setPreviousUser(user);
+    dispatch(onUserSelect(user));
   };
 
   const handleChange = (event, newValue) => {
@@ -68,9 +88,11 @@ const Sidebar = () => {
           icon={
             <Badge
               badgeContent={
-                currentUsers && typeof currentUsers.length > 0
-                  ? currentUsers[0].nb_total_unread_message
-                  : null
+                !nbTotalNonRead
+                  ? currentUsers && currentUsers.length > 0
+                    ? currentUsers[0].nb_total_unread_message
+                    : null
+                  : nbTotalNonRead
               }
               color="primary"
             >
@@ -100,10 +122,13 @@ const Sidebar = () => {
           users={
             currentUsers &&
             currentUsers.sort(function (x, y) {
-              return y.chat_status - x.chat_status;
+              return (
+                Date.parse(y.last_message_time) -
+                Date.parse(x.last_message_time)
+              );
             })
           }
-          onContactSelect={onContactSelect}
+          onUserSelect={onUserChatSelect}
         />
       ) : value === 2 ? (
         <ContactList

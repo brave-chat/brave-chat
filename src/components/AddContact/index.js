@@ -33,10 +33,9 @@ const AddContact = ({ open, onCloseDialog }) => {
     <Dialog open={open} onClose={onCloseDialog} className="dialog-root">
       <DialogTitle className="dialog-title-root">Add Contact.</DialogTitle>
       <DialogContent dividers>
-        <Box alignItems="center" m={{ xs: 6, md: 5 }}>
+        <Box alignItems="center" m={{ xs: 2, md: 6 }}>
           <AppTextInput
             fullWidth
-            size={""}
             className="text-field-root"
             variant="outlined"
             label="Email Address"
@@ -49,7 +48,7 @@ const AddContact = ({ open, onCloseDialog }) => {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start" variant="standard">
-                  <IconButton aria-label="Email" edge="end">
+                  <IconButton aria-label="Email" edge="end" disabled>
                     <MailIcon />
                   </IconButton>
                 </InputAdornment>

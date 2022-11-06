@@ -71,9 +71,10 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
           alignItems="center"
           mb={{ xs: 6, md: 5 }}
           mt={{ xs: 6, md: 5 }}
+          ml={4}
         >
           <GridContainer>
-            <Grid item xs={12} sm={5.8}>
+            <Grid item xs={12} md={5.8}>
               <AppTextInput
                 fullWidth
                 className="text-field-root"
@@ -96,7 +97,7 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
                 }}
               />
             </Grid>
-            <Grid item xs={12} sm={5.8}>
+            <Grid item xs={12} md={5.8}>
               <AppTextInput
                 fullWidth
                 className="text-field-root"
@@ -121,49 +122,60 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
             </Grid>
           </GridContainer>
         </Box>
-        <Box mb={{ xs: 6, md: 5, width: "51.5ch" }}>
-          <AppTextInput
-            fullWidth
-            className="text-field-root"
-            variant="outlined"
-            label="Bio"
-            value={bio}
-            onChange={(e) => {
-              setBio(e.target.value);
-              setBioError("");
-            }}
-            helperText={bioError}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start" variant="standard">
-                  <IconButton aria-label="Bio" edge="end" disabled>
-                    <ThreePIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Box>
-        <Box mb={{ xs: 6, md: 5 }}>
-          <PhoneInput
-            country={"us"}
-            className="text-field-root"
-            variant="outlined"
-            label="Phone Number"
-            enableSearch={true}
-            onChange={(phoneNumber) => onPhoneNoAdd(phoneNumber)}
-            helperText={phoneNumberError}
-            InputProps={{
-              inputProps: { value: phoneNumber },
-              startAdornment: (
-                <InputAdornment position="start" variant="standard">
-                  <IconButton aria-label="Phone Number" edge="end" disabled>
-                    <DialpadIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
+        <Box
+          display="flex"
+          flexDirection={{ xs: "column", md: "row" }}
+          alignItems="center"
+          mb={{ xs: 6, md: 5 }}
+          mt={{ xs: 6, md: 5 }}
+          ml={4}
+        >
+          <GridContainer>
+            <Grid item xs={12} md={5.8}>
+              <AppTextInput
+                fullWidth
+                className="text-field-root"
+                variant="outlined"
+                label="Bio"
+                value={bio}
+                onChange={(e) => {
+                  setBio(e.target.value);
+                  setBioError("");
+                }}
+                helperText={bioError}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start" variant="standard">
+                      <IconButton aria-label="Bio" edge="end" disabled>
+                        <ThreePIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} md={5.8}>
+              <PhoneInput
+                country={"us"}
+                className="phone-field text-field-root"
+                variant="outlined"
+                label="Phone Number"
+                enableSearch={true}
+                onChange={(phoneNumber) => onPhoneNoAdd(phoneNumber)}
+                helperText={phoneNumberError}
+                InputProps={{
+                  inputProps: { value: phoneNumber },
+                  startAdornment: (
+                    <InputAdornment position="start" variant="standard">
+                      <IconButton aria-label="Phone Number" edge="end" disabled>
+                        <DialpadIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+          </GridContainer>
         </Box>
         <Box display="flex" justifyContent="flex-end" mb={0}>
           <Button onClick={onCloseDialog} color="secondary">

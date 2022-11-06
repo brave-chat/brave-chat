@@ -159,7 +159,7 @@ const ContentHeader = ({ user }) => {
               backgroundColor={getStatusColor()}
             />
             <Box component="span" ml={1.5} fontSize={12} color="#fff">
-              {user.chat_status ? user.chat_status : "offline"}
+              {user.chat_status ? user.chat_status : "  "}
             </Box>
           </Box>
         </Box>
