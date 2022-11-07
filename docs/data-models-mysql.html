@@ -74,18 +74,18 @@
                             </div>
                             <br />
                             <p>
-                              Essentially, there are <strong>six</strong> primary tables that the plarform is built upon: 
+                              Essentially, there are <strong>six</strong> primary tables that the platform is built upon: 
                             </p>
                             <ul>
-                              <li><strong>users</strong>: A table that contains detailed information about each user who signed up into the platform.</li>
-                              <li><strong>access_tokens</strong>: A table that keeps track of unique user tokens to ensure only authorized users can log in. It also helps to add a logout functionality at the server side.</li>
-                              <li><strong>contacts</strong>: A table contains contacts for each user. A user must have a contact to send a message. The contact act as receiver of a message.</li>
-                              <li><strong>messages</strong>: A table contains sender, receiver IDs and or room name for every message sent along with information about each message type(e.g. text message or media), content of the message...</li>
-                              <li><strong>rooms</strong>: A table contains information about each room(group); room name, and a description of the room. </li>
+                              <li><strong>users</strong>: A table containing detailed information about each user who signed into the platform.</li>
+                              <li><strong>access_tokens</strong>: A table that keeps track of unique user tokens to ensure only authorized users can log in. It also helps to add a logout functionality on the server side.</li>
+                              <li><strong>contacts</strong>: A table contains contacts for each user. A user must have a contact to send a message. The contact act as the receiver of a message.</li>
+                              <li><strong>messages</strong>: A table contains sender, receiver IDs and/or room names for every message sent along with information about each message type(e.g. text message or media), the content of the message...</li>
+                              <li><strong>rooms</strong>: A table contains information about each room(group); the room name, and a room description. </li>
                               <li><strong>rooms_members</strong>: A table that maps users to rooms joined in.</li>
                             </ul>
                             <p>
-                              There is a one to many relashionship between <strong>users</strong> and <strong>contacts</strong> tables. A user can have more than one contact.
+                              There is a one-to-many relationship between <strong>users</strong> and <strong>contacts</strong> tables. A user can have more than one contact.
                             </p>
                             <div class="outer">
                               <figure class="img1 embed news">
@@ -100,7 +100,7 @@
                             </div><br />
 
                             <p>
-                              Additionally, the <strong>users</strong> table contains enough information to populate the user profile details view.
+                              The <strong>users</strong> table also contains enough information to populate the user profile details view.
                             </p>
 
                             <div class="outer">
@@ -118,7 +118,7 @@
 <br />
 
                             <p>
-                              There is a many to many relationship between <strong>users</strong> and <strong>messages</strong>; a user can have multiple conversation with other users. The <strong>messages</strong> table contains enough information to populate the chat view as well as the messages list between each sender and receiver.
+                              There is a many-to-many relationship between <strong>users</strong> and <strong>messages</strong>; a user can have multiple conversations with other users. The <strong>messages</strong> table contains enough information to populate the chat view and the messages list between each sender and receiver.
                             </p>
                             <div class="outer">
                               <figure class="img1 embed news">
@@ -135,7 +135,7 @@
 <br />
 
                             <p>
-                              There is a one to many relationship between <strong>users</strong> and <strong>rooms</strong>; a user can exist in one or more rooms. There is also one to many relationship between </strong>rooms</strong> and <strong>messages</strong>; a room can have one or multiple messages. The <strong>messages</strong> table contains enough information to populate the messages list between a sender and multiple receivers in the room. The only difference here from the previous users-messages model is that the receiver side of the conversation is the room itself; think of the room column as a wildcard, if set, for all receivers.
+                              There is a one-to-many relationship between <strong>users</strong> and <strong>rooms</strong>; a user can exist in one or more rooms. There is also a one-to-many relationship between </strong>rooms</strong> and <strong>messages</strong>; a room can have one or multiple messages. The <strong>messages</strong> table contains enough information to populate the messages list between a sender and multiple receivers in the room. The only difference from the previous users-messages model is that the receiver side of the conversation is the room itself; think of the room column as a wildcard, if set, for all receivers.
                             </p>
                             <div class="outer">
                               <figure class="img1 embed news">
@@ -153,7 +153,7 @@
                               <span class="material-icons"> forward </span>
                               Database Queries
                             </h4>
-<p>Now that we have our data modeled, we need to think about how we are going to query it. As you can see, we have a table for messages and a table for users. If we want to fetch all messages sent between two users, we need to join the two tables like the following:</p>
+<p>Now that we have our data modelled, we need to think about how we will query it. As you can see, we have a table for messages and a table for users. If we want to fetch all messages sent between two users, we need to join the two tables like the following:</p>
 <pre class="bg-dark text-white ps-4"><code class="lang-sql">
 SELECT
     id,
@@ -181,8 +181,8 @@ ORDER BY
   creation_date
 
 </code></pre>
-<p>However, as you can tell, we have a table for messages and Two table for rooms. The rooms table holds detailed information about each room. And the <code>room_members</code> table maps users to rooms. This way, we are respecting the four normalization priciples. In case you are not familiar with normalisation, it is the process of breaking down data into its smallest possible unit. This ensures that no data is duplicated and that all data is kept in its proper place.</p>
-<p>For example, consider one table that contains information about rooms and messages. However, this would not be normalized because it would require us to duplicate data in the same table. Instead, we can have a table for rooms and a separate table for <code>room_members</code> which maps users to rooms. This way, we are respecting the four normalization priciples. And, to fetch all messages sent in a room, we can join the two tables:</p>
+<p>However, as you can tell, we have a table for messages and Two tables for rooms. The rooms table holds detailed information about each room. And the <code>room_members</code> table maps users to rooms. This way, we respect the four normalization principles. If you are unfamiliar with normalization, it breaks down data into its smallest possible unit. This ensures that no data is duplicated and that all data is kept in its proper place.</p>
+<p>For example, consider one table containing room information and messages. However, this would not be normalized because it would require us to duplicate data in the same table. Instead, we can have a table for rooms and a separate table for <code>room_members</code> which maps users to rooms. This way, we respect the four normalization principles. And, to fetch all messages sent in a room, we can join the two tables:</p>
 <pre class="bg-dark text-white ps-4"><code class="lang-sql">
 SELECT
     messages.id as msg_id,
@@ -207,10 +207,10 @@ ORDER BY
   messages.creation_date
 
 </code></pre>
-<p>As you can tell, we need to join two tables every time we want to fetch messages. This can be slow if the tables are large. However, future releases of the app will consider optimizing all different types of queries that exist in the app. Let&#39;s ignore that for a while.</p>
-<p>One way to do this is to add a new column called <code>room</code> to indicate whether it&#39;s a room or an individual recipient. This column would contain the id of the room that the messages have been sent to, which would allow all recepients to be included. If a user sends a message in a room, the receiver column value would be null, indicating that all recepients in this room should receive the message.</p>
-<p>The theory is that, even if the user is just in a one-on-one private chat, there is still a column room that has a value of null. Each message they send is directed to that other chat member.</p>
-<p>However, the denormalization required for this doesn&#39;t create a risk for update anomalies, so the redundancy isn&#39;t too much of a problem. For example, let&#39;s say you want to run a typical query that answer the question &quot;What are the most recent messages sent to a given user?&quot;. And the answer would be the following:</p>
+<p>As you can tell, we need to join two tables whenever we want to fetch messages. This can be slow if the tables are large. However, future releases of the app will consider optimizing all different types of queries that exist in the app. Let&#39;s ignore that for a while.</p>
+<p>One way to do this is to add a new column called <code>room</code> to indicate whether it&#39;s a room or an individual recipient. This column would contain the id of the room the messages have been sent to, allowing all recipients to be included. If a user sends a message in a room, the receiver column value would be null, indicating that all recipients in this room should receive the message.</p>
+<p>The theory is that there is still a column room with a null value even if the user is just in a one-on-one private chat. Each message they send is directed to that other chat member.</p>
+<p>However, the denormalization required for this doesn&#39;t create a risk for update anomalies, so the redundancy isn&#39;t too much of a problem. For example, let&#39;s say you want to run a typical query that answers the question &quot; What are the most recent messages sent to a given user?&quot;. And the answer would be the following:</p>
 <pre class="bg-dark text-white ps-4"><code class="lang-sql">
 SELECT
   messages.id as message_id,
