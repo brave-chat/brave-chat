@@ -1,8 +1,21 @@
 {
+  "name": "Brave Chat",
+  "description": "The ultimate open source slack alternative.",
+  "keywords": [
+      "slack",
+      "chat",
+      "brave chat",
+      "wattsapp",
+      "telegram",
+      "privacy",
+      "messaging",
+      "message"
+  ],
+  "repository": "https://github.com/brave-chat/brave-chat",
   "buildpacks": [
-    {
-      "url": "https://github.com/mars/create-react-app-buildpack"
-    }
+      {
+        "url": "heroku/nodejs"
+      }
   ],
   "env": {
     "REACT_APP_SERVER_URL": {
@@ -15,5 +28,12 @@
       "value": "APP_SOCKET_URL",
       "required": true
     }
-  }
+  },
+  "formation": {
+      "web": {
+          "quantity": 1,
+          "size": "free"
+    }
+  },
+    "stack": "heroku-22"
 }
