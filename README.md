@@ -25,11 +25,11 @@ As well as being feature-rich, Brave Chat is also fully responsive, meaning it w
 
 - Sending and receiving text messages in real time.
 
-![Sending and receiving text messages.](./docs/static/images/send-messages.png)
+![Sending and receiving text messages.](./docs/static/images/snd-rcv-text.gif)
 
 - Sending and receiving images in real time.
 
-![Sending and receiving images.](./docs/static/images/send-images.png)
+![Sending and receiving images.](./docs/static/images/snd-rcv-img.gif)
 
 - Instant notifications when submitting a form.
 
@@ -335,4 +335,4 @@ To deploy the client, you will need to set the following environment variables t
 
 ## Documentation
 
-You can refer to [the official documentation](file:///home/harmouch/Desktop/redis-hackaton/chat/brave-chat/docs/index.html) for additional guides, examples, and APIs.
+You can refer to [the official documentation](https://docs.brave-chat.wiseai.dev) for additional guides, examples, and APIs.
