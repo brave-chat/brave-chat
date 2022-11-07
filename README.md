@@ -1,5 +1,10 @@
 # Brave Chat
 
+[![Demo](https://badgen.net/badge/icon/demo?icon=telegram&label=brave-chat)](https://brave-chat-demo.herokuapp.com/)
+[![Status](https://badgen.net/uptime-robot/status/m780862024-50db2c44c703e5c68d6b1ebb)](https://brave-chat-demo.herokuapp.com/)
+[![Tag](https://badgen.net/github/tag/brave-chat/brave-chat)](https://github.com/brave-chat/brave-chat/releases/tag/v0.3.0)
+[![Docs](https://badgen.net/badge/icon/docs?icon=wiki&label)](https://docs.brave-chat.wiseai.dev)
+
 ![Brave Chat](./docs/static/images/banner.PNG "Brave Chat")
 
 Brave Chat is a fully featured chat application developed to bring the power back to people. It's designed to be the ultimate open source slack alternative with privacy in mind. It is user-friendly with a clean interface that is easy to navigate.
