@@ -36,7 +36,7 @@ const LandingSection = () => {
 
             <Typography mt={2} variant="h5">
               Keep the conversation going by utilizing excellent tools
-              centralized in one place, made by the People, For the People.
+              centralized in one place, made by the People, for the People.
             </Typography>
             <Typography variant="h4" mt={2} color="#52a1fc">
               <TypedText

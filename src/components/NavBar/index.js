@@ -14,7 +14,7 @@ const NavBar = () => {
               <div className="nav-github-btn">
                 <GitHubButton
                   data-color-scheme="dark: dark;"
-                  href="https://github.com/brave-chat/client"
+                  href="https://github.com/brave-chat/brave-chat"
                   data-size="large"
                   data-show-count="true"
                   aria-label="Star us on GitHub"
