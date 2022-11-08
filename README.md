@@ -1,6 +1,7 @@
 # Brave Chat
 
-[![Demo](https://badgen.net/badge/icon/demo?icon=telegram&label=brave-chat)](https://brave-chat-demo.herokuapp.com/)
+[![Demo on Cloudflare](https://badgen.net/badge/icon/cloudflare/green?icon=telegram&label=brave-chat)](https://brave-chat-client.pages.dev/landing)
+[![Demo on Heroku](https://badgen.net/badge/icon/heroku?icon=telegram&label=brave-chat)](https://brave-chat-demo.herokuapp.com/)
 [![Status](https://badgen.net/uptime-robot/status/m780862024-50db2c44c703e5c68d6b1ebb)](https://brave-chat-demo.herokuapp.com/)
 [![Tag](https://badgen.net/github/tag/brave-chat/brave-chat)](https://github.com/brave-chat/brave-chat/releases/tag/v0.3.0)
 [![Docs](https://badgen.net/badge/icon/docs?icon=wiki&label)](https://docs.brave-chat.wiseai.dev)
