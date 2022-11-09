@@ -14,9 +14,11 @@ import { Server } from "../../../utils";
 import Popover from "@mui/material/Popover";
 const ReceivedMessageCell = ({ conversation, user }) => {
   const [position, setPosition] = useState(-1);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClose = () => {
     setAnchorEl(null);
+    setPosition(-1);
   };
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -41,62 +43,62 @@ const ReceivedMessageCell = ({ conversation, user }) => {
   return (
     <Box className={clsx("chat-msg-item", "received-msg-item")}>
       <Box onClick={handleClick} className="chat-avatar">
-        <CustomAvatar
-          src={conversation.profile_picture}
-          alt={conversation.first_name}
-        />
+        {!conversation.sender ? (
+          <CustomAvatar
+            src={conversation.profile_picture}
+            alt={conversation.first_name}
+          />
+        ) : (
+          <CustomAvatar
+            src={conversation.sender.profile_picture}
+            onClick={handleClick}
+          />
+        )}
       </Box>
       <Box className="chat-msg-content">
-        <Box className={clsx("chat-bubble", "receive-bubble")}>
-          {conversation.media.length === 0 ? (
+        <Box className="chat-bubble">
+          {conversation.content.length > 0 ? (
             <TextToHtml content={conversation.content} />
           ) : typeof conversation.media === "string" &&
-            conversation.media.length > 0 ? (
+            conversation.media.length > 0 &&
+            conversation.content.length === 0 ? (
             <Box>
               <CustomImage
+                onClick={() => {
+                  setPosition(0);
+                }}
                 key={conversation.id}
                 src={`${Server.endpoint}${conversation.media}`}
                 alt={"image"}
                 height={100}
                 width={100}
               />
-
               <MediaViewer
                 position={position}
-                medias={[`${Server.endpoint}${conversation.media}`]}
+                medias={{
+                  preview: `${Server.endpoint}${conversation.media}`,
+                  name: "image",
+                }}
                 handleClose={handleClose}
               />
             </Box>
           ) : (
-            <Box className="chat-bubble-img">
-              <Box className="chat-bubble-img-row">
-                {typeof conversation.media.map === "function" &&
-                  conversation.media.map((data, index) => (
-                    <Box
-                      key={index}
-                      className="chat-bubble-img-item"
-                      onClick={() => setPosition(index)}
-                    >
-                      <Box className="chat-bubble-img-item-inner">
-                        {data.metaData.type.startsWith("image") ? (
-                          <CustomImage
-                            key={index}
-                            src={data.preview}
-                            alt={data.name}
-                          />
-                        ) : (
-                          <iframe
-                            key={index}
-                            src={data.preview}
-                            title={data.name}
-                            height={100}
-                            width={100}
-                          />
-                        )}
-                      </Box>
-                    </Box>
-                  ))}
-              </Box>
+            <Box>
+              <CustomImage
+                onClick={() => {
+                  setPosition(0);
+                }}
+                key={conversation.id}
+                src={conversation.media.preview}
+                alt={"image"}
+                height={100}
+                width={100}
+              />
+              <MediaViewer
+                position={position}
+                medias={{ preview: conversation.media.preview, name: "image" }}
+                handleClose={handleClose}
+              />
             </Box>
           )}
         </Box>
@@ -104,11 +106,6 @@ const ReceivedMessageCell = ({ conversation, user }) => {
           {moment(conversation.creation_date).format("hh:mm:ss")}
         </Box>
       </Box>
-      <MediaViewer
-        position={position}
-        medias={conversation.media}
-        handleClose={handleClose}
-      />
       <Popover
         id={id}
         open={open}
@@ -124,31 +121,61 @@ const ReceivedMessageCell = ({ conversation, user }) => {
           horizontal: "left",
         }}
       >
-        <Box p={{ xs: 4, md: 6 }}>
-          <Box className="user-root">
-            <CustomAvatar
-              src={conversation.profile_picture}
-              onClick={handleClick}
-            />
-            <Box className={clsx("user-info", "custom-user-info")}>
-              <Typography className="user-title" component="h3" variant="h6">
-                {conversation.first_name + " " + conversation.last_name}
-              </Typography>
-              <Typography className="user-sub-title" component="span">
-                {conversation.bio
-                  ? conversation.bio.substring(0, 30) + "..."
-                  : ""}
-              </Typography>
+        {conversation.sender ? (
+          <Box p={{ xs: 4, md: 6 }}>
+            <Box className="user-root">
+              <CustomAvatar
+                src={conversation.sender.profile_picture}
+                onClick={handleClick}
+              />
+              <Box className={clsx("user-info", "custom-user-info")}>
+                <Typography className="user-title" component="h3" variant="h6">
+                  {conversation.sender.first_name +
+                    " " +
+                    conversation.sender.last_name}
+                </Typography>
+                <Typography className="user-sub-title" component="span">
+                  {conversation.sender.bio
+                    ? conversation.sender.bio.substring(0, 30) + "..."
+                    : ""}
+                </Typography>
+              </Box>
             </Box>
+            <ProfileDetail
+              currentUser={false}
+              user={conversation.sender}
+              userStatus={conversation.sender.chat_status}
+              setUserStatus={() => {}}
+              statusColor={getStatusColor()}
+            />
           </Box>
-          <ProfileDetail
-            currentUser={false}
-            user={conversation}
-            userStatus={conversation.chat_status}
-            setUserStatus={() => {}}
-            statusColor={getStatusColor()}
-          />
-        </Box>
+        ) : (
+          <Box p={{ xs: 4, md: 6 }}>
+            <Box className="user-root">
+              <CustomAvatar
+                src={conversation.profile_picture}
+                onClick={handleClick}
+              />
+              <Box className={clsx("user-info", "custom-user-info")}>
+                <Typography className="user-title" component="h3" variant="h6">
+                  {conversation.first_name + " " + conversation.last_name}
+                </Typography>
+                <Typography className="user-sub-title" component="span">
+                  {conversation.bio
+                    ? conversation.bio.substring(0, 30) + "..."
+                    : ""}
+                </Typography>
+              </Box>
+            </Box>
+            <ProfileDetail
+              currentUser={false}
+              user={conversation}
+              userStatus={conversation.chat_status}
+              setUserStatus={() => {}}
+              statusColor={getStatusColor()}
+            />
+          </Box>
+        )}
       </Popover>
     </Box>
   );

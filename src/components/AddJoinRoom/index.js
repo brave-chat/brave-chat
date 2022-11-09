@@ -27,11 +27,11 @@ const AddJoinRoom = ({ join, open, onCloseDialog }) => {
     if (!roomName) {
       setRoomError("Room name must be valid!");
     } else if (join) {
-      dispatch(addRoom(roomName, roomDescription, 1, onCloseDialog));
+      dispatch(addRoom(roomName, roomDescription, 0, onCloseDialog));
     } else if (!join && !roomDescription) {
       setRoomDescriptionError("Provide a room description!");
     } else {
-      dispatch(addRoom(roomName, roomDescription, 0, onCloseDialog));
+      dispatch(addRoom(roomName, roomDescription, 1, onCloseDialog));
     }
   };
 

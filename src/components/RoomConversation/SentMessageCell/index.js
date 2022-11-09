@@ -17,57 +17,48 @@ const SentMessageCell = ({ conversation }) => {
     <Box className={clsx("chat-msg-item", "sent-msg-item")}>
       <Box className="chat-msg-content">
         <Box className="chat-bubble">
-          {conversation.media.length === 0 ? (
+          {conversation.content.length > 0 ? (
             <TextToHtml content={conversation.content} />
           ) : typeof conversation.media === "string" &&
-            conversation.media.length > 0 ? (
+            conversation.media.length > 0 &&
+            conversation.content.length === 0 ? (
             <Box>
               <CustomImage
+                onClick={() => {
+                  setPosition(0);
+                }}
                 key={conversation.id}
                 src={`${Server.endpoint}${conversation.media}`}
                 alt={"image"}
                 height={100}
                 width={100}
               />
-
               <MediaViewer
                 position={position}
-                medias={[`${Server.endpoint}${conversation.media}`]}
+                medias={{
+                  preview: `${Server.endpoint}${conversation.media}`,
+                  name: "image",
+                }}
                 handleClose={handleClose}
               />
             </Box>
           ) : (
-            <Box className="chat-bubble-img">
-              <Box className="chat-bubble-img-row">
-                {typeof conversation.media.map === "function" &&
-                  conversation.media.map((data, index) => (
-                    <Box
-                      key={index}
-                      className="chat-bubble-img-item"
-                      onClick={() => setPosition(index)}
-                    >
-                      <Box className="chat-bubble-img-item-inner">
-                        {data.metaData.type.startsWith("image") ? (
-                          <CustomImage
-                            key={index}
-                            src={data.preview}
-                            alt={data.name}
-                            height={100}
-                            width={100}
-                          />
-                        ) : (
-                          <iframe
-                            key={index}
-                            src={data.preview}
-                            title={data.name}
-                            height={100}
-                            width={100}
-                          />
-                        )}
-                      </Box>
-                    </Box>
-                  ))}
-              </Box>
+            <Box>
+              <CustomImage
+                onClick={() => {
+                  setPosition(0);
+                }}
+                key={conversation.id}
+                src={conversation.media.preview}
+                alt={"image"}
+                height={100}
+                width={100}
+              />
+              <MediaViewer
+                position={position}
+                medias={{ preview: conversation.media.preview, name: "image" }}
+                handleClose={handleClose}
+              />
             </Box>
           )}
         </Box>
@@ -75,11 +66,6 @@ const SentMessageCell = ({ conversation }) => {
           {moment(conversation.creation_date).format("hh:mm:ss")}
         </Box>
       </Box>
-      <MediaViewer
-        position={position}
-        medias={conversation.media}
-        handleClose={handleClose}
-      />
     </Box>
   );
 };

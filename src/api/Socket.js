@@ -3,6 +3,7 @@ import {
   receiveNewChatMessage,
   fetchSuccess,
   receiveMediaMessage,
+  receiveRoomMediaMessage,
 } from "../redux/appReducer/actions";
 
 import { Server } from "../utils";
@@ -34,7 +35,7 @@ export const initiateRoomSocket = (sender, room_name) => {
     roomClient.onmessage = (event) => {
       let message = JSON.parse(JSON.parse(event.data));
       let message_body = {
-        user: message["user"],
+        user: message["sender"],
         content: message["content"],
       };
       if (
@@ -42,10 +43,15 @@ export const initiateRoomSocket = (sender, room_name) => {
         sender.id !== message["user"].id
       ) {
         dispatch(fetchSuccess(message["content"]));
+      } else if (
+        message["type"] === "media" &&
+        message["user"].id !== sender.id
+      ) {
+        dispatch(receiveRoomMediaMessage(message));
       } else if (message.hasOwnProperty("room_name")) {
         return;
       } else if (sender.id !== message["user"].id) {
-        dispatch(receiveNewChatMessageRoom(message_body));
+        dispatch(receiveNewChatMessageRoom(message));
       }
     };
   };
@@ -122,6 +128,22 @@ export const sendNewMessageMedia = (fileContent, fileName, preview) => {
       return;
     }
     chatClient.send(
+      JSON.stringify({
+        content: fileContent.split(",")[1],
+        file_name: fileName,
+        type: "media",
+        preview: preview,
+      })
+    );
+  };
+};
+
+export const sendNewRoomMessageMedia = (fileContent, fileName, preview) => {
+  return (dispatch) => {
+    if (!roomClient) {
+      return;
+    }
+    roomClient.send(
       JSON.stringify({
         content: fileContent.split(",")[1],
         file_name: fileName,

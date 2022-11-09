@@ -8,6 +8,7 @@ import {
   SET_SELECTED_USER_ROOM,
   SET_CONVERSATION_DATA,
   SET_ROOM_CONVERSATION_DATA,
+  RECEIVE_NEW_ROOM_MEDIA_MESSAGE,
   RECEIVE_NEW_MEDIA_MESSAGE,
   SEND_NEW_MEDIA_MESSAGE_ROOM,
   SEND_NEW_CHAT_MESSAGE_ROOM,
@@ -186,6 +187,19 @@ const appReducer = (state = initialState, action) => {
           id: new Date().getTime(),
           user: state.currentUser,
           type: "sent",
+          content: "",
+          media: action.payload,
+          creation_date: moment.utc(),
+        }),
+      };
+    }
+    case RECEIVE_NEW_ROOM_MEDIA_MESSAGE: {
+      return {
+        ...state,
+        roomConversation: state.roomConversation.concat({
+          id: new Date().getTime(),
+          sender: action.payload.user,
+          type: "received",
           content: "",
           media: action.payload,
           creation_date: moment.utc(),

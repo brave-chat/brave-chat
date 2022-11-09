@@ -9,6 +9,8 @@ import {
   SET_SELECTED_USER_ROOM,
   SEND_NEW_CHAT_MESSAGE_ROOM,
   RECEIVE_NEW_CHAT_MESSAGE_ROOM,
+  RECEIVE_NEW_ROOM_MEDIA_MESSAGE,
+  SEND_NEW_MEDIA_MESSAGE_ROOM,
   RECEIVE_NEW_CHAT_MESSAGE,
   SET_CONVERSATION_DATA,
   SET_ROOM_CONVERSATION_DATA,
@@ -128,10 +130,28 @@ export const sendMediaMessage = (file) => {
   };
 };
 
+export const sendRoomMediaMessage = (file) => {
+  return (dispatch) => {
+    dispatch({
+      type: SEND_NEW_MEDIA_MESSAGE_ROOM,
+      payload: file,
+    });
+  };
+};
+
 export const receiveMediaMessage = (file) => {
   return (dispatch) => {
     dispatch({
       type: RECEIVE_NEW_MEDIA_MESSAGE,
+      payload: file,
+    });
+  };
+};
+
+export const receiveRoomMediaMessage = (file) => {
+  return (dispatch) => {
+    dispatch({
+      type: RECEIVE_NEW_ROOM_MEDIA_MESSAGE,
       payload: file,
     });
   };

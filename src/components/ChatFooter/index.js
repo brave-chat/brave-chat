@@ -9,11 +9,15 @@ import AttachFileIcon from "@mui/icons-material/Attachment";
 
 import {
   sendNewMediaMessage,
+  sendNewMediaRoomMessage,
   sendTextMessage,
   sendRoomTextMessage,
 } from "../../api/Axios";
 
-import { sendMediaMessage } from "../../redux/appReducer/actions";
+import {
+  sendMediaMessage,
+  sendRoomMediaMessage,
+} from "../../redux/appReducer/actions";
 import CustomTextInput from "../CustomTextInput";
 import { authUser } from "../../redux/appReducer/selectors";
 
@@ -48,14 +52,25 @@ const ChatFooter = ({ receiver }) => {
         const tempFile = file;
         const reader = new FileReader();
         reader.onload = (event) => {
-          dispatch(
-            sendNewMediaMessage(
-              receiver.id,
-              event.target.result,
-              tempFile.name,
-              URL.createObjectURL(tempFile)
-            )
-          );
+          if (receiver.first_name) {
+            dispatch(
+              sendNewMediaMessage(
+                receiver.id,
+                event.target.result,
+                tempFile.name,
+                URL.createObjectURL(tempFile)
+              )
+            );
+          } else if (receiver.room_name) {
+            dispatch(
+              sendNewMediaRoomMessage(
+                receiver.room_name,
+                event.target.result,
+                tempFile.name,
+                URL.createObjectURL(tempFile)
+              )
+            );
+          }
         };
         reader.readAsDataURL(tempFile);
         file = {
@@ -64,7 +79,11 @@ const ChatFooter = ({ receiver }) => {
           ...file,
           metaData: { type: file.type, size: file.size },
         };
-        dispatch(sendMediaMessage(file));
+        if (receiver.first_name) {
+          dispatch(sendMediaMessage(file));
+        } else {
+          dispatch(sendRoomMediaMessage(file));
+        }
         return file;
       });
     },

@@ -2,6 +2,7 @@ import {
   sendRoomMessage,
   sendChatMessage,
   sendNewMessageMedia,
+  sendNewRoomMessageMedia,
   leaveRoomSocket,
   leaveContactSocket,
 } from "./Socket";
@@ -170,11 +171,21 @@ export const sendNewMediaMessage = (
   preview
 ) => {
   return (dispatch) => {
-    //formData.append("receiver", receiver.id)
-    // https://github.com/tiangolo/fastapi/issues/2445
     dispatch(fetchStart());
     dispatch(sendNewMessageMedia(fileContent, fileName, preview));
-    //dispatch(sendMediaMessage(file));
+    dispatch(fetchSuccess());
+  };
+};
+
+export const sendNewMediaRoomMessage = (
+  room_name,
+  fileContent,
+  fileName,
+  preview
+) => {
+  return (dispatch) => {
+    dispatch(fetchStart());
+    dispatch(sendNewRoomMessageMedia(fileContent, fileName, preview));
     dispatch(fetchSuccess());
   };
 };
