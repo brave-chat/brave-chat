@@ -34,10 +34,6 @@ export const initiateRoomSocket = (sender, room_name) => {
     };
     roomClient.onmessage = (event) => {
       let message = JSON.parse(JSON.parse(event.data));
-      let message_body = {
-        user: message["sender"],
-        content: message["content"],
-      };
       if (
         (message["type"] === "online" || message["type"] === "offline") &&
         sender.id !== message["user"].id

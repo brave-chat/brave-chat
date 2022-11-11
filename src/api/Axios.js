@@ -13,7 +13,6 @@ import {
   fetchSuccess,
   sendNewChatMessage,
   sendNewChatMessageRoom,
-  sendMediaMessage,
   setAuthUser,
   setChatUsers,
   setContactUsers,

@@ -10,7 +10,6 @@ import Conversation from "../Conversation";
 import RoomConversation from "../RoomConversation";
 import ContentHeader from "../ContentHeader";
 import RoomContentHeader from "../RoomContentHeader";
-import Typography from "@mui/material/Typography";
 import CustomImage from "../CustomImage";
 import ChatFooter from "../ChatFooter";
 import ContentLoader from "../ContentLoader";

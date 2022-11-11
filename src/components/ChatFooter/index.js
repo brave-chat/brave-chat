@@ -48,6 +48,7 @@ const ChatFooter = ({ receiver }) => {
     accept: "image/*,video/*",
     multiple: true,
     onDrop: (acceptedFiles) => {
+      // eslint-disable-next-line
       const files = acceptedFiles.map((file) => {
         const tempFile = file;
         const reader = new FileReader();

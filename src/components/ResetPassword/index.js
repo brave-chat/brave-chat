@@ -13,8 +13,6 @@ import { resetPassword } from "../../api/Axios";
 import LockIcon from "@mui/icons-material/Lock";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import TitleIcon from "@mui/icons-material/Title";
-import DescriptionIcon from "@mui/icons-material/Description";
 import "./style.css";
 
 const ResetPassword = ({ open, onCloseDialog }) => {
