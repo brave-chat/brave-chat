@@ -22,33 +22,57 @@ import "react-phone-input-2/lib/material.css";
 import "./style.css";
 
 const EditPersonalInformation = ({ open, onCloseDialog }) => {
-  const [firstName, setFisrtName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [bio, setBio] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
 
-  const [firstNameError, setFirstNameError] = useState("");
-  const [lastNameError, setLastNameError] = useState("");
-  const [bioError, setBioError] = useState("");
-  const [phoneNumberError, setPhoneNumberError] = useState("");
+  const [personalInfoValues, setPersonalInfoValues] = useState({
+    firstName: "",
+    lastName: "",
+    bio: "",
+    phoneNumber: "",
+  });
+
+  const [errorValues, setErrorValues] = useState({
+    firstNameError: "",
+    lastNameError: "",
+    bioError: "",
+    phoneNumberError: "",
+  });
 
   const dispatch = useDispatch();
 
   const onPhoneNoAdd = (number) => {
-    const phone = number.replace("-", "");
-    setPhoneNumber(phone);
-    setPhoneNumberError("");
+    setPersonalInfoValues({
+      ...personalInfoValues,
+      phoneNumber: number
+    });
+    setErrorValues({
+      ...errorValues,
+      phoneNumberError: "",
+    });
   };
 
   const onSubmit = () => {
+    const { firstName, lastName, bio, phoneNumber } = personalInfoValues;
+
     if (!firstName) {
-      setFirstNameError("First name is required!");
+      setErrorValues({
+        ...errorValues,
+        firstNameError: "This field is required!",
+      });
     } else if (!lastName) {
-      setLastNameError("Last name is required!");
+      setErrorValues({
+        ...errorValues,
+        lastNameError: "This field is required!",
+      });
     } else if (!bio) {
-      setBioError("Bio is required!");
+      setErrorValues({
+        ...errorValues,
+        bioError: "This field is required!",
+      });
     } else if (!phoneNumber) {
-      setPhoneNumberError("Phone number is required!");
+      setErrorValues({
+        ...errorValues,
+        phoneNumberError: "This field is required!",
+      });
     } else {
       dispatch(
         SetPersonalInfo(
@@ -80,12 +104,15 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
                 className="text-field-root"
                 variant="outlined"
                 label="First Name"
-                value={firstName}
+                value={personalInfoValues.firstName}
                 onChange={(e) => {
-                  setFisrtName(e.target.value);
-                  setFirstNameError("");
+                  setPersonalInfoValues({
+                    ...personalInfoValues,
+                    firstName: e.target.value,
+                  });
+                  setErrorValues({ ...errorValues, firstNameError: "" });
                 }}
-                helperText={firstNameError}
+                helperText={errorValues.firstNameError}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start" variant="standard">
@@ -103,12 +130,15 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
                 className="text-field-root"
                 variant="outlined"
                 label="Last Name"
-                value={lastName}
+                value={personalInfoValues.lastName}
                 onChange={(e) => {
-                  setLastName(e.target.value);
-                  setLastNameError("");
+                  setPersonalInfoValues({
+                    ...personalInfoValues,
+                    lastName: e.target.value,
+                  });
+                  setErrorValues({ ...errorValues, lastNameError: "" });
                 }}
-                helperText={lastNameError}
+                helperText={errorValues.lastNameError}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start" variant="standard">
@@ -137,12 +167,15 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
                 className="text-field-root"
                 variant="outlined"
                 label="Bio"
-                value={bio}
+                value={personalInfoValues.bio}
                 onChange={(e) => {
-                  setBio(e.target.value);
-                  setBioError("");
+                  setPersonalInfoValues({
+                    ...personalInfoValues,
+                    bio: e.target.value,
+                  });
+                  setErrorValues({ ...errorValues, bioError: "" });
                 }}
-                helperText={bioError}
+                helperText={errorValues.bioError}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start" variant="standard">
@@ -161,10 +194,16 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
                 variant="outlined"
                 label="Phone Number"
                 enableSearch={true}
-                onChange={(phoneNumber) => onPhoneNoAdd(phoneNumber)}
-                helperText={phoneNumberError}
+                onChange={(phoneNumber) => {
+                  setPersonalInfoValues({
+                    ...personalInfoValues,
+                    phoneNumber: phoneNumber,
+                  });
+                  setErrorValues({ ...errorValues, phoneNumberError: "" });
+                }}
+                helperText={errorValues.phoneNumberError}
                 InputProps={{
-                  inputProps: { value: phoneNumber },
+                  inputProps: { value: personalInfoValues.phoneNumber },
                   startAdornment: (
                     <InputAdornment position="start" variant="standard">
                       <IconButton aria-label="Phone Number" edge="end" disabled>
