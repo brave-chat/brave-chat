@@ -1,10 +1,22 @@
 # Brave Chat
 
+<div align="center">
+
 [![Demo on Cloudflare](https://badgen.net/badge/icon/cloudflare/green?icon=telegram&label=brave-chat)](https://brave-chat-client.pages.dev/landing)
 [![Demo on Heroku](https://badgen.net/badge/icon/heroku?icon=telegram&label=brave-chat)](https://brave-chat-demo.herokuapp.com/)
 [![Status](https://badgen.net/uptime-robot/status/m780862024-50db2c44c703e5c68d6b1ebb)](https://brave-chat-demo.herokuapp.com/)
 [![Tag](https://badgen.net/github/tag/brave-chat/brave-chat)](https://github.com/brave-chat/brave-chat/releases/tag/v0.3.0)
 [![Docs](https://badgen.net/badge/icon/docs?icon=wiki&label)](https://docs.brave-chat.wiseai.dev)
+
+</div>
+
+<div align="center">
+
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-blue.svg?style=flat-square)](#contributors)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+</div>
 
 ![Brave Chat](./docs/static/images/banner.PNG "Brave Chat")
 
@@ -337,3 +349,14 @@ To deploy the client, you will need to set the following environment variables t
 ## Documentation
 
 You can refer to [the official documentation](https://docs.brave-chat.wiseai.dev) for additional guides, examples, and APIs.
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
