@@ -1,0 +1,25 @@
+{
+  "projectName": "brave-chat",
+  "projectOwner": "wiseaidev",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "eslint",
+  "contributors": [
+    {
+      "login": "andrewkykoo",
+      "name": "Andrew Koo ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47183818?v=4",
+      "profile": "https://www.linkedin.com/in/andrewkykoo/",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "linkToUsage": true
+}
