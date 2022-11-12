@@ -16,17 +16,23 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import "./style.css";
 
 const ResetPassword = ({ open, onCloseDialog }) => {
-  const [oldPassword, setOldPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordValues, setPasswordValues] = useState({
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: ""
+  });
 
-  const [showOldPassword, setShowOldPassword] = useState(true);
-  const [showNewPassword, setShowNewPassword] = useState(true);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(true);
+  const [showPasswordValues, setShowPasswordValues] = useState({
+    showOldPassword: true,
+    showNewPassword: true,
+    showConfirmPassword: true
+  });
 
-  const [oldPasswordError, setOldPasswordError] = useState("");
-  const [newPasswordError, setNewPasswordError] = useState("");
-  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [errorValues, setErrorValues] = useState({
+    oldPasswordError: "",
+    newPasswordError: "",
+    confirmPasswordError: ""
+  });
 
   const dispatch = useDispatch();
 
@@ -35,12 +41,14 @@ const ResetPassword = ({ open, onCloseDialog }) => {
   };
 
   const onSubmit = () => {
+    const { oldPassword, newPassword, confirmPassword } = passwordValues;
+
     if (!oldPassword) {
-      setOldPasswordError("This field is required!");
+      setErrorValues({...errorValues, oldPasswordError: "This field is required!"})
     } else if (!newPassword) {
-      setNewPasswordError("This field is required!");
+      setErrorValues({...errorValues, newPasswordError: "This field is required!"})
     } else if (!confirmPassword) {
-      setConfirmPasswordError("This field is required!");
+      setErrorValues({...errorValues, confirmPasswordError: "This field is required!"})
     } else {
       dispatch(
         resetPassword(oldPassword, newPassword, confirmPassword, onCloseDialog)
@@ -73,27 +81,27 @@ const ResetPassword = ({ open, onCloseDialog }) => {
             <AppTextInput
               fullWidth
               className="text-field-root"
-              type={showOldPassword ? "text" : "password"}
+              type={showPasswordValues.showOldPassword ? "text" : "password"}
               variant="outlined"
               label="Old Password"
-              value={oldPassword}
+              value={passwordValues.oldPassword}
               onChange={(e) => {
-                setOldPassword(e.target.value);
-                setOldPasswordError("");
+                setPasswordValues({...passwordValues, oldPassword: e.target.value});
+                setErrorValues({...errorValues, oldPasswordError: ""})
               }}
-              helperText={oldPasswordError}
+              helperText={errorValues.oldPasswordError}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
                       onClick={() => {
-                        setShowOldPassword(!showOldPassword);
+                        setShowPasswordValues({...showPasswordValues, showOldPassword: !showPasswordValues.showOldPassword});
                       }}
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {!showOldPassword ? <VisibilityOff /> : <Visibility />}
+                      {!showPasswordValues.showOldPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -118,27 +126,27 @@ const ResetPassword = ({ open, onCloseDialog }) => {
             <AppTextInput
               fullWidth
               className="text-field-root"
-              type={showNewPassword ? "text" : "password"}
+              type={showPasswordValues.showNewPassword ? "text" : "password"}
               variant="outlined"
               label="New Password"
-              value={newPassword}
+              value={passwordValues.newPassword}
               onChange={(e) => {
-                setNewPassword(e.target.value);
-                setNewPasswordError("");
+                setPasswordValues({...passwordValues, newPassword: e.target.value});
+                setErrorValues({...errorValues, newPasswordError: ""})
               }}
-              helperText={newPasswordError}
+              helperText={errorValues.newPasswordError}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
                       onClick={() => {
-                        setShowNewPassword(!showNewPassword);
+                        setShowPasswordValues({...showPasswordValues, showNewPassword: !showPasswordValues.showNewPassword});
                       }}
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {!showNewPassword ? <VisibilityOff /> : <Visibility />}
+                      {!showPasswordValues.showNewPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -164,27 +172,27 @@ const ResetPassword = ({ open, onCloseDialog }) => {
             <AppTextInput
               fullWidth
               className="text-field-root"
-              type={showConfirmPassword ? "text" : "password"}
+              type={showPasswordValues.showConfirmPassword ? "text" : "password"}
               variant="outlined"
               label="Confirm Password"
-              value={confirmPassword}
+              value={passwordValues.confirmPassword}
               onChange={(e) => {
-                setConfirmPassword(e.target.value);
-                setConfirmPasswordError("");
+                setPasswordValues({...passwordValues, confirmPassword: e.target.value});
+                setErrorValues({...errorValues, confirmPasswordError: ""})
               }}
-              helperText={confirmPasswordError}
+              helperText={errorValues.confirmPasswordError}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
                       onClick={() => {
-                        setShowConfirmPassword(!showConfirmPassword);
+                        setShowPasswordValues({...showPasswordValues, showConfirmPassword: !showPasswordValues.showConfirmPassword});
                       }}
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {!showConfirmPassword ? (
+                      {!showPasswordValues.showConfirmPassword ? (
                         <VisibilityOff />
                       ) : (
                         <Visibility />
