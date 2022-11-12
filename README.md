@@ -76,13 +76,16 @@ As well as being feature-rich, Brave Chat is also fully responsive, meaning it w
 
 ![Deleted messages.](./docs/static/images/deleted-messages.png)
 
-- The ability to render HTML tags, links, emails in the chat area.
+- The ability to render HTML tags, links, emails.
 
 ![HTML tags being rendered.](./docs/static/images/bold-italic.png)
 
+- The ability to render Markdown text.
+
+![HTML tags being rendered.](./docs/static/images/render-markdown.png)
+
 ## 2022 Roadmap
 
-- The ability to render Markdown text in the chat area.
 - Enrypt and decrypt text messages on the client side using the signal protocol.
 - Add support for voice, videos, files messages.
 - Add support for voice and video calls.
@@ -288,10 +291,6 @@ Brave Chat code base is written to be developer-friendly, with code that is both
 │   │   │   └── 📄 index.js
 │   │   │ 
 │   │   ├── 📄 style.css
-│   │   │ 
-│   │   └── 📂 TextToHtml
-│   │ 
-│   │       └── 📄 index.js
 ```
 
 </details>

@@ -5,8 +5,12 @@ import moment from "moment";
 import "../style.css";
 import CustomImage from "../../CustomImage";
 import MediaViewer from "../../MediaViewer";
-import TextToHtml from "../../TextToHtml";
 import { Server } from "../../../utils";
+
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import parse from "html-react-parser";
+import { checkHtml } from "../../Helper";
 
 const SentMessageCell = ({ conversation }) => {
   const [position, setPosition] = useState(-1);
@@ -18,7 +22,14 @@ const SentMessageCell = ({ conversation }) => {
       <Box className="chat-msg-content">
         <Box className="chat-bubble">
           {conversation.content.length > 0 ? (
-            <TextToHtml content={conversation.content} />
+            checkHtml(conversation.content) ? (
+              parse(conversation.content)
+            ) : (
+              <ReactMarkdown
+                children={conversation.content}
+                remarkPlugins={[remarkGfm]}
+              />
+            )
           ) : typeof conversation.media === "string" &&
             conversation.media.length > 0 &&
             conversation.content.length === 0 ? (

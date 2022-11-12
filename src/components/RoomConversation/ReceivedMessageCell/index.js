@@ -6,7 +6,12 @@ import clsx from "clsx";
 import CustomImage from "../../CustomImage";
 import CustomAvatar from "../../CustomAvatar";
 import MediaViewer from "../../MediaViewer";
-import TextToHtml from "../../TextToHtml";
+
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import parse from "html-react-parser";
+import { checkHtml } from "../../Helper";
+
 import { Typography } from "@mui/material";
 import ProfileDetail from "../../Sidebar/ProfileDetail";
 import { Server } from "../../../utils";
@@ -58,7 +63,14 @@ const ReceivedMessageCell = ({ conversation, user }) => {
       <Box className="chat-msg-content">
         <Box className="chat-bubble">
           {conversation.content.length > 0 ? (
-            <TextToHtml content={conversation.content} />
+            checkHtml(conversation.content) ? (
+              parse(conversation.content)
+            ) : (
+              <ReactMarkdown
+                children={conversation.content}
+                remarkPlugins={[remarkGfm]}
+              />
+            )
           ) : typeof conversation.media === "string" &&
             conversation.media.length > 0 &&
             conversation.content.length === 0 ? (

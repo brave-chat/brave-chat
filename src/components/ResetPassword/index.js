@@ -19,19 +19,19 @@ const ResetPassword = ({ open, onCloseDialog }) => {
   const [passwordValues, setPasswordValues] = useState({
     oldPassword: "",
     newPassword: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
 
   const [showPasswordValues, setShowPasswordValues] = useState({
     showOldPassword: true,
     showNewPassword: true,
-    showConfirmPassword: true
+    showConfirmPassword: true,
   });
 
   const [errorValues, setErrorValues] = useState({
     oldPasswordError: "",
     newPasswordError: "",
-    confirmPasswordError: ""
+    confirmPasswordError: "",
   });
 
   const dispatch = useDispatch();
@@ -44,11 +44,20 @@ const ResetPassword = ({ open, onCloseDialog }) => {
     const { oldPassword, newPassword, confirmPassword } = passwordValues;
 
     if (!oldPassword) {
-      setErrorValues({...errorValues, oldPasswordError: "This field is required!"})
+      setErrorValues({
+        ...errorValues,
+        oldPasswordError: "This field is required!",
+      });
     } else if (!newPassword) {
-      setErrorValues({...errorValues, newPasswordError: "This field is required!"})
+      setErrorValues({
+        ...errorValues,
+        newPasswordError: "This field is required!",
+      });
     } else if (!confirmPassword) {
-      setErrorValues({...errorValues, confirmPasswordError: "This field is required!"})
+      setErrorValues({
+        ...errorValues,
+        confirmPasswordError: "This field is required!",
+      });
     } else {
       dispatch(
         resetPassword(oldPassword, newPassword, confirmPassword, onCloseDialog)
@@ -86,8 +95,11 @@ const ResetPassword = ({ open, onCloseDialog }) => {
               label="Old Password"
               value={passwordValues.oldPassword}
               onChange={(e) => {
-                setPasswordValues({...passwordValues, oldPassword: e.target.value});
-                setErrorValues({...errorValues, oldPasswordError: ""})
+                setPasswordValues({
+                  ...passwordValues,
+                  oldPassword: e.target.value,
+                });
+                setErrorValues({ ...errorValues, oldPasswordError: "" });
               }}
               helperText={errorValues.oldPasswordError}
               InputProps={{
@@ -96,12 +108,19 @@ const ResetPassword = ({ open, onCloseDialog }) => {
                     <IconButton
                       aria-label="toggle password visibility"
                       onClick={() => {
-                        setShowPasswordValues({...showPasswordValues, showOldPassword: !showPasswordValues.showOldPassword});
+                        setShowPasswordValues({
+                          ...showPasswordValues,
+                          showOldPassword: !showPasswordValues.showOldPassword,
+                        });
                       }}
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {!showPasswordValues.showOldPassword ? <VisibilityOff /> : <Visibility />}
+                      {!showPasswordValues.showOldPassword ? (
+                        <VisibilityOff />
+                      ) : (
+                        <Visibility />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -131,8 +150,11 @@ const ResetPassword = ({ open, onCloseDialog }) => {
               label="New Password"
               value={passwordValues.newPassword}
               onChange={(e) => {
-                setPasswordValues({...passwordValues, newPassword: e.target.value});
-                setErrorValues({...errorValues, newPasswordError: ""})
+                setPasswordValues({
+                  ...passwordValues,
+                  newPassword: e.target.value,
+                });
+                setErrorValues({ ...errorValues, newPasswordError: "" });
               }}
               helperText={errorValues.newPasswordError}
               InputProps={{
@@ -141,12 +163,19 @@ const ResetPassword = ({ open, onCloseDialog }) => {
                     <IconButton
                       aria-label="toggle password visibility"
                       onClick={() => {
-                        setShowPasswordValues({...showPasswordValues, showNewPassword: !showPasswordValues.showNewPassword});
+                        setShowPasswordValues({
+                          ...showPasswordValues,
+                          showNewPassword: !showPasswordValues.showNewPassword,
+                        });
                       }}
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {!showPasswordValues.showNewPassword ? <VisibilityOff /> : <Visibility />}
+                      {!showPasswordValues.showNewPassword ? (
+                        <VisibilityOff />
+                      ) : (
+                        <Visibility />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -172,13 +201,18 @@ const ResetPassword = ({ open, onCloseDialog }) => {
             <AppTextInput
               fullWidth
               className="text-field-root"
-              type={showPasswordValues.showConfirmPassword ? "text" : "password"}
+              type={
+                showPasswordValues.showConfirmPassword ? "text" : "password"
+              }
               variant="outlined"
               label="Confirm Password"
               value={passwordValues.confirmPassword}
               onChange={(e) => {
-                setPasswordValues({...passwordValues, confirmPassword: e.target.value});
-                setErrorValues({...errorValues, confirmPasswordError: ""})
+                setPasswordValues({
+                  ...passwordValues,
+                  confirmPassword: e.target.value,
+                });
+                setErrorValues({ ...errorValues, confirmPasswordError: "" });
               }}
               helperText={errorValues.confirmPasswordError}
               InputProps={{
@@ -187,7 +221,11 @@ const ResetPassword = ({ open, onCloseDialog }) => {
                     <IconButton
                       aria-label="toggle password visibility"
                       onClick={() => {
-                        setShowPasswordValues({...showPasswordValues, showConfirmPassword: !showPasswordValues.showConfirmPassword});
+                        setShowPasswordValues({
+                          ...showPasswordValues,
+                          showConfirmPassword:
+                            !showPasswordValues.showConfirmPassword,
+                        });
                       }}
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
