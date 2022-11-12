@@ -31,9 +31,17 @@ npm install
 git checkout -b name-of-your-bugfix-or-feature
 ```
 
+6. Set the following env variable for redux debugging purposes:
+
+```sh
+export REACT_APP_STAGE="dev"
+```
+
+This will allow you to inspect every state and action payload.
+
 Now you can make your changes locally.
 
-6. Commit your changes and push your branch to GitHub:
+7. Commit your changes and push your branch to GitHub:
 
 ```sh
 git add .
@@ -41,7 +49,7 @@ git commit -m "Your detailed description of your changes."
 git push origin name-of-your-bugfix-or-feature
 ```
 
-7. Submit a pull request through the GitHub website.
+8. Submit a pull request through the GitHub website.
 
 
 ## 📜 Docs: Getting Started!
