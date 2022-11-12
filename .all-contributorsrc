@@ -18,6 +18,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "wiseaidev",
+      "name": "Mahmoud Harmouch",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62179149?v=4",
+      "profile": "https://github.com/wiseaidev",
+      "contributions": [
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 7,

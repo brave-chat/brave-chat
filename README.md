@@ -13,7 +13,7 @@
 <div align="center">
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-blue.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 </div>
@@ -358,6 +358,7 @@ You can refer to [the official documentation](https://docs.brave-chat.wiseai.dev
 <table>
   <tbody>
     <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/wiseaidev"><img src="https://avatars.githubusercontent.com/u/62179149?v=4?s=100" width="100px;" alt="Mahmoud Harmouch"/><br /><sub><b>Mahmoud Harmouch</b></sub></a><br /><a href="#maintenance-wiseaidev" title="Maintenance">🚧</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/andrewkykoo/"><img src="https://avatars.githubusercontent.com/u/47183818?v=4?s=100" width="100px;" alt="Andrew Koo "/><br /><sub><b>Andrew Koo </b></sub></a><br /><a href="https://github.com/wiseaidev/brave-chat/commits?author=andrewkykoo" title="Code">💻</a></td>
     </tr>
   </tbody>
