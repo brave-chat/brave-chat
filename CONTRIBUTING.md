@@ -39,9 +39,16 @@ export REACT_APP_STAGE="dev"
 
 This will allow you to inspect every state and action payload.
 
+7. Set the following env variables:
+
+```sh
+export REACT_APP_SERVER_URL=http://localhost:8000/api/v1
+export REACT_APP_SOCKET_URL=ws://localhost:8000/api/v1/ws
+```
+
 Now you can make your changes locally.
 
-7. Commit your changes and push your branch to GitHub:
+8. Commit your changes and push your branch to GitHub:
 
 ```sh
 git add .
@@ -49,7 +56,7 @@ git commit -m "Your detailed description of your changes."
 git push origin name-of-your-bugfix-or-feature
 ```
 
-8. Submit a pull request through the GitHub website.
+9. Submit a pull request through the GitHub website.
 
 
 ## 📜 Docs: Getting Started!
