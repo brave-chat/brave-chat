@@ -1,6 +1,6 @@
 {
   "projectName": "brave-chat",
-  "projectOwner": "wiseaidev",
+  "projectOwner": "brave-chat",
   "repoType": "github",
   "repoHost": "https://github.com",
   "files": [
@@ -26,6 +26,15 @@
       "profile": "https://github.com/wiseaidev",
       "contributions": [
         "maintenance"
+      ]
+    },
+    {
+      "login": "MaverickDe",
+      "name": "Princewill Asotibe",
+      "avatar_url": "https://avatars.githubusercontent.com/u/100746581?v=4",
+      "profile": "http://linkedin.com/in/princewill-asotibe-b31036204/",
+      "contributions": [
+        "code"
       ]
     }
   ],
