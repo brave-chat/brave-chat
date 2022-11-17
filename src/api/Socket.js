@@ -40,6 +40,12 @@ export const initiateRoomSocket = (sender, room_name) => {
       ) {
         dispatch(fetchSuccess(message["content"]));
       } else if (
+        (message["type"] === "ban" || message["type"] === "unban") &&
+        message["user"].id !== sender.id
+      ) {
+        roomClient.close();
+        window.location.reload();
+      } else if (
         message["type"] === "media" &&
         message["user"].id !== sender.id
       ) {

@@ -21,6 +21,7 @@ import {
   ADD_ROOM_TO_LIST,
   UPDATE_LOAD_USER,
   LEAVE_ROOM,
+  BAN_USER_FROM_ROOM,
   DELETE_CONTACT,
   FETCH_ERROR,
   FETCH_START,
@@ -95,6 +96,23 @@ const appReducer = (state = initialState, action) => {
       return {
         ...state,
         contacts: state.contacts,
+      };
+    }
+    case BAN_USER_FROM_ROOM: {
+      if (state.roomConversation.sender) {
+        state.roomConversation.forEach((conversation, i) => {
+          if (conversation.sender.email === action.payload)
+            state.roomConversation[i].content = "<em>Deleted Message!</em>";
+        });
+      } else {
+        state.roomConversation.forEach((conversation, i) => {
+          if (conversation.email === action.payload)
+            state.roomConversation[i].content = "<em>Deleted Message!</em>";
+        });
+      }
+      return {
+        ...state,
+        roomConversation: state.roomConversation,
       };
     }
     case ADD_ROOM_TO_LIST: {

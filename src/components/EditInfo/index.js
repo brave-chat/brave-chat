@@ -15,14 +15,12 @@ import InputAdornment from "@mui/material/InputAdornment";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import PersonIcon from "@mui/icons-material/Person";
 import ThreePIcon from "@mui/icons-material/ThreeP";
-import DialpadIcon from "@mui/icons-material/Dialpad";
 import { SetPersonalInfo } from "../../api/Axios";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/material.css";
 import "./style.css";
 
 const EditPersonalInformation = ({ open, onCloseDialog }) => {
-
   const [personalInfoValues, setPersonalInfoValues] = useState({
     firstName: "",
     lastName: "",
@@ -38,17 +36,6 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
   });
 
   const dispatch = useDispatch();
-
-  const onPhoneNoAdd = (number) => {
-    setPersonalInfoValues({
-      ...personalInfoValues,
-      phoneNumber: number
-    });
-    setErrorValues({
-      ...errorValues,
-      phoneNumberError: "",
-    });
-  };
 
   const onSubmit = () => {
     const { firstName, lastName, bio, phoneNumber } = personalInfoValues;
@@ -202,16 +189,6 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
                   setErrorValues({ ...errorValues, phoneNumberError: "" });
                 }}
                 helperText={errorValues.phoneNumberError}
-                InputProps={{
-                  inputProps: { value: personalInfoValues.phoneNumber },
-                  startAdornment: (
-                    <InputAdornment position="start" variant="standard">
-                      <IconButton aria-label="Phone Number" edge="end" disabled>
-                        <DialpadIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
               />
             </Grid>
           </GridContainer>

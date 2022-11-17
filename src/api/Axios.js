@@ -25,6 +25,7 @@ import {
   setSearchData,
   addRoomToList,
   updateLoadUser,
+  removeBannedUserConversation,
 } from "../redux/appReducer/actions";
 import { Server } from "../utils";
 
@@ -160,6 +161,37 @@ export const sendTextMessage = (sender, receiver, message) => {
     dispatch(sendChatMessage({ content: message, type: "text" }));
     dispatch(sendNewChatMessage(message));
     dispatch(fetchSuccess());
+  };
+};
+
+export const banUserFromRoom = (user, roomName) => {
+  return (dispatch) => {
+    dispatch(fetchStart());
+    dispatch(
+      sendRoomMessage({
+        type: "ban",
+        content: "ban",
+        receiver: user.email,
+        room_name: roomName,
+      })
+    );
+    dispatch(removeBannedUserConversation(user.email));
+    dispatch(fetchSuccess(`${user.first_name} has been banned!`));
+  };
+};
+
+export const unbanUserFromRoom = (user, roomName) => {
+  return (dispatch) => {
+    dispatch(fetchStart());
+    dispatch(
+      sendRoomMessage({
+        type: "unban",
+        content: "unban",
+        receiver: user.email,
+        room_name: roomName,
+      })
+    );
+    dispatch(fetchSuccess(`${user.first_name} has been unbanned!`));
   };
 };
 
