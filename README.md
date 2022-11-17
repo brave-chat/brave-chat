@@ -84,6 +84,10 @@ As well as being feature-rich, Brave Chat is also fully responsive, meaning it w
 
 ![HTML tags being rendered.](./docs/static/images/render-markdown.png)
 
+- The ability to ban and unban room members.
+
+![HTML tags being rendered.](./docs/static/images/moderation.gif)
+
 ## 2022 Roadmap
 
 - Enrypt and decrypt text messages on the client side using the signal protocol.
