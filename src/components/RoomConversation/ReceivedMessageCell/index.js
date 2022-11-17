@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import moment from "moment";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
+
 import "../style.css";
 import clsx from "clsx";
 import CustomImage from "../../CustomImage";
@@ -15,9 +16,11 @@ import { checkHtml } from "../../Helper";
 import { Typography } from "@mui/material";
 import ProfileDetail from "../../Sidebar/ProfileDetail";
 import { Server } from "../../../utils";
+import { useDispatch } from "react-redux";
+import { banUserFromRoom, unbanUserFromRoom } from "../../../api/Axios";
 
 import Popover from "@mui/material/Popover";
-const ReceivedMessageCell = ({ conversation, user }) => {
+const ReceivedMessageCell = ({ conversation, room }) => {
   const [position, setPosition] = useState(-1);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -45,6 +48,23 @@ const ReceivedMessageCell = ({ conversation, user }) => {
         return "#C1C1C1";
     }
   };
+
+  const dispatch = useDispatch();
+  const onBanClick = () => {
+    if (conversation.sender) {
+      dispatch(banUserFromRoom(conversation.sender, room.room_name));
+    } else {
+      dispatch(banUserFromRoom(conversation, room.room_name));
+    }
+  };
+  const onUnBanClick = () => {
+    if (conversation.sender) {
+      dispatch(unbanUserFromRoom(conversation.sender, room.room_name));
+    } else {
+      dispatch(unbanUserFromRoom(conversation, room.room_name));
+    }
+  };
+
   return (
     <Box className={clsx("chat-msg-item", "received-msg-item")}>
       <Box onClick={handleClick} className="chat-avatar">
@@ -160,6 +180,29 @@ const ReceivedMessageCell = ({ conversation, user }) => {
               setUserStatus={() => {}}
               statusColor={getStatusColor()}
             />
+
+            {conversation.sender.admin === 1 ? (
+              <Box mt={3} display="flex" flexDirection={"row"}>
+                <Box mr={3}>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={onBanClick}
+                  >
+                    Ban
+                  </Button>
+                </Box>
+                <Box mr={3}>
+                  <Button
+                    variant="contained"
+                    color="success"
+                    onClick={onUnBanClick}
+                  >
+                    UnBan
+                  </Button>
+                </Box>
+              </Box>
+            ) : null}
           </Box>
         ) : (
           <Box p={{ xs: 4, md: 6 }}>
@@ -186,6 +229,28 @@ const ReceivedMessageCell = ({ conversation, user }) => {
               setUserStatus={() => {}}
               statusColor={getStatusColor()}
             />
+            {conversation.admin === 1 ? (
+              <Box mt={3} display="flex" flexDirection={"row"}>
+                <Box mr={3}>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={onBanClick}
+                  >
+                    Ban
+                  </Button>
+                </Box>
+                <Box mr={3}>
+                  <Button
+                    variant="contained"
+                    color="success"
+                    onClick={onUnBanClick}
+                  >
+                    UnBan
+                  </Button>
+                </Box>
+              </Box>
+            ) : null}
           </Box>
         )}
       </Popover>

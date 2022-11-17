@@ -24,6 +24,7 @@ import {
   FETCH_ERROR,
   FETCH_START,
   FETCH_SUCCESS,
+  BAN_USER_FROM_ROOM,
 } from "../../../constants/ActionTypes";
 
 export const fetchSuccess = (message) => {
@@ -251,6 +252,15 @@ export const deleteContact = (email) => {
   return (dispatch) => {
     dispatch({
       type: DELETE_CONTACT,
+      payload: email,
+    });
+  };
+};
+
+export const removeBannedUserConversation = (email) => {
+  return (dispatch) => {
+    dispatch({
+      type: BAN_USER_FROM_ROOM,
       payload: email,
     });
   };

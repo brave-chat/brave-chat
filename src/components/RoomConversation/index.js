@@ -28,7 +28,7 @@ const RoomConversation = ({ conversation, selectedRoom }) => {
                   <ReceivedMessageCell
                     key={index}
                     conversation={data}
-                    user={selectedRoom}
+                    room={selectedRoom}
                   />
                 </div>
               );
