@@ -1,12 +1,7 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { useLocation, Routes, Route, Navigate } from "react-router-dom";
 import PageLoader from "../components/PageLoader";
-import { useSelector } from "react-redux";
-import ChatApp from "../pages/ChatApp";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import LandingPage from "../pages/LandingPage";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser, setAuthUser } from "../redux/appReducer/actions";
 
 import { getUserContacts, getUserRooms } from "../api/Axios";
@@ -14,6 +9,11 @@ import { authUser } from "../redux/appReducer/selectors";
 
 const AppRoutes = () => {
   const [currentAuthUser, setCurrentAuthUser] = useState(useSelector(authUser));
+  const LandingPage = lazy(() => import('../pages/LandingPage'))
+  const Login = lazy(() => import('../pages/Login'))
+  const Register = lazy(() => import('../pages/Register'))
+  const ChatApp = lazy(() => import('../pages/ChatApp'))
+  const PageNotFound = lazy(() => import('../pages/PageNotFound'))
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -43,7 +43,6 @@ const AppRoutes = () => {
   }
 
   return (
-    <>
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route
@@ -59,13 +58,11 @@ const AppRoutes = () => {
             path="/chat"
             element={
               <div className="chat">
-                {/*<ChatApp />*/}
                 {currentAuthUser ? (
                   <ChatApp />
                 ) : (
                   <Navigate to={"/login"} replace />
                 )}
-                {/*lazy(() => import('../pages/ChatApp'))*/}
               </div>
             }
           ></Route>
@@ -74,7 +71,6 @@ const AppRoutes = () => {
             element={
               <div className="signup">
                 {<Register />}
-                {/*lazy(() => import('../pages/Register'))*/}
               </div>
             }
           ></Route>
@@ -83,20 +79,18 @@ const AppRoutes = () => {
             element={
               <div className="login">
                 {<Login />}
-                {/*lazy(() => import('../pages/Login'))*/}
               </div>
             }
           ></Route>
           <Route
             element={
               <div className="page-404">
-                {lazy(() => import("../pages/PageNotFound"))}
+                {<PageNotFound />}
               </div>
             }
           ></Route>
         </Routes>
       </Suspense>
-    </>
   );
 };
 
