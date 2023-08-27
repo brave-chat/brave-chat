@@ -135,6 +135,32 @@ const appReducer = (state = initialState, action) => {
       };
     }
     case RECEIVE_NEW_CHAT_MESSAGE: {
+      if (action.payload.user.id === 100000000000000000) {
+        if (action.payload.content === "start") {
+          state.conversation = state.conversation.concat({
+            id: new Date().getTime(),
+            user: action.payload.user,
+            content: "...",
+            type: "received",
+            media: "",
+            creation_date: moment.utc(),
+          });
+        } else {
+          state.conversation.pop();
+          state.conversation = state.conversation.concat({
+            id: new Date().getTime(),
+            user: action.payload.user,
+            content: action.payload.content,
+            type: "received",
+            media: "",
+            creation_date: moment.utc(),
+          });
+        }
+        return {
+          ...state,
+          conversation: state.conversation,
+        };
+      }
       return {
         ...state,
         conversation: state.conversation.concat({

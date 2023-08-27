@@ -80,6 +80,24 @@ export const getContactUsers = (search = "") => {
   };
 };
 
+export const setOpenAIAPIKey = (apiKey = "") => {
+  return (dispatch) => {
+    dispatch(fetchStart());
+    axJson.defaults.headers.common["Authorization"] =
+      "Bearer " + localStorage.getItem("token");
+    axJson
+      .get(`${Server.endpoint}/user/openai/key`, {
+        params: { apiKey: apiKey },
+      })
+      .then((data) => {
+        dispatch(fetchSuccess());
+      })
+      .catch(function (error) {
+        dispatch(fetchError(""));
+      });
+  };
+};
+
 export const getRoomsUser = (search = "") => {
   return (dispatch) => {
     dispatch(fetchStart());
@@ -104,29 +122,32 @@ export const getRoomsUser = (search = "") => {
 
 export const getConversation = (receiver) => {
   return (dispatch) => {
-    dispatch(fetchStart());
-    axJson.defaults.headers.common["Authorization"] =
-      "Bearer " + localStorage.getItem("token");
-    axJson
-      .get(`${Server.endpoint}/conversation`, {
-        params: {
-          sender: JSON.parse(localStorage.getItem("user")).email,
-          receiver: receiver.email,
-        },
-      })
-      .then((data) => {
-        if (data.data.status_code === 200) {
-          dispatch(fetchSuccess());
-          dispatch(setConversation(data.data.result));
-        } else {
-          dispatch(fetchError("Something went wrong"));
+    dispatch(setConversation([]));
+    if (receiver.email !== "chatgpt@brave-chat.net") {
+      dispatch(fetchStart());
+      axJson.defaults.headers.common["Authorization"] =
+        "Bearer " + localStorage.getItem("token");
+      axJson
+        .get(`${Server.endpoint}/conversation`, {
+          params: {
+            sender: JSON.parse(localStorage.getItem("user")).email,
+            receiver: receiver.email,
+          },
+        })
+        .then((data) => {
+          if (data.data.status_code === 200) {
+            dispatch(fetchSuccess());
+            dispatch(setConversation(data.data.result));
+          } else {
+            dispatch(fetchError("Something went wrong"));
+            dispatch(setConversation([]));
+          }
+        })
+        .catch(function (error) {
+          dispatch(fetchError(""));
           dispatch(setConversation([]));
-        }
-      })
-      .catch(function (error) {
-        dispatch(fetchError(""));
-        dispatch(setConversation([]));
-      });
+        });
+    }
   };
 };
 
@@ -158,7 +179,11 @@ export const getRoomConversation = (room) => {
 export const sendTextMessage = (sender, receiver, message) => {
   return (dispatch) => {
     dispatch(fetchStart());
-    dispatch(sendChatMessage({ content: message, type: "text" }));
+    if (receiver.email !== "chatgpt@brave-chat.net") {
+      dispatch(sendChatMessage({ content: message, type: "text" }));
+    } else {
+      dispatch(sendChatMessage({ content: message, type: "chatgpt" }));
+    }
     dispatch(sendNewChatMessage(message));
     dispatch(fetchSuccess());
   };
