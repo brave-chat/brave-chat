@@ -8,8 +8,8 @@ import PropTypes from "prop-types";
 const EmojiPicker = ({ onPickEmoji }) => {
   const [showEmoji, setShowEmoji] = useState(false);
 
-  const onEmojiClick = (event, emojiObject) => {
-    onPickEmoji(emojiObject.emoji);
+  const onEmojiClick = (emojiData, event) => {
+    onPickEmoji(emojiData.emoji);
     setShowEmoji(!showEmoji);
   };
 
