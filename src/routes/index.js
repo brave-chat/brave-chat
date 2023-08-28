@@ -9,11 +9,12 @@ import { authUser } from "../redux/appReducer/selectors";
 
 const AppRoutes = () => {
   const [currentAuthUser, setCurrentAuthUser] = useState(useSelector(authUser));
-  const LandingPage = lazy(() => import('../pages/LandingPage'))
-  const Login = lazy(() => import('../pages/Login'))
-  const Register = lazy(() => import('../pages/Register'))
-  const ChatApp = lazy(() => import('../pages/ChatApp'))
-  const PageNotFound = lazy(() => import('../pages/PageNotFound'))
+  const LandingPage = lazy(() => import("../pages/LandingPage"));
+  const Login = lazy(() => import("../pages/Login"));
+  const Register = lazy(() => import("../pages/Register"));
+  const ChatApp = lazy(() => import("../pages/ChatApp"));
+  const PageNotFound = lazy(() => import("../pages/PageNotFound"));
+  const InviteRoomPage = lazy(() => import("../pages/InviteRoomPage"));
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -43,54 +44,43 @@ const AppRoutes = () => {
   }
 
   return (
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={<Navigate replace to="/landing" />}
-          ></Route>
-          <Route
-            path="/landing"
-            element={<div className="landing">{<LandingPage />}</div>}
-          ></Route>
-          <Route
-            path="/chat"
-            element={
-              <div className="chat">
-                {currentAuthUser ? (
-                  <ChatApp />
-                ) : (
-                  <Navigate to={"/login"} replace />
-                )}
-              </div>
-            }
-          ></Route>
-          <Route
-            path="/signup"
-            element={
-              <div className="signup">
-                {<Register />}
-              </div>
-            }
-          ></Route>
-          <Route
-            path="/login"
-            element={
-              <div className="login">
-                {<Login />}
-              </div>
-            }
-          ></Route>
-          <Route
-            element={
-              <div className="page-404">
-                {<PageNotFound />}
-              </div>
-            }
-          ></Route>
-        </Routes>
-      </Suspense>
+    <Suspense fallback={<PageLoader />}>
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={<Navigate replace to="/landing" />}
+        ></Route>
+        <Route
+          path="/landing"
+          element={<div className="landing">{<LandingPage />}</div>}
+        ></Route>
+        <Route
+          path="/chat"
+          element={
+            <div className="chat">
+              {currentAuthUser ? (
+                <ChatApp />
+              ) : (
+                <Navigate to={"/login"} replace />
+              )}
+            </div>
+          }
+        ></Route>
+        <Route
+          path="/signup"
+          element={<div className="signup">{<Register />}</div>}
+        ></Route>
+        <Route
+          path="/login"
+          element={<div className="login">{<Login />}</div>}
+        ></Route>
+        <Route
+          element={<div className="page-404">{<PageNotFound />}</div>}
+        ></Route>
+        <Route path="/chat/:uuid/:uuid" element={<InviteRoomPage />}></Route>
+      </Routes>
+    </Suspense>
   );
 };
 

@@ -314,6 +314,55 @@ export const deleteRoomConversation = (room, onRoomSelect) => {
   };
 };
 
+export const invitePeople = (roomName, inviteLink) => {
+  return (dispatch) => {
+    dispatch(fetchStart());
+    axJson.defaults.headers.common["Authorization"] =
+      "Bearer " + localStorage.getItem("token");
+    axJson
+      .post(`${Server.endpoint}/room/invite/link`, {
+        room_name: roomName,
+        invite_link: inviteLink,
+      })
+      .then(({ data }) => {
+        if (data.status_code === 200) {
+          dispatch(fetchSuccess(data.message));
+        } else {
+          dispatch(fetchError(data.message));
+        }
+      })
+      .catch(function (error) {
+        dispatch(fetchError(""));
+      });
+    dispatch(fetchSuccess());
+  };
+};
+
+export const inviteUser = (roomName, inviteLink, navigate) => {
+  return (dispatch) => {
+    dispatch(fetchStart());
+    axJson.defaults.headers.common["Authorization"] =
+      "Bearer " + localStorage.getItem("token");
+    axJson
+      .post(`${Server.endpoint}/room/user/invite`, {
+        room_name: roomName,
+        invite_link: inviteLink,
+      })
+      .then(({ data }) => {
+        if (data.status_code === 200) {
+          dispatch(fetchSuccess(data.message));
+          navigate(`/chat`);
+        } else {
+          dispatch(fetchError(data.message));
+        }
+      })
+      .catch(function (error) {
+        dispatch(fetchError("Not Authorized! You have to log in first!"));
+      });
+    dispatch(fetchSuccess());
+  };
+};
+
 export const removeContact = (email, onUserSelect) => {
   return (dispatch) => {
     dispatch(fetchStart());
