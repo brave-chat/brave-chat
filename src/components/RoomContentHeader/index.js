@@ -8,14 +8,20 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { onRoomSelect } from "../../redux/appReducer/actions";
 import { useDispatch } from "react-redux";
 import DropdownMenu from "../DropdownMenu";
-import { removeRoom, deleteRoomConversation } from "../../api/Axios";
+import {
+  removeRoom,
+  deleteRoomConversation,
+  invitePeople,
+} from "../../api/Axios";
 import { leaveRoomSocket } from "../../api/Socket";
 import clsx from "clsx";
+import { v4 as uuid } from "uuid";
 
 import Popover from "@mui/material/Popover";
 const actions = [
   { label: "Room Description", slug: "description" },
   { label: "Delete Messages", slug: "delete" },
+  { label: "Invite People", slug: "invite" },
   { label: "Leave Room", slug: "leave" },
 ];
 
@@ -38,6 +44,14 @@ const RoomContentHeader = ({ room }) => {
         break;
       case "leave":
         dispatch(removeRoom(room.room_name, onRoomSelect));
+        handleClose();
+        break;
+      case "invite":
+        const inviteLink = `${window.location.href}/${
+          room.room_name
+        }/${uuid()}`;
+        dispatch(invitePeople(room.room_name, inviteLink));
+        navigator.clipboard.writeText(inviteLink);
         handleClose();
         break;
       default:
