@@ -37,7 +37,7 @@
     "remark-gfm": "^3.0.1",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.8",
-    "sweetalert2": "^11.4.29",
+    "sweetalert2": "^11.7.27",
     "sweetalert2-react-content": "^5.0.7",
     "tsparticles": "^2.5.3",
     "typed.js": "^2.0.12",
