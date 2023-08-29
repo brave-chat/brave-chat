@@ -323,6 +323,7 @@ Navigate to [the server repository](https://github.com/brave-chat/brave-chat-ser
 
 ## Deployment
 
+> **Warning**<br>
 To deploy the client, you will need to set the following environment variables that help the client connect to the server.
 
 ```sh
@@ -330,7 +331,52 @@ To deploy the client, you will need to set the following environment variables t
 * REACT_APP_SOCKET_URL - Your deployed server Sockets url.
 ```
 
-## **Deploy to a Static Hosting Provider**
+### **Deploy to a Static Hosting Provider**
+
+### **CloudFlare**
+
+1. Install [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/get-started/):
+
+   To get started with Cloudflare Workers, you'll need to install the Wrangler CLI, which is a powerful tool for managing your deployments. Open up your command-line interface and enter the following command to globally install Wrangler:
+
+   ```sh
+   npm install -g wrangler
+   ```
+
+1. Login to Cloudflare Account from the CLI:
+
+   To seamlessly interact with your Cloudflare account, you'll need to log in using Wrangler. Run the following command in your terminal:
+
+   ```sh
+   wrangler login
+   ```
+
+1. Configure Environment Variables for Client-Server Connection:
+
+   For your React app to communicate effectively with the server, you need to set a couple of environment variables. Replace the placeholders with actual URLs:
+
+   ```sh
+   export REACT_APP_SERVER_URL=Your_deployed_server_APIs_url
+   export REACT_APP_SOCKET_URL=Your_deployed_server_Sockets_url
+   ```
+
+1. Run Your Build Command:
+
+   Before deployment, ensure your project is finely tuned. Execute your build command to prepare your app for the world:
+
+   ```sh
+   pnpm run build
+   ```
+
+1. Create a New Deployment:
+
+   The moment has come to launch your creation into the online realm! Execute the following command to deploy your app with Wrangler Pages:
+
+   ```sh
+   wrangler pages deploy
+   ```
+
+### **Netlify**
 
 [![Deploy on Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/brave-chat/brave-chat)
 
