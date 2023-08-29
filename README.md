@@ -373,7 +373,7 @@ To deploy the client, you will need to set the following environment variables t
    The moment has come to launch your creation into the online realm! Execute the following command to deploy your app with Wrangler Pages:
 
    ```sh
-   wrangler pages deploy
+   wrangler pages deploy dist
    ```
 
 ### **Netlify**
