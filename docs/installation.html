@@ -51,16 +51,27 @@
                               Installation
                             </h4>
                             <p>
-                              This project was bootstrapped using
+                              This project was initially bootstrapped using
                               <a
                                 class="text-decoration-none text-primary fw-bold"
                                 href="https://create-react-app.dev/"
                                 target="_blank"
                               >
-                                <strong>Create React App </strong>
+                                <strong> Create React App </strong>
                               </a>
-                              meaning that it is equiped with built-in scripts
-                              that get your application up and running. This
+                              then<a
+                                class="text-decoration-none text-primary fw-bold"
+                                href="https://github.com/brave-chat/brave-chat/pull/86"
+                                target="_blank"
+                              >
+                                <strong> migrated </strong>
+                              </a>to<a
+                                class="text-decoration-none text-primary fw-bold"
+                                href="https://vitejs.dev/guide/"
+                                target="_blank"
+                              >
+                                <strong> vite</strong>
+                              </a>. This
                               makes it easier for you to get started with React
                               and have a working application with minimal
                               effort. But, before running these scripts, you'll
@@ -96,12 +107,12 @@
                                   <td>
                                     <a
                                       class="text-decoration-none text-primary fw-bold"
-                                      href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm"
+                                      href="https://pnpm.io/installation"
                                       target="_blank"
-                                      >npm
+                                      >pnpm
                                     </a>
                                   </td>
-                                  <td>8.15.0</td>
+                                  <td>8.7.0</td>
                                   <td>
                                     npm is a widely used JavaScript package
                                     manager that makes it easy to install,
@@ -109,27 +120,10 @@
                                     projects.
                                   </td>
                                 </tr>
-                                <tr>
-                                  <td>
-                                    <a
-                                      class="text-decoration-none text-primary fw-bold"
-                                      href="https://yarnpkg.com/getting-started"
-                                      target="_blank"
-                                      >yarn
-                                    </a>
-                                  </td>
-                                  <td>1.22.19</td>
-                                  <td>
-                                    Like npm, Yarn is yet another JavaScript
-                                    package manager. It is a newer than npm and
-                                    offers several advantages over it, including
-                                    a slightly better performance and security.
-                                  </td>
-                                </tr>
                               </tbody>
                             </table>
-                           <p>Once you have git, Node.js and one of the package 
-                            managers installed, you should be good to go! Now 
+                           <p>Once you have git, Node.js and the package 
+                            manager installed, you should be good to go! Now 
                             you need to fork and clone the repository:</p>
                             <ul>
                               <li>Fork the Brave Chat repo on GitHub.</li>
@@ -171,8 +165,7 @@ REACT_APP_SOCKET_URL=ws://localhost:8000/api/v1/ws
                               <tbody>
                                 <tr>
                                   <td>
-                                    <code><strong>npm install </strong></code> or
-                                    <code><strong>yarn install </strong></code>
+                                    <code><strong>pnpm install </strong></code>
                                   </td>
                                   <td>
                                     This command will install everything that's
@@ -184,8 +177,7 @@ REACT_APP_SOCKET_URL=ws://localhost:8000/api/v1/ws
                                 </tr>
                                 <tr>
                                   <td>
-                                    <code><strong>npm start </strong></code> or
-                                    <code><strong>yarn start </strong></code>
+                                    <code><strong>pnpm run dev </strong></code>
                                   </td>
                                   <td>
                                     This command will start the server at
@@ -197,8 +189,7 @@ REACT_APP_SOCKET_URL=ws://localhost:8000/api/v1/ws
                                 </tr>
                                 <tr>
                                   <td>
-                                    <code><strong>npm build </strong></code> or
-                                    <code><strong>yarn build </strong></code>
+                                    <code><strong>pnpm run build </strong></code>
                                   </td>
                                   <td>
                                     This command will generate a
