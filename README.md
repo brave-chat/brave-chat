@@ -289,33 +289,37 @@ Brave Chat code base is written to be developer-friendly, with code that is both
 
 ### Running locally with NPM
 
-- Fork/Clone the repo:
+> **Note**<br>
+Make sure you have [`pnpm`](https://pnpm.io/installation) installed on your machine.
 
-```sh
-git clone git@github.com:wiseaidev/brave-chat.git
-```
+1. Fork/Clone the repo:
 
-- Open the newly created directory:
+	```sh
+	git clone git@github.com:brave-chat/brave-chat.git
+	```
 
-```sh
-cd brave-chat
-pnpm install
-```
+1. Open the newly created directory:
 
-In order to run the project locally or build for production use, you will need to set the following environment variables to connect with the server: 
+	```sh
+	cd brave-chat
+	pnpm install
+	```
+
+> **Warning**<br>
+In order to run the project locally or build for production use, you will need to set the following environment variables to connect with the server.
 
 ```sh
 REACT_APP_SERVER_URL=http://localhost:8000/api/v1
 REACT_APP_SOCKET_URL=ws://localhost:8000/api/v1/ws
 ```
 
-Now, you can run the client:
+1. Now, you can run the client:
 
-```sh
-pnpm run dev
-```
+	```sh
+	pnpm run dev
+	```
 
-Navigate to [http://localhost:3000](http://localhost:3000) to explore the landing page.
+1. Navigate to [http://localhost:3000](http://localhost:3000) to explore the landing page.
 
 ## Running locally with Compose v2
 
