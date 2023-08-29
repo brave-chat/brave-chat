@@ -1,0 +1,43 @@
+{
+  "projectName": "brave-chat",
+  "projectOwner": "brave-chat",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "eslint",
+  "contributors": [
+    {
+      "login": "andrewkykoo",
+      "name": "Andrew Koo ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47183818?v=4",
+      "profile": "https://www.linkedin.com/in/andrewkykoo/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "wiseaidev",
+      "name": "Mahmoud Harmouch",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62179149?v=4",
+      "profile": "https://github.com/wiseaidev",
+      "contributions": [
+        "maintenance"
+      ]
+    },
+    {
+      "login": "MaverickDe",
+      "name": "Princewill Asotibe",
+      "avatar_url": "https://avatars.githubusercontent.com/u/100746581?v=4",
+      "profile": "http://linkedin.com/in/princewill-asotibe-b31036204/",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "linkToUsage": true
+}

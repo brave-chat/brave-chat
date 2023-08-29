@@ -1,0 +1,65 @@
+.dialog-root .MuiDialogContent-root {
+  background-color: black;
+  overflow: hidden;
+}
+.dialog-title-root .form-control {
+  font-size: 16px;
+  color: #fff;
+  background-color: grey;
+  border: 3px solid blue;
+}
+
+.dialog-root .MuiInputAdornment-root > .MuiIconButton-root > .MuiSvgIcon-root {
+  color: #000;
+  margin-left: -13px;
+}
+.react-tel-input .form-control {
+  height: 1.4375em;
+  font-size: 16px;
+  color: #000;
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 40%;
+}
+.react-tel-input .special-label {
+  background: none;
+  color: #fff;
+  line-height: 1em;
+  top: -25px;
+  left: -1.6px;
+}
+
+.react-tel-input .selected-flag {
+  top: -2px;
+}
+
+.react-tel-input .country-list {
+  color: white;
+  background-color: black;
+}
+.react-tel-input .country-list .country.highlight {
+  color: blue;
+  background-color: black;
+}
+
+.react-tel-input .flag-dropdown {
+  color: blue;
+  background-color: black;
+}
+
+.react-tel-input .flag-dropdown li:hover {
+  color: blue;
+  background-color: black;
+}
+.react-tel-input .country-list .search {
+  background-color: #000;
+}
+
+.phone-field {
+  width: 245%;
+}
+
+@media screen and (max-width: 390px) {
+  .phone-field {
+    width: 215%;
+  }
+}

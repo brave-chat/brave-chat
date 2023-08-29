@@ -1,0 +1,126 @@
+@-webkit-keyframes button-bounce {
+  0% {
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-5px);
+  }
+  50% {
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+  }
+  100% {
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes button-bounce {
+  0% {
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-5px);
+  }
+  50% {
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+  }
+  100% {
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-5px);
+  }
+}
+
+@media (max-width: 1377px) {
+  .inner-landing-row > .page-title {
+    font-size: 3em;
+  }
+}
+
+@media (max-width: 750px) {
+  .inner-landing-row > .page-title {
+    font-size: 2.5em;
+  }
+}
+
+.inner-bg-landing-section {
+  opacity: 0.5;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+}
+
+.bg-landing-section {
+  height: 100vh !important;
+  padding-bottom: 80px;
+  position: relative;
+}
+
+.inner-landing-row {
+  text-align: center !important;
+  color: #ffffff !important;
+  flex: 0 0 auto;
+  width: 80%;
+}
+
+.landing-container {
+  top: 40%;
+  transform: translateY(-50%);
+  position: absolute;
+  z-index: 100;
+  left: 0px;
+  right: 0px;
+}
+
+.landing-row {
+  justify-content: center !important;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0;
+  margin-right: -0.25rem;
+  margin-left: -0.25rem;
+}
+
+.page-title span {
+  top: 50%;
+  line-height: 74px;
+  color: #0288d1;
+  margin-bottom: 70px;
+}
+
+.landing-description {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+  margin: 0 auto;
+  padding-top: 1rem !important;
+}
+
+.landing-buttons {
+  padding: 2px;
+  justify-content: center !important;
+  align-items: center !important;
+  margin-top: 20px;
+}
+
+.about-us {
+  border: 0px;
+  background-color: grey;
+  color: black;
+}
+.about-us:hover {
+  transform: translateY(-10%);
+  color: white;
+}
+
+.lets-chat {
+  color: white;
+  background-color: #0288d1;
+  animation: button-bounce 2s infinite ease-in-out;
+}
+
+.lets-chat:hover {
+  transform: translateY(-5%);
+  color: black;
+}
