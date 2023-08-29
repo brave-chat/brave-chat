@@ -2,21 +2,11 @@
 
 <div align="center">
 
-[![Demo on Cloudflare](https://badgen.net/badge/icon/cloudflare/green?icon=telegram&label=brave-chat)](https://brave-chat-client.pages.dev/landing)
-[![Demo on Heroku](https://badgen.net/badge/icon/heroku?icon=telegram&label=brave-chat)](https://brave-chat-demo.herokuapp.com/)
+[![Demo on Cloudflare](https://badgen.net/badge/icon/cloudflare/green?icon=telegram&label=brave-chat)](https://brave-chat.net/)
 [![Status](https://badgen.net/uptime-robot/status/m780862024-50db2c44c703e5c68d6b1ebb)](https://brave-chat-demo.herokuapp.com/)
-[![Tag](https://badgen.net/github/tag/brave-chat/brave-chat)](https://github.com/brave-chat/brave-chat/releases/tag/v0.3.0)
+[![Tag](https://badgen.net/github/tag/brave-chat/brave-chat)](https://github.com/brave-chat/brave-chat/releases/tag/v0.4.0)
 [![Docs](https://badgen.net/badge/icon/docs?icon=wiki&label)](https://docs.brave-chat.wiseai.dev)
-
-</div>
-
-<div align="center">
-
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-blue.svg?style=flat)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-
-</div>
 
 ![Brave Chat](./docs/static/images/banner.PNG "Brave Chat")
 
@@ -88,7 +78,7 @@ As well as being feature-rich, Brave Chat is also fully responsive, meaning it w
 
 ![HTML tags being rendered.](./docs/static/images/moderation.gif)
 
-## 2022 Roadmap
+## 2023 Roadmap
 
 - Enrypt and decrypt text messages on the client side using the signal protocol.
 - Add support for voice, videos, files messages.
@@ -311,7 +301,7 @@ git clone git@github.com:wiseaidev/brave-chat.git
 
 ```sh
 cd brave-chat
-npm install
+pnpm install
 ```
 
 In order to run the project locally or build for production use, you will need to set the following environment variables to connect with the server: 
@@ -324,7 +314,7 @@ REACT_APP_SOCKET_URL=ws://localhost:8000/api/v1/ws
 Now, you can run the client:
 
 ```sh
-npm start
+pnpm run dev
 ```
 
 Navigate to [http://localhost:3000](http://localhost:3000) to explore the landing page.
@@ -344,10 +334,7 @@ To deploy the client, you will need to set the following environment variables t
 
 ## **Deploy to a Static Hosting Provider**
 
-[![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/brave-chat/brave-chat)
-
 [![Deploy on Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/brave-chat/brave-chat)
-
 
 ## Documentation
 
