@@ -95,7 +95,12 @@ const SignIn = () => {
       <ContentLoader variant="info" />
 
       <Box
-        sx={{ textAlign: "center", mb: 4, position: "absolute", top: "12%" }}
+        sx={{
+          textAlign: "center",
+          mb: 4,
+          position: "absolute",
+          top: theme.spacing(13),
+        }}
       >
         <NavLink to="/" underline="none" sx={{ display: "block" }}>
           {theme.palette.mode === "dark" ? (

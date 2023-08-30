@@ -24,7 +24,9 @@ const NavBar = () => {
     <header className="landing-header">
       <div className="inner-container">
         <nav className="inner-nav-bar">
-          <Logo logoSource={"./logo.png"} />
+          <Box sx={{ display: { md: "block", sm: "none", xs: "none" } }}>
+            <Logo logoSource={"./logo.png"} />
+          </Box>
           <ul className="nav-bar-ul">
             <li className="nav-item">
               <div className="nav-github-btn">
