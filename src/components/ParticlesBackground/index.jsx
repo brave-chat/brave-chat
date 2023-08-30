@@ -1,8 +1,10 @@
+import { useTheme } from "@mui/material/styles";
 import React, { useCallback } from "react";
 import Particles from "react-particles";
 import { loadFull } from "tsparticles";
 
 const ParticlesBackground = () => {
+  const theme = useTheme();
   const particlesInit = useCallback(async (engine) => {
     await loadFull(engine);
   }, []);
@@ -29,9 +31,9 @@ const ParticlesBackground = () => {
           },
         },
         particles: {
-          color: { value: "#ffffff" },
+          color: { value: theme.palette.text.primary },
           line_linked: {
-            color: "#ffffff",
+            color: theme.palette.text.primary,
             distance: 150,
             enable: true,
             opacity: 0.4,

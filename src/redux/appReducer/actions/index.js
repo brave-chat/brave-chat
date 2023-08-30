@@ -25,6 +25,7 @@ import {
   FETCH_START,
   FETCH_SUCCESS,
   BAN_USER_FROM_ROOM,
+  UPDATE_THEME,
 } from "../../../constants/ActionTypes";
 
 export const fetchSuccess = (message) => {
@@ -57,6 +58,15 @@ export const onUserSelect = (user) => {
     dispatch({
       type: SET_SELECTED_USER,
       payload: user,
+    });
+  };
+};
+
+export const onUpdateTheme = (theme) => {
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_THEME,
+      payload: theme,
     });
   };
 };

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import ContentLoader from "../ContentLoader";
 import AppTextInput from "../AppTextInput";
 import DialogContent from "@mui/material/DialogContent";
@@ -12,6 +12,8 @@ import IconButton from "@mui/material/IconButton";
 import { addRoom } from "../../api/Axios";
 import TitleIcon from "@mui/icons-material/Title";
 import DescriptionIcon from "@mui/icons-material/Description";
+import { useTheme } from "@mui/material/styles";
+
 import "./style.css";
 
 const AddJoinRoom = ({ join, open, onCloseDialog }) => {
@@ -22,6 +24,7 @@ const AddJoinRoom = ({ join, open, onCloseDialog }) => {
   const [roomDescriptionError, setRoomDescriptionError] = useState("");
 
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const onSubmit = () => {
     if (!roomName) {
@@ -47,12 +50,22 @@ const AddJoinRoom = ({ join, open, onCloseDialog }) => {
           pt={{ xs: 4, md: 0 }}
           pb={{ xs: 4, md: 0 }}
         >
+          <Typography
+            variant="body1"
+            sx={{
+              color: "common.white",
+              ml: theme.spacing(1),
+              mb: 0,
+            }}
+          >
+            Room Name
+            <span style={{ color: "red", marginLeft: "5px" }}>*</span>
+          </Typography>
           <AppTextInput
             fullWidth
             size={""}
             className="text-field-root"
             variant="outlined"
-            label="Room Name"
             value={roomName}
             onChange={(e) => {
               setRoomName(e.target.value);
@@ -78,12 +91,22 @@ const AddJoinRoom = ({ join, open, onCloseDialog }) => {
             pt={{ xs: 4, md: 0 }}
             pb={{ xs: 4, md: 0 }}
           >
+            <Typography
+              variant="body1"
+              sx={{
+                color: "common.white",
+                ml: theme.spacing(1),
+                mb: 0,
+              }}
+            >
+              Room Description
+              <span style={{ color: "red", marginLeft: "5px" }}>*</span>
+            </Typography>
             <AppTextInput
               fullWidth
               size={""}
               className="text-field-root"
               variant="outlined"
-              label="Room Description"
               value={roomDescription}
               onChange={(e) => {
                 setRoomDescription(e.target.value);

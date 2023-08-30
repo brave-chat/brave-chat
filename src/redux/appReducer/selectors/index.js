@@ -6,6 +6,7 @@ export const contacts = (state) => state.app.contacts;
 export const rooms = (state) => state.app.rooms;
 export const selectedUser = (state) => state.app.selectedUser;
 export const selectedRoom = (state) => state.app.selectedRoom;
+export const selectedTheme = (state) => state.app.selectedTheme;
 export const authUser = (state) => state.app.authUser;
 export const loadUser = (state) => state.app.loadUser;
 export const message = (state) => state.app.message;

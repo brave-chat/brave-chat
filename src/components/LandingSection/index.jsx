@@ -1,24 +1,16 @@
+import { useTheme } from "@mui/material/styles";
 import React from "react";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import TelegramIcon from "@mui/icons-material/Telegram";
-//import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TypedText from "../TypedText";
 import ParticlesBackground from "../ParticlesBackground";
 import { Link } from "react-router-dom";
 import "./style.css";
 
-// const theme = createTheme({
-//   palette: {
-//     neutral: {
-//       main: "#fff",
-//       contrastText: "#fff",
-//     },
-//   },
-// });
-
 const LandingSection = () => {
+  const theme = useTheme();
   return (
     <div className="bg-landing-section">
       <div className="inner-bg-landing-section">
@@ -27,14 +19,26 @@ const LandingSection = () => {
       <div className="landing-container">
         <div className="landing-row">
           <div className="inner-landing-row">
-            <Typography variant="h1" className="page-title">
+            <Typography
+              variant="h1"
+              className="page-title"
+              sx={{ color: theme.palette.text.primary }}
+            >
               The <span>Open Source</span>
             </Typography>
-            <Typography variant="h1" className="page-title">
+            <Typography
+              variant="h1"
+              className="page-title"
+              sx={{ color: theme.palette.text.primary }}
+            >
               <span>Slack</span> Alternative
             </Typography>
 
-            <Typography mt={2} variant="h5">
+            <Typography
+              mt={2}
+              variant="h5"
+              sx={{ color: theme.palette.text.primary }}
+            >
               Keep the conversation going by utilizing excellent tools
               centralized in one place, made by the People, for the People.
             </Typography>
@@ -49,23 +53,15 @@ const LandingSection = () => {
               />
             </Typography>
             <Stack direction="row" className="landing-buttons" spacing={2}>
-              {/*<ThemeProvider theme={theme}>
-                <Button variant="outlined" className="about-us" color="neutral">
-                  About Us
-                </Button>
-              </ThemeProvider>*/}
-
               <Button
                 variant="contained"
                 className="lets-chat"
+                component={Link}
+                sx={{ textDecoration: "none", color: "#fff" }}
                 endIcon={<TelegramIcon />}
+                to="/login"
               >
-                <Link
-                  style={{ textDecoration: "none", color: "#fff" }}
-                  to="/login"
-                >
-                  Let's chat
-                </Link>
+                Let's chat
               </Button>
             </Stack>
           </div>

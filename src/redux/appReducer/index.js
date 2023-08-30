@@ -26,6 +26,7 @@ import {
   FETCH_ERROR,
   FETCH_START,
   FETCH_SUCCESS,
+  UPDATE_THEME,
 } from "../../constants/ActionTypes";
 
 const initialState = {
@@ -35,6 +36,7 @@ const initialState = {
   roomConversation: [],
   rooms: [],
   currentUser: null,
+  selectedTheme: "dark",
   selectedUser: null,
   selectedRoom: null,
   authUser: "",
@@ -267,6 +269,12 @@ const appReducer = (state = initialState, action) => {
       return {
         ...state,
         loadUser: action.payload,
+      };
+    }
+    case UPDATE_THEME: {
+      return {
+        ...state,
+        selectedTheme: action.payload,
       };
     }
     case FETCH_START: {
