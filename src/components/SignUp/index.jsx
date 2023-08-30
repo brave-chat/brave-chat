@@ -1,31 +1,41 @@
+import { useTheme } from "@mui/material/styles";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Box } from "@mui/material";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  Box,
+  Button,
+  IconButton,
+  InputAdornment,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Typography,
+} from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { JWTAuth } from "../../api/Axios";
-import AppTextInput from "../AppTextInput";
+import MailIcon from "@mui/icons-material/Mail";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import IconButton from "@mui/material/IconButton";
-import InputAdornment from "@mui/material/InputAdornment";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import PersonIcon from "@mui/icons-material/Person";
-import MailIcon from "@mui/icons-material/Mail";
 import LockIcon from "@mui/icons-material/Lock";
-import { isValidEmail } from "../Helper";
-import ParticlesBackground from "../ParticlesBackground";
+import { JWTAuth } from "../../api/Axios";
+import AppTextInput from "../AppTextInput";
 import ContentLoader from "../ContentLoader";
-import "../SignIn/style.css";
+import ParticlesBackground from "../ParticlesBackground";
+import { isValidEmail } from "../Helper";
 
 const SignUp = () => {
+  const theme = useTheme();
+  const dispatch = useDispatch();
+
   const [values, setValues] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     showPassword: false,
+    rememberMe: false,
+    agreeToTerms: false,
   });
 
   const [errorValues, setErrorValues] = useState({
@@ -34,8 +44,6 @@ const SignUp = () => {
     emailError: "",
     passwordError: "",
   });
-
-  const dispatch = useDispatch();
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -58,7 +66,8 @@ const SignUp = () => {
     event.preventDefault();
   };
 
-  const onClick = () => {
+  const onClick = (event) => {
+    event.preventDefault();
     if (!values.firstName) {
       handleErrorChange("firstNameError")("First Name is required!");
     } else if (!values.lastName) {
@@ -84,31 +93,88 @@ const SignUp = () => {
   return (
     <Box
       component="form"
-      sx={{ "& .MuiTextField-root": { mt: 3, mb: 3, ml: 1, width: "30ch" } }}
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      noValidate
-      autoComplete="off"
-      className="auth-wrap"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        paddingTop: theme.spacing(30),
+        backgroundColor: theme.palette.background.default,
+        "& .MuiTextField-root": {
+          mt: theme.spacing(3),
+          mb: theme.spacing(3),
+          width: "35ch",
+        },
+      }}
+      onSubmit={onClick}
     >
-      <ParticlesBackground />
-      <Box className="auth-card">
-        <Box className="auth-content">
-          <Typography component="div" variant="h4" className="title-root">
+      <ContentLoader variant="info" />
+      <Box
+        sx={{ textAlign: "center", mb: 4, position: "absolute", top: "12%" }}
+      >
+        <NavLink to="/" underline="none" sx={{ display: "block" }}>
+          {theme.palette.mode === "dark" ? (
+            <img src="/logo.png" alt="Brave Chat" height="100" />
+          ) : (
+            <img src="/dark-logo.png" alt="Brave Chat" height="100" />
+          )}
+        </NavLink>
+      </Box>
+
+      <Box
+        sx={{
+          border: `2px solid ${theme.palette.primary.main}`,
+          zIndex: 3,
+          boxShadow: theme.shadows[3],
+          borderRadius: theme.shape.borderRadius,
+          backgroundColor: theme.palette.background.primary,
+          color: theme.palette.text.primary,
+          display: "flex",
+          marginRight: theme.spacing(3),
+          marginLeft: theme.spacing(3),
+        }}
+      >
+        <Box
+          sx={{
+            width: "100%",
+            padding: theme.spacing(3),
+            backgroundColor: theme.palette.background.primary,
+            borderRadius: theme.shape.borderRadius,
+          }}
+        >
+          <Typography
+            component="div"
+            pl={0}
+            variant="h4"
+            sx={{
+              color: theme.palette.primary.main,
+              marginBottom: theme.spacing(2),
+              textAlign: "center",
+              fontWeight: "bold",
+            }}
+          >
             REGISTER
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              color: theme.palette.text.primary,
+              ml: theme.spacing(1),
+              mb: -2,
+            }}
+          >
+            Full Name
+            <span style={{ color: "red", marginLeft: "5px" }}>*</span>
           </Typography>
           <Box
             display="flex"
-            width="31ch"
+            width="36.5ch"
             flexDirection={{ xs: "column", md: "row" }}
             alignItems="center"
           >
             <AppTextInput
               fullWidth
-              className="text-field-root "
+              className="text-field-root"
               variant="outlined"
-              label="First Name"
               value={values.firstName}
               onChange={(e) => {
                 handleChange("firstName")(e);
@@ -119,17 +185,26 @@ const SignUp = () => {
                 startAdornment: (
                   <InputAdornment position="start" variant="standard">
                     <IconButton aria-label="First Name" edge="end" disabled>
-                      <PermIdentityIcon />
+                      <PermIdentityIcon
+                        style={{ color: theme.palette.text.primary }}
+                      />
                     </IconButton>
                   </InputAdornment>
                 ),
+              }}
+              sx={{
+                width: "100%",
+                ml: theme.spacing(1),
+                mr: theme.spacing(1),
+                mt: theme.spacing(1),
+                backgroundColor: theme.palette.background.paper,
+                borderColor: theme.palette.text.primary,
               }}
             />
             <AppTextInput
               fullWidth
               className="text-field-root full-width-text-box"
               variant="outlined"
-              label="Last Name"
               value={values.lastName}
               onChange={(e) => {
                 handleChange("lastName")(e);
@@ -140,10 +215,20 @@ const SignUp = () => {
                 startAdornment: (
                   <InputAdornment position="start" variant="standard">
                     <IconButton aria-label="Last Name" edge="end" disabled>
-                      <PersonIcon />
+                      <PersonIcon
+                        style={{ color: theme.palette.text.primary }}
+                      />
                     </IconButton>
                   </InputAdornment>
                 ),
+              }}
+              sx={{
+                width: "100%",
+                ml: theme.spacing(1),
+                mr: theme.spacing(1),
+                mt: theme.spacing(1),
+                backgroundColor: theme.palette.background.paper,
+                borderColor: theme.palette.text.primary,
               }}
             />
           </Box>
@@ -155,11 +240,17 @@ const SignUp = () => {
               "& .MuiTextField-root": { mt: 3, mb: 3, ml: 7, width: "39ch" },
             }}
           >
+            <Typography
+              variant="body1"
+              sx={{ color: theme.palette.text.primary, ml: 1, mb: -2 }}
+            >
+              Email Address
+              <span style={{ color: "red", marginLeft: "5px" }}>*</span>
+            </Typography>
             <AppTextInput
               fullWidth
               variant="outlined"
               className="text-field-root"
-              label="Email Address"
               value={values.email}
               onChange={(e) => {
                 handleChange("email")(e);
@@ -170,21 +261,34 @@ const SignUp = () => {
                 startAdornment: (
                   <InputAdornment position="start" variant="standard">
                     <IconButton aria-label="Email" edge="end" disabled>
-                      <MailIcon />
+                      <MailIcon style={{ color: theme.palette.text.primary }} />
                     </IconButton>
                   </InputAdornment>
                 ),
               }}
+              sx={{
+                width: "100%",
+                ml: theme.spacing(1),
+                mr: theme.spacing(1),
+                mt: theme.spacing(1),
+                backgroundColor: theme.palette.background.paper,
+                borderColor: theme.palette.text.primary,
+              }}
             />
           </Box>
-
           <Box>
+            <Typography
+              variant="body1"
+              sx={{ color: theme.palette.text.primary, ml: 1, mb: -2 }}
+            >
+              Password
+              <span style={{ color: "red", marginLeft: "5px" }}>*</span>
+            </Typography>
             <AppTextInput
               fullWidth
               className="text-field-root"
               type={values.showPassword ? "text" : "password"}
               variant="outlined"
-              label="Password"
               value={values.password}
               onChange={(e) => {
                 handleChange("password")(e);
@@ -200,49 +304,98 @@ const SignUp = () => {
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                      {values.showPassword ? (
+                        <VisibilityOff
+                          style={{ color: theme.palette.text.primary }}
+                        />
+                      ) : (
+                        <Visibility
+                          style={{ color: theme.palette.text.primary }}
+                        />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 ),
                 startAdornment: (
                   <InputAdornment position="start" variant="standard">
                     <IconButton aria-label="Email" edge="end" disabled>
-                      <LockIcon />
+                      <LockIcon style={{ color: theme.palette.text.primary }} />
                     </IconButton>
                   </InputAdornment>
                 ),
               }}
+              sx={{
+                width: "100%",
+                ml: theme.spacing(1),
+                mr: theme.spacing(1),
+                mt: theme.spacing(1),
+                backgroundColor: theme.palette.background.paper,
+                borderColor: theme.palette.text.primary,
+              }}
+            />
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              marginLeft: theme.spacing(1),
+            }}
+          >
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={values.agreeToTerms}
+                  onChange={(e) =>
+                    setValues({ ...values, agreeToTerms: e.target.checked })
+                  }
+                  color="primary"
+                />
+              }
+              label="Agree to Terms and Service"
+              sx={{ color: theme.palette.text.primary, marginTop: "-10px" }}
             />
           </Box>
 
           <Box
             display="flex"
-            alignItems="center"
+            alignItems="left"
             justifyContent="space-between"
-            mt={2}
             mb={3}
             ml={1}
+            mr={1}
+            mt={1}
           >
-            <Button onClick={onClick} variant="contained" color="primary">
+            <Button type="submit" variant="contained" fullWidth color="primary">
               {"Sign Up"}
             </Button>
           </Box>
-
-          <Typography ml={1} mb={1}>
-            Have an account?
-            <NavLink
-              style={{
-                textDecoration: "none",
-                color: "#52a1fc",
-                marginLeft: "8px",
-              }}
-              to="/login"
-            >
-              Sign In
-            </NavLink>
-          </Typography>
         </Box>
-        <ContentLoader />
+      </Box>
+      <Box
+        sx={{
+          mt: 3,
+          textAlign: "center",
+          color: theme.palette.text.primary,
+          zIndex: 1024,
+        }}
+      >
+        <Typography variant="body2">
+          Have an account?
+          <NavLink
+            style={{
+              textDecoration: "none",
+              color: theme.palette.primary.main,
+              marginLeft: theme.spacing(1),
+            }}
+            to="/login"
+          >
+            Sign In
+          </NavLink>
+        </Typography>
+        <Typography variant="body2">
+          &copy; {new Date().getFullYear()} - Brave Chat. Crafted with ❤️ by
+          friends.
+        </Typography>
       </Box>
     </Box>
   );

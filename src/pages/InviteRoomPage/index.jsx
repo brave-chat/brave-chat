@@ -1,27 +1,11 @@
 import React from "react";
-import {
-  Button,
-  Card,
-  CardContent,
-  Typography,
-  ThemeProvider,
-  createTheme,
-} from "@mui/material";
+import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import { blue } from "@mui/material/colors";
 import { inviteUser } from "../../api/Axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ContentLoader from "../../components/ContentLoader";
 import ParticlesBackground from "../../components/ParticlesBackground";
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-    primary: {
-      main: blue[500],
-    },
-  },
-});
 
 const styles = {
   centerScreen: {
@@ -34,6 +18,8 @@ const styles = {
     maxWidth: 400,
     width: "90%",
     padding: "20px",
+    backgroundColor: "common.black",
+    color: "common.white",
     borderRadius: "20px",
     border: `2px solid ${blue[500]}`,
     boxShadow: `0px 4px 8px ${blue[500]}80`,
@@ -57,19 +43,19 @@ const InviteRoomPage = () => {
   };
 
   return (
-    <ThemeProvider theme={darkTheme}>
+    <>
       <ParticlesBackground />
-      <div style={styles.centerScreen}>
+      <Box style={styles.centerScreen}>
         <ContentLoader variant="info" />
         <Card variant="outlined" sx={styles.card}>
           <CardContent>
             <Typography variant="h5" component="div" gutterBottom>
               Welcome to Brave Chat!
             </Typography>
-            <Typography variant="body1" color="textSecondary" gutterBottom>
+            <Typography variant="body1" color="lightgrey" gutterBottom>
               You have been invited to join a chat room.
             </Typography>
-            <Typography variant="body2" color="textSecondary">
+            <Typography variant="body2" color="lightgrey">
               Chat and collaborate with like-minded people.
             </Typography>
             <Button
@@ -82,8 +68,8 @@ const InviteRoomPage = () => {
             </Button>
           </CardContent>
         </Card>
-      </div>
-    </ThemeProvider>
+      </Box>
+    </>
   );
 };
 

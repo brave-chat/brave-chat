@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import ContentLoader from "../ContentLoader";
 import AppTextInput from "../AppTextInput";
 import DialogContent from "@mui/material/DialogContent";
@@ -12,6 +12,8 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import { isValidEmail } from "../Helper";
 import { addContactEmail } from "../../api/Axios";
+import { useTheme } from "@mui/material/styles";
+
 import "./style.css";
 
 const AddContact = ({ open, onCloseDialog }) => {
@@ -20,8 +22,10 @@ const AddContact = ({ open, onCloseDialog }) => {
   const [emailError, setEmailError] = useState("");
 
   const dispatch = useDispatch();
+  const theme = useTheme();
 
-  const onSubmit = () => {
+  const onSubmit = (event) => {
+    event.preventDefault();
     if (!isValidEmail(email)) {
       setEmailError("Email address must be valid!");
     } else {
@@ -33,12 +37,27 @@ const AddContact = ({ open, onCloseDialog }) => {
     <Dialog open={open} onClose={onCloseDialog} className="dialog-root">
       <DialogTitle className="dialog-title-root">Add Contact.</DialogTitle>
       <DialogContent dividers>
-        <Box alignItems="center" m={{ xs: 2, md: 6 }}>
+        <Box
+          alignItems="center"
+          m={{ xs: 2, md: 6 }}
+          component="form"
+          onSubmit={onSubmit}
+        >
+          <Typography
+            variant="body1"
+            sx={{
+              color: "common.white",
+              ml: theme.spacing(1),
+              mb: 0,
+            }}
+          >
+            Email Address
+            <span style={{ color: "red", marginLeft: "5px" }}>*</span>
+          </Typography>
           <AppTextInput
             fullWidth
             className="text-field-root"
             variant="outlined"
-            label="Email Address"
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
@@ -62,7 +81,7 @@ const AddContact = ({ open, onCloseDialog }) => {
             Cancel
           </Button>
           <Box ml={2}>
-            <Button variant="contained" color="primary" onClick={onSubmit}>
+            <Button variant="contained" color="primary" type="submit">
               Add
             </Button>
           </Box>

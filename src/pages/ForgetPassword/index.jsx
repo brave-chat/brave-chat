@@ -6,35 +6,31 @@ import {
   IconButton,
   InputAdornment,
   TextField,
+  Typography,
   FormControlLabel,
   Checkbox,
-  Typography,
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import LockIcon from "@mui/icons-material/Lock";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import MailIcon from "@mui/icons-material/Mail";
-import { useSelector, useDispatch } from "react-redux";
-import { JWTAuth } from "../../api/Axios";
-import AppTextInput from "../AppTextInput";
-import ContentLoader from "../ContentLoader";
-import ParticlesBackground from "../ParticlesBackground";
-import { isValidEmail } from "../Helper";
+import ContentLoader from "../../components/ContentLoader";
+import { useDispatch } from "react-redux";
+import { onUpdateTheme } from "../../redux/appReducer/actions";
+import { isValidEmail } from "../../components/Helper";
+import AppTextInput from "../../components/AppTextInput";
+import NavBar from "../../components/NavBar";
 
-const SignIn = () => {
-  const theme = useTheme();
+const ForgetPassword = () => {
   const dispatch = useDispatch();
+  const theme = useTheme();
   const [values, setValues] = useState({
     email: "",
-    password: "",
-    showPassword: false,
-    rememberMe: false,
   });
 
   const [errorValues, setErrorValues] = useState({
     emailError: "",
-    passwordError: "",
   });
 
   const handleChange = (prop) => (event) => {
@@ -49,27 +45,13 @@ const SignIn = () => {
     }
   };
 
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
   const onClick = (event) => {
     event.preventDefault();
     if (!isValidEmail(values.email)) {
       handleErrorChange("emailError")("Email address must be valid!");
-    } else if (!values.password) {
-      handleErrorChange("passwordError")("Password is required!");
     } else {
-      dispatch(
-        JWTAuth.onLogin({ email: values.email, password: values.password })
-      );
+      // Implement your logic for password reset here
+      console.log("Password reset logic here");
     }
   };
 
@@ -77,8 +59,6 @@ const SignIn = () => {
     <Box
       component="form"
       sx={{
-        marginBottom: 0,
-        paddingBottom: 0,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -92,6 +72,7 @@ const SignIn = () => {
       }}
       onSubmit={onClick}
     >
+      <NavBar />
       <ContentLoader variant="info" />
 
       <Box
@@ -138,7 +119,7 @@ const SignIn = () => {
               fontWeight: "bold",
             }}
           >
-            LOGIN
+            RESET PASSWORD
           </Typography>
           <Box>
             <Typography
@@ -181,113 +162,6 @@ const SignIn = () => {
               }}
             />
           </Box>
-          <Box>
-            <Typography
-              variant="body1"
-              sx={{
-                color: theme.palette.text.primary,
-                ml: theme.spacing(1),
-                mb: -2,
-              }}
-            >
-              Password
-              <span style={{ color: "red", marginLeft: "5px" }}>*</span>
-            </Typography>
-            <AppTextInput
-              fullWidth
-              type={values.showPassword ? "text" : "password"}
-              variant="outlined"
-              value={values.password}
-              onChange={(e) => {
-                handleChange("password")(e);
-                handleErrorChange("passwordError")("");
-              }}
-              helperText={errorValues.passwordError}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {values.showPassword ? (
-                        <VisibilityOff
-                          style={{ color: theme.palette.text.primary }}
-                        />
-                      ) : (
-                        <Visibility
-                          style={{ color: theme.palette.text.primary }}
-                        />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-                startAdornment: (
-                  <InputAdornment position="start" variant="standard">
-                    <IconButton aria-label="Password" edge="end" disabled>
-                      <LockIcon style={{ color: theme.palette.text.primary }} />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              sx={{
-                width: "100%",
-                ml: theme.spacing(1),
-                mr: theme.spacing(1),
-                mt: theme.spacing(1),
-                backgroundColor: theme.palette.background.paper,
-                borderColor: theme.palette.text.primary,
-              }}
-            />
-          </Box>
-          <Typography
-            variant="body2"
-            sx={{
-              mr: theme.spacing(1),
-              color: theme.palette.text.primary,
-              textAlign: "right",
-            }}
-          >
-            <NavLink
-              style={{
-                textDecoration: "none",
-                color: theme.palette.primary.main,
-              }}
-              to="/forgot-password"
-            >
-              Forgot Password?
-            </NavLink>
-          </Typography>
-
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              marginLeft: theme.spacing(1),
-            }}
-          >
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={values.rememberMe}
-                  onChange={(e) =>
-                    setValues({ ...values, rememberMe: e.target.checked })
-                  }
-                  color="primary"
-                />
-              }
-              label="Remember me"
-              sx={{ color: theme.palette.text.primary }}
-            />
-            <FormControlLabel
-              control={<Checkbox color="primary" />}
-              label="Agree to Terms and Service"
-              sx={{ color: theme.palette.text.primary, marginTop: "-10px" }}
-            />
-          </Box>
-
           <Box
             display="flex"
             alignItems="left"
@@ -296,30 +170,25 @@ const SignIn = () => {
             ml={1}
           >
             <Button type="submit" variant="contained" fullWidth color="primary">
-              {"Sign In"}
+              {"Reset Password"}
             </Button>
           </Box>
         </Box>
       </Box>
       <Box
-        sx={{
-          mt: 3,
-          textAlign: "center",
-          color: theme.palette.text.primary,
-          zIndex: 1024,
-        }}
+        sx={{ mt: 3, textAlign: "center", color: theme.palette.text.primary }}
       >
         <Typography variant="body2">
-          Don't have an account?
+          Remember It?{" "}
           <NavLink
             style={{
               textDecoration: "none",
+              fontWeight: "medium",
               color: theme.palette.primary.main,
-              marginLeft: theme.spacing(1),
             }}
-            to="/signup"
+            to="/login"
           >
-            Sign Up
+            Sign In
           </NavLink>
         </Typography>
         <Typography variant="body2">
@@ -331,4 +200,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default ForgetPassword;
