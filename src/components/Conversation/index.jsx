@@ -8,12 +8,12 @@ import {
   IconButton,
   InputAdornment,
   Typography,
+  useTheme,
 } from "@mui/material";
-import "./style.css";
 import TypingMessage from "./ReceivedMessageCell/TypingMessage";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { VpnKey } from "@mui/icons-material";
-
+import "./style.css";
 import { setOpenAIAPIKey } from "../../api/Axios";
 
 import { useDispatch } from "react-redux";
@@ -21,12 +21,23 @@ import { useDispatch } from "react-redux";
 const Conversation = ({ conversation, selectedUser }) => {
   const [APIKey, setAPIKey] = useState("");
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   useEffect(() => {
     dispatch(setOpenAIAPIKey(APIKey));
   }, [dispatch, APIKey]);
+
   return (
-    <Box className="chat-main-content">
+    <Box
+      sx={{
+        position: "relative",
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-end",
+        height: "100%",
+      }}
+    >
       {selectedUser["email"] === "chatgpt@brave-chat.net" && (
         <Box
           sx={{
@@ -35,24 +46,29 @@ const Conversation = ({ conversation, selectedUser }) => {
             alignItems: "center",
             justifyContent: "center",
             maxWidth: 700,
-            minheight: 500,
             margin: "0 auto",
+            padding: theme.spacing(2),
+            backgroundColor: theme.palette.background.default,
           }}
         >
-          <Typography variant="h6" gutterBottom>
-            OpenAI API Key
+          <Typography
+            variant="h6"
+            gutterBottom
+            sx={{ color: theme.palette.text.primary }}
+          >
+            Enter your OpenAI key and send a message
           </Typography>
           <InputBase
             sx={{
-              padding: 1,
-              borderRadius: 3,
+              padding: theme.spacing(1),
+              borderRadius: theme.shape.borderRadius,
               alignItems: "center",
               margin: "0 auto",
               justifyContent: "center",
-              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-              backgroundColor: "#1E1E1E",
-              color: "#FFFFFF",
-              border: "1px solid #333",
+              boxShadow: theme.shadows[1],
+              backgroundColor: theme.palette.background.paper,
+              color: theme.palette.text.primary,
+              border: `1px solid ${theme.palette.divider}`,
             }}
             placeholder={"OpenAI API KEY"}
             inputProps={{ "aria-label": "OpenAI API KEY" }}
@@ -74,21 +90,17 @@ const Conversation = ({ conversation, selectedUser }) => {
           renderRow={(conversation, index) => {
             if (conversation.type === "sent") {
               return (
-                <div key={index}>
-                  <SentMessageCell key={index} conversation={conversation} />
-                </div>
+                <SentMessageCell key={index} conversation={conversation} />
               );
             }
 
             if (conversation.type === "received") {
               return (
-                <div key={index}>
-                  <ReceivedMessageCell
-                    key={index}
-                    conversation={conversation}
-                    user={selectedUser}
-                  />
-                </div>
+                <ReceivedMessageCell
+                  key={index}
+                  conversation={conversation}
+                  user={selectedUser}
+                />
               );
             }
           }}

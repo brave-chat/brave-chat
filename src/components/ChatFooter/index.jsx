@@ -1,37 +1,36 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useDropzone } from "react-dropzone";
-
 import SendIcon from "@mui/icons-material/Send";
 import IconButton from "@mui/material/IconButton";
-import "./style.css";
 import AttachFileIcon from "@mui/icons-material/Attachment";
-
+import CustomTextInput from "../CustomTextInput";
+import EmojiPicker from "../EmojiPicker";
+import Box from "@mui/material/Box";
 import {
   sendNewMediaMessage,
   sendNewMediaRoomMessage,
   sendTextMessage,
   sendRoomTextMessage,
 } from "../../api/Axios";
-
 import {
   sendMediaMessage,
   sendRoomMediaMessage,
 } from "../../redux/appReducer/actions";
-import CustomTextInput from "../CustomTextInput";
 import { authUser } from "../../redux/appReducer/selectors";
-
-import EmojiPicker from "../EmojiPicker";
-import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 
 const ChatFooter = ({ receiver }) => {
   const [message, setMessage] = useState("");
   const sender = useSelector(authUser);
 
   const dispatch = useDispatch();
+  const theme = useTheme();
+
   const onPickEmoji = (emoji) => {
     setMessage(message + emoji);
   };
+
   const onSendMessage = () => {
     if (message) {
       if (receiver.room_name) {
@@ -48,9 +47,7 @@ const ChatFooter = ({ receiver }) => {
     accept: "image/*,video/*",
     multiple: true,
     onDrop: (acceptedFiles) => {
-      // eslint-disable-next-line
-      const files = acceptedFiles.map((file) => {
-        const tempFile = file;
+      acceptedFiles.forEach((file) => {
         const reader = new FileReader();
         reader.onload = (event) => {
           if (receiver.first_name) {
@@ -58,8 +55,8 @@ const ChatFooter = ({ receiver }) => {
               sendNewMediaMessage(
                 receiver.id,
                 event.target.result,
-                tempFile.name,
-                URL.createObjectURL(tempFile)
+                file.name,
+                URL.createObjectURL(file)
               )
             );
           } else if (receiver.room_name) {
@@ -67,25 +64,24 @@ const ChatFooter = ({ receiver }) => {
               sendNewMediaRoomMessage(
                 receiver.room_name,
                 event.target.result,
-                tempFile.name,
-                URL.createObjectURL(tempFile)
+                file.name,
+                URL.createObjectURL(file)
               )
             );
           }
         };
-        reader.readAsDataURL(tempFile);
-        file = {
+        reader.readAsDataURL(file);
+        const fileData = {
           preview: URL.createObjectURL(file),
           name: file.name,
           ...file,
           metaData: { type: file.type, size: file.size },
         };
         if (receiver.first_name) {
-          dispatch(sendMediaMessage(file));
+          dispatch(sendMediaMessage(fileData));
         } else {
-          dispatch(sendRoomMediaMessage(file));
+          dispatch(sendRoomMediaMessage(fileData));
         }
-        return file;
       });
     },
   });
@@ -104,9 +100,23 @@ const ChatFooter = ({ receiver }) => {
   };
 
   return (
-    <div className="chat-footer-root">
+    <Box
+      sx={{
+        position: "sticky",
+        borderTop: `1px solid ${theme.palette.divider}`,
+        backgroundColor: theme.palette.background.chatFooter,
+        padding: theme.spacing(1.75, 2),
+        display: "flex",
+        alignItems: "center",
+        marginTop: "auto",
+        bottom: 0,
+      }}
+    >
       <input {...getInputProps()} />
-      <IconButton className="icon-btn-root" {...getRootProps()}>
+      <IconButton
+        sx={{ padding: theme.spacing(1.25), color: theme.palette.text.primary }}
+        {...getRootProps()}
+      >
         <AttachFileIcon />
       </IconButton>
       <CustomTextInput
@@ -117,15 +127,23 @@ const ChatFooter = ({ receiver }) => {
         placeholder="Shift ⇧ + Enter ↵ to add a line break."
         variant="outlined"
         multiline
-        className="text-field-root"
+        sx={{
+          flex: 1,
+          marginLeft: theme.spacing(1),
+          marginRight: theme.spacing(1),
+          backgroundColor: theme.palette.background.paper,
+        }}
       />
-      <Box mr={4} ml={0}>
+      <Box sx={{ marginRight: theme.spacing(4), marginLeft: 0 }}>
         <EmojiPicker onPickEmoji={onPickEmoji} />
       </Box>
-      <IconButton className="icon-btn-root" onClick={onSendMessage}>
+      <IconButton
+        sx={{ padding: theme.spacing(1.25), color: theme.palette.primary.main }}
+        onClick={onSendMessage}
+      >
         <SendIcon />
       </IconButton>
-    </div>
+    </Box>
   );
 };
 

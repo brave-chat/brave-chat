@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import GridContainer from "../GridContainer";
 import Grid from "@mui/material/Grid";
 import AppTextInput from "../AppTextInput";
@@ -18,9 +19,11 @@ import ThreePIcon from "@mui/icons-material/ThreeP";
 import { SetPersonalInfo } from "../../api/Axios";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/material.css";
+import { useTheme } from "@mui/material/styles";
 import "./style.css";
 
 const EditPersonalInformation = ({ open, onCloseDialog }) => {
+  const theme = useTheme();
   const [personalInfoValues, setPersonalInfoValues] = useState({
     firstName: "",
     lastName: "",
@@ -37,7 +40,8 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
 
   const dispatch = useDispatch();
 
-  const onSubmit = () => {
+  const onSubmit = (event) => {
+    event.preventDefault();
     const { firstName, lastName, bio, phoneNumber } = personalInfoValues;
 
     if (!firstName) {
@@ -71,136 +75,208 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
   };
 
   return (
-    <Dialog open={open} onClose={onCloseDialog} className="dialog-root">
-      <DialogTitle className="dialog-title-root">
+    <Dialog open={open} onClose={onCloseDialog}>
+      <DialogTitle
+        sx={{
+          fontSize: "16px",
+          color: "common.white",
+          backgroundColor: "grey",
+          border: "3px solid " + theme.palette.primary.main,
+        }}
+      >
         Edit Personal Information.
       </DialogTitle>
       <DialogContent dividers>
-        <Box
-          display="flex"
-          flexDirection={{ xs: "column", md: "row" }}
-          alignItems="center"
-          mb={{ xs: 6, md: 5 }}
-          mt={{ xs: 6, md: 5 }}
-          ml={4}
-        >
-          <GridContainer>
-            <Grid item xs={12} md={5.8}>
-              <AppTextInput
-                fullWidth
-                className="text-field-root"
-                variant="outlined"
-                label="First Name"
-                value={personalInfoValues.firstName}
-                onChange={(e) => {
-                  setPersonalInfoValues({
-                    ...personalInfoValues,
-                    firstName: e.target.value,
-                  });
-                  setErrorValues({ ...errorValues, firstNameError: "" });
-                }}
-                helperText={errorValues.firstNameError}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start" variant="standard">
-                      <IconButton aria-label="First Name" edge="end" disabled>
-                        <PermIdentityIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} md={5.8}>
-              <AppTextInput
-                fullWidth
-                className="text-field-root"
-                variant="outlined"
-                label="Last Name"
-                value={personalInfoValues.lastName}
-                onChange={(e) => {
-                  setPersonalInfoValues({
-                    ...personalInfoValues,
-                    lastName: e.target.value,
-                  });
-                  setErrorValues({ ...errorValues, lastNameError: "" });
-                }}
-                helperText={errorValues.lastNameError}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start" variant="standard">
-                      <IconButton aria-label="Last Name" edge="end" disabled>
-                        <PersonIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Grid>
-          </GridContainer>
-        </Box>
-        <Box
-          display="flex"
-          flexDirection={{ xs: "column", md: "row" }}
-          alignItems="center"
-          mb={{ xs: 6, md: 5 }}
-          mt={{ xs: 6, md: 5 }}
-          ml={4}
-        >
-          <GridContainer>
-            <Grid item xs={12} md={5.8}>
-              <AppTextInput
-                fullWidth
-                className="text-field-root"
-                variant="outlined"
-                label="Bio"
-                value={personalInfoValues.bio}
-                onChange={(e) => {
-                  setPersonalInfoValues({
-                    ...personalInfoValues,
-                    bio: e.target.value,
-                  });
-                  setErrorValues({ ...errorValues, bioError: "" });
-                }}
-                helperText={errorValues.bioError}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start" variant="standard">
-                      <IconButton aria-label="Bio" edge="end" disabled>
-                        <ThreePIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} md={5.8}>
-              <PhoneInput
-                country={"us"}
-                className="phone-field text-field-root"
-                variant="outlined"
-                label="Phone Number"
-                enableSearch={true}
-                onChange={(phoneNumber) => {
-                  setPersonalInfoValues({
-                    ...personalInfoValues,
-                    phoneNumber: phoneNumber,
-                  });
-                  setErrorValues({ ...errorValues, phoneNumberError: "" });
-                }}
-                helperText={errorValues.phoneNumberError}
-              />
-            </Grid>
-          </GridContainer>
-        </Box>
-        <Box display="flex" justifyContent="flex-end" mb={0}>
-          <Button onClick={onCloseDialog} color="secondary">
-            Cancel
-          </Button>
-          <Box ml={2}>
-            <Button variant="contained" color="primary" onClick={onSubmit}>
-              Save
+        <Box component="form" onSubmit={onSubmit}>
+          <Box
+            display="flex"
+            flexDirection={{ xs: "column", md: "row" }}
+            alignItems="center"
+            mb={{ xs: 6, md: 5 }}
+            mt={{ xs: 2, md: 2 }}
+          >
+            <GridContainer>
+              <Grid item xs={12} md={5.8}>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: theme.palette.text.primary,
+                    ml: theme.spacing(1),
+                    mb: 0,
+                  }}
+                >
+                  First Name
+                  <span style={{ color: "red", marginLeft: "5px" }}>*</span>
+                </Typography>
+                <AppTextInput
+                  fullWidth
+                  value={personalInfoValues.firstName}
+                  onChange={(e) => {
+                    setPersonalInfoValues({
+                      ...personalInfoValues,
+                      firstName: e.target.value,
+                    });
+                    setErrorValues({ ...errorValues, firstNameError: "" });
+                  }}
+                  helperText={errorValues.firstNameError}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start" variant="standard">
+                        <IconButton aria-label="First Name" edge="end" disabled>
+                          <PermIdentityIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                  sx={{
+                    width: "100%",
+                    backgroundColor: theme.palette.background.paper,
+                    borderColor: theme.palette.text.primary,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} md={5.8}>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: theme.palette.text.primary,
+                    ml: theme.spacing(1),
+                    mb: 0,
+                    mt: { md: 0, sm: theme.spacing(-3), xs: theme.spacing(-3) },
+                  }}
+                >
+                  Last Name
+                  <span style={{ color: "red", marginLeft: "5px" }}>*</span>
+                </Typography>
+                <AppTextInput
+                  fullWidth
+                  variant="outlined"
+                  value={personalInfoValues.lastName}
+                  onChange={(e) => {
+                    setPersonalInfoValues({
+                      ...personalInfoValues,
+                      lastName: e.target.value,
+                    });
+                    setErrorValues({ ...errorValues, lastNameError: "" });
+                  }}
+                  helperText={errorValues.lastNameError}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start" variant="standard">
+                        <IconButton aria-label="Last Name" edge="end" disabled>
+                          <PersonIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                  sx={{
+                    width: "100%",
+                    marginRight: theme.spacing(2),
+                    backgroundColor: theme.palette.background.paper,
+                  }}
+                />
+              </Grid>
+            </GridContainer>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection={{ xs: "column", md: "row" }}
+            alignItems="center"
+            mb={{ xs: 6, md: 5 }}
+          >
+            <GridContainer>
+              <Grid item xs={12} md={5.8}>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: theme.palette.text.primary,
+                    ml: theme.spacing(1),
+                    mb: 0,
+                    mt: { md: 0, sm: theme.spacing(-3), xs: theme.spacing(-3) },
+                  }}
+                >
+                  Bio
+                  <span style={{ color: "red", marginLeft: "5px" }}>*</span>
+                </Typography>
+                <AppTextInput
+                  fullWidth
+                  value={personalInfoValues.bio}
+                  onChange={(e) => {
+                    setPersonalInfoValues({
+                      ...personalInfoValues,
+                      bio: e.target.value,
+                    });
+                    setErrorValues({ ...errorValues, bioError: "" });
+                  }}
+                  helperText={errorValues.bioError}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start" variant="standard">
+                        <IconButton aria-label="Bio" edge="end" disabled>
+                          <ThreePIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                  sx={{
+                    width: "100%",
+                    marginRight: theme.spacing(2),
+                    backgroundColor: theme.palette.background.paper,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} md={5.8}>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: theme.palette.text.primary,
+                    ml: theme.spacing(7),
+                    mb: 0,
+                    mt: { md: 0, sm: theme.spacing(-3), xs: theme.spacing(-3) },
+                  }}
+                >
+                  <span style={{ color: "red", marginLeft: "5px" }}>*</span>
+                </Typography>
+                <PhoneInput
+                  country={"us"}
+                  enableSearch={true}
+                  onChange={(phoneNumber) => {
+                    setPersonalInfoValues({
+                      ...personalInfoValues,
+                      phoneNumber: phoneNumber,
+                    });
+                    setErrorValues({ ...errorValues, phoneNumberError: "" });
+                  }}
+                  helperText={errorValues.phoneNumberError}
+                  specialLabelClass="special-label"
+                  dropdownClass="country-list"
+                  searchClass="search"
+                  selectedFlagClass="selected-flag"
+                  flagDropdownClass="flag-dropdown"
+                  countryListClass="country-list"
+                  countryCodeEditable={false}
+                  inputProps={{
+                    style: {
+                      color: theme.palette.text.primary,
+                      width: "100%",
+                      marginRight: theme.spacing(2),
+                      backgroundColor: theme.palette.background.paper,
+                      height: "1.4375em",
+                    },
+                  }}
+                />
+              </Grid>
+            </GridContainer>
+          </Box>
+          <Box display="flex" justifyContent="flex-end" mb={0}>
+            <Button onClick={onCloseDialog} color="secondary">
+              Cancel
             </Button>
+            <Box ml={2}>
+              <Button variant="contained" color="primary" type="submit">
+                Save
+              </Button>
+            </Box>
           </Box>
         </Box>
       </DialogContent>
@@ -209,7 +285,7 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
   );
 };
 
-EditPersonalInformation.prototype = {
+EditPersonalInformation.propTypes = {
   open: PropTypes.bool.isRequired,
   onCloseDialog: PropTypes.func,
 };

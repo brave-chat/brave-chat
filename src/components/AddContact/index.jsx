@@ -14,13 +14,9 @@ import { isValidEmail } from "../Helper";
 import { addContactEmail } from "../../api/Axios";
 import { useTheme } from "@mui/material/styles";
 
-import "./style.css";
-
 const AddContact = ({ open, onCloseDialog }) => {
   const [email, setEmail] = useState("");
-
   const [emailError, setEmailError] = useState("");
-
   const dispatch = useDispatch();
   const theme = useTheme();
 
@@ -34,56 +30,87 @@ const AddContact = ({ open, onCloseDialog }) => {
   };
 
   return (
-    <Dialog open={open} onClose={onCloseDialog} className="dialog-root">
-      <DialogTitle className="dialog-title-root">Add Contact.</DialogTitle>
-      <DialogContent dividers>
-        <Box
-          alignItems="center"
-          m={{ xs: 2, md: 6 }}
-          component="form"
-          onSubmit={onSubmit}
-        >
-          <Typography
-            variant="body1"
+    <Dialog
+      open={open}
+      onClose={onCloseDialog}
+      sx={{ root: { backgroundColor: theme.palette.background.paper } }}
+    >
+      <DialogTitle
+        sx={{
+          fontSize: 16,
+          color: theme.palette.text.primary,
+          backgroundColor: theme.palette.grey[500],
+          border: `3px solid ${theme.palette.primary.main}`,
+        }}
+      >
+        Add Contact.
+      </DialogTitle>
+      <DialogContent
+        sx={{ backgroundColor: theme.palette.background.primary }}
+        dividers
+      >
+        <Box component="form" onSubmit={onSubmit}>
+          <Box
+            alignItems="center"
+            m={{ xs: 2, md: 6 }}
             sx={{
-              color: "common.white",
+              color: theme.palette.common.white,
               ml: theme.spacing(1),
               mb: 0,
             }}
           >
-            Email Address
-            <span style={{ color: "red", marginLeft: "5px" }}>*</span>
-          </Typography>
-          <AppTextInput
-            fullWidth
-            className="text-field-root"
-            variant="outlined"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-              setEmailError("");
-            }}
-            helperText={emailError}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start" variant="standard">
-                  <IconButton aria-label="Email" edge="end" disabled>
-                    <MailIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Box>
-        <ContentLoader variant="info" />
-        <Box display="flex" justifyContent="flex-end" mb={2}>
-          <Button onClick={onCloseDialog} color="secondary">
-            Cancel
-          </Button>
-          <Box ml={2}>
-            <Button variant="contained" color="primary" type="submit">
-              Add
+            <Typography
+              variant="body1"
+              sx={{
+                color: theme.palette.text.primary,
+                ml: theme.spacing(1),
+                mb: 0,
+              }}
+            >
+              Email Address
+              <span
+                style={{ color: theme.palette.error.main, marginLeft: "5px" }}
+              >
+                *
+              </span>
+            </Typography>
+            <AppTextInput
+              fullWidth
+              sx={{
+                width: "100%",
+                ml: theme.spacing(1),
+                mr: theme.spacing(1),
+                mt: theme.spacing(1),
+                backgroundColor: theme.palette.background.paper,
+                borderColor: theme.palette.text.primary,
+              }}
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setEmailError("");
+              }}
+              helperText={emailError}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start" variant="standard">
+                    <IconButton aria-label="Email" edge="end" disabled>
+                      <MailIcon style={{ color: theme.palette.text.primary }} />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Box>
+          <ContentLoader variant="info" />
+          <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
+            <Button onClick={onCloseDialog} color="secondary">
+              Cancel
             </Button>
+            <Box sx={{ ml: 2 }}>
+              <Button variant="contained" color="primary" type="submit">
+                Add
+              </Button>
+            </Box>
           </Box>
         </Box>
       </DialogContent>

@@ -9,11 +9,23 @@ import ProfileDetail from "../ProfileDetail";
 import { uploadProfilePicture } from "../../../api/Axios";
 import { useDropzone } from "react-dropzone";
 import IconButton from "@mui/material/IconButton";
-import { useDispatch } from "react-redux";
+import { useTheme } from "@mui/material/styles";
+import { useSelector, useDispatch } from "react-redux";
+import { onUpdateTheme } from "../../../redux/appReducer/actions";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { selectedTheme } from "../../../redux/appReducer/selectors";
 
 const SidebarHeader = ({ user, searchText, setSearchText }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [userStatus, setUserStatus] = React.useState(user.chat_status);
+  const themeMode = useSelector(selectedTheme);
+  const theme = useTheme();
+
+  const onToggleTheme = (event) => {
+    event.preventDefault();
+    dispatch(onUpdateTheme(themeMode === "light" ? "dark" : "light"));
+  };
 
   const dispatch = useDispatch();
   const handleClick = (event) => {
@@ -66,6 +78,23 @@ const SidebarHeader = ({ user, searchText, setSearchText }) => {
             {user.bio ? user.bio : ""}
           </Typography>
         </Box>
+        <IconButton
+          onClick={onToggleTheme}
+          sx={{
+            top: theme.spacing(0.2),
+            left: theme.spacing(6),
+          }}
+        >
+          {theme.palette.mode === "light" ? (
+            <Brightness7Icon
+              sx={{ fontSize: 28, fontWeight: "bold", color: "common.white" }}
+            />
+          ) : (
+            <Brightness4Icon
+              sx={{ fontSize: 28, fontWeight: "bold", color: "common.white" }}
+            />
+          )}
+        </IconButton>
       </Box>
       <Box className="search-root">
         <InputBase

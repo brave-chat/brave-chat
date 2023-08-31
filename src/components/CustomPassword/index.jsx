@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Box from "@mui/material/Box";
@@ -6,51 +6,57 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import LockIcon from "@mui/icons-material/Lock";
 import AppTextInput from "../AppTextInput";
-import "./style.css";
+import { useTheme } from "@mui/material/styles";
 
-const CustomPasswordInput = ({
-  password,
-  setPassword,
-  helperText,
-  setPasswordError,
-}) => {
+const CustomPassword = ({ password, helperText, onChange, ...rest }) => {
   const [passwordType, setPasswordType] = useState("password");
   const togglePassword = () => {
     if (passwordType === "password") {
       setPasswordType("text");
-      return;
+    } else {
+      setPasswordType("password");
     }
-    setPasswordType("password");
   };
+
+  const theme = useTheme();
+
   return (
-    <Box mb={2} className="div-password-field">
+    <Box mb={2} sx={{ marginBottom: theme.spacing(2) }}>
       <AppTextInput
-        label="Password"
+        {...rest}
         type={passwordType}
         fullWidth
-        onChange={(e) => {
-          setPassword(e.target.value);
-          setPasswordError("");
-        }}
+        onChange={onChange}
         defaultValue={password}
         helperText={helperText}
-        size={""}
         margin="normal"
         variant="outlined"
-        className="text-field-root"
+        sx={{
+          width: "100%",
+          marginLeft: theme.spacing(1),
+          marginRight: theme.spacing(1),
+          marginTop: theme.spacing(1),
+          backgroundColor: theme.palette.background.paper,
+          borderColor: theme.palette.text.primary,
+          color: theme.palette.text.primary,
+        }}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
-                aria-label="toggle password"
-                className="toggle-button-password"
-                edge="end"
+                aria-label="toggle password visibility"
                 onClick={togglePassword}
+                edge="end"
+                sx={{ cursor: "pointer" }}
               >
                 {passwordType === "password" ? (
-                  <VisibilityOffIcon />
+                  <VisibilityOffIcon
+                    style={{ color: theme.palette.text.primary }}
+                  />
                 ) : (
-                  <VisibilityIcon />
+                  <VisibilityIcon
+                    style={{ color: theme.palette.text.primary }}
+                  />
                 )}
               </IconButton>
             </InputAdornment>
@@ -59,12 +65,12 @@ const CustomPasswordInput = ({
           startAdornment: (
             <InputAdornment position="start" variant="standard">
               <IconButton
-                aria-label="Email"
-                className="password-field"
+                aria-label="Password"
                 edge="end"
                 disabled
+                sx={{ cursor: "not-allowed" }}
               >
-                <LockIcon />
+                <LockIcon style={{ color: theme.palette.text.primary }} />
               </IconButton>
             </InputAdornment>
           ),
@@ -73,4 +79,5 @@ const CustomPasswordInput = ({
     </Box>
   );
 };
-export default CustomPasswordInput;
+
+export default CustomPassword;

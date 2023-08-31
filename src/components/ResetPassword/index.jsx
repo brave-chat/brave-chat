@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { useTheme } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import ContentLoader from "../ContentLoader";
 import AppTextInput from "../AppTextInput";
 import DialogContent from "@mui/material/DialogContent";
@@ -13,19 +14,14 @@ import { resetPassword } from "../../api/Axios";
 import LockIcon from "@mui/icons-material/Lock";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import "./style.css";
+import CustomPassword from "../CustomPassword";
 
 const ResetPassword = ({ open, onCloseDialog }) => {
+  const theme = useTheme();
   const [passwordValues, setPasswordValues] = useState({
     oldPassword: "",
     newPassword: "",
     confirmPassword: "",
-  });
-
-  const [showPasswordValues, setShowPasswordValues] = useState({
-    showOldPassword: true,
-    showNewPassword: true,
-    showConfirmPassword: true,
   });
 
   const [errorValues, setErrorValues] = useState({
@@ -36,11 +32,8 @@ const ResetPassword = ({ open, onCloseDialog }) => {
 
   const dispatch = useDispatch();
 
-  const handleMouseDownPassword = (event) => {
+  const onSubmit = (event) => {
     event.preventDefault();
-  };
-
-  const onSubmit = () => {
     const { oldPassword, newPassword, confirmPassword } = passwordValues;
 
     if (!oldPassword) {
@@ -66,34 +59,41 @@ const ResetPassword = ({ open, onCloseDialog }) => {
   };
 
   return (
-    <Dialog open={open} onClose={onCloseDialog} className="dialog-root">
-      <DialogTitle className="dialog-title-root">
+    <Dialog open={open} onClose={onCloseDialog}>
+      <DialogTitle
+        sx={{
+          fontSize: "16px",
+          color: "#fff",
+          backgroundColor: "grey",
+          border: "3px solid blue",
+        }}
+      >
         Reset Your Password.
       </DialogTitle>
       <DialogContent dividers>
-        {" "}
-        <Box
-          alignItems="left"
-          justifyContent="space-between"
-          mt={5}
-          mb={3}
-          ml={1}
-        >
+        <Box component="form" onSubmit={onSubmit}>
           <Box
-            display="flex"
-            alignItems="left"
+            alignItems="flex-start"
             justifyContent="space-between"
             mt={5}
             mb={3}
-            ml={1}
           >
-            <AppTextInput
+            <Typography
+              variant="body1"
+              sx={{ color: theme.palette.text.primary, mb: -1 }}
+            >
+              Old Password
+              <span
+                style={{ color: "red", marginLeft: "5px" }}
+                aria-hidden="true"
+              >
+                *
+              </span>
+            </Typography>
+            <CustomPassword
               fullWidth
-              className="text-field-root"
-              type={showPasswordValues.showOldPassword ? "text" : "password"}
-              variant="outlined"
-              label="Old Password"
-              value={passwordValues.oldPassword}
+              password={passwordValues.oldPassword}
+              helperText={errorValues.oldPasswordError}
               onChange={(e) => {
                 setPasswordValues({
                   ...passwordValues,
@@ -101,54 +101,30 @@ const ResetPassword = ({ open, onCloseDialog }) => {
                 });
                 setErrorValues({ ...errorValues, oldPasswordError: "" });
               }}
-              helperText={errorValues.oldPasswordError}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={() => {
-                        setShowPasswordValues({
-                          ...showPasswordValues,
-                          showOldPassword: !showPasswordValues.showOldPassword,
-                        });
-                      }}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {!showPasswordValues.showOldPassword ? (
-                        <VisibilityOff />
-                      ) : (
-                        <Visibility />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-                startAdornment: (
-                  <InputAdornment position="start" variant="standard">
-                    <IconButton aria-label="old-password" edge="end" disabled>
-                      <LockIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
             />
           </Box>
           <Box
-            display="flex"
-            alignItems="left"
+            alignItems="flex-start"
             justifyContent="space-between"
-            mt={5}
+            mt={0}
             mb={3}
-            ml={1}
           >
-            <AppTextInput
+            <Typography
+              variant="body1"
+              sx={{ color: theme.palette.text.primary, mb: -1 }}
+            >
+              New Password
+              <span
+                style={{ color: "red", marginLeft: "5px" }}
+                aria-hidden="true"
+              >
+                *
+              </span>
+            </Typography>
+            <CustomPassword
               fullWidth
-              className="text-field-root"
-              type={showPasswordValues.showNewPassword ? "text" : "password"}
-              variant="outlined"
-              label="New Password"
-              value={passwordValues.newPassword}
+              password={passwordValues.newPassword}
+              helperText={errorValues.newPasswordError}
               onChange={(e) => {
                 setPasswordValues({
                   ...passwordValues,
@@ -156,99 +132,36 @@ const ResetPassword = ({ open, onCloseDialog }) => {
                 });
                 setErrorValues({ ...errorValues, newPasswordError: "" });
               }}
-              helperText={errorValues.newPasswordError}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={() => {
-                        setShowPasswordValues({
-                          ...showPasswordValues,
-                          showNewPassword: !showPasswordValues.showNewPassword,
-                        });
-                      }}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {!showPasswordValues.showNewPassword ? (
-                        <VisibilityOff />
-                      ) : (
-                        <Visibility />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-                startAdornment: (
-                  <InputAdornment position="start" variant="standard">
-                    <IconButton aria-label="new-password" edge="end" disabled>
-                      <LockIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
             />
           </Box>
           <Box
-            display="flex"
-            alignItems="left"
+            alignItems="flex-start"
             justifyContent="space-between"
-            mt={5}
+            mt={0}
             mb={3}
-            ml={1}
           >
-            {" "}
-            <AppTextInput
+            <Typography
+              variant="body1"
+              sx={{ color: theme.palette.text.primary, mb: -1 }}
+            >
+              Confirm Password
+              <span
+                style={{ color: "red", marginLeft: "5px" }}
+                aria-hidden="true"
+              >
+                *
+              </span>
+            </Typography>
+            <CustomPassword
               fullWidth
-              className="text-field-root"
-              type={
-                showPasswordValues.showConfirmPassword ? "text" : "password"
-              }
-              variant="outlined"
-              label="Confirm Password"
-              value={passwordValues.confirmPassword}
+              password={passwordValues.confirmPassword}
+              helperText={errorValues.confirmPasswordError}
               onChange={(e) => {
                 setPasswordValues({
                   ...passwordValues,
                   confirmPassword: e.target.value,
                 });
                 setErrorValues({ ...errorValues, confirmPasswordError: "" });
-              }}
-              helperText={errorValues.confirmPasswordError}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={() => {
-                        setShowPasswordValues({
-                          ...showPasswordValues,
-                          showConfirmPassword:
-                            !showPasswordValues.showConfirmPassword,
-                        });
-                      }}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {!showPasswordValues.showConfirmPassword ? (
-                        <VisibilityOff />
-                      ) : (
-                        <Visibility />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-                startAdornment: (
-                  <InputAdornment position="start" variant="standard">
-                    <IconButton
-                      aria-label="confirm-password"
-                      edge="end"
-                      disabled
-                    >
-                      <LockIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
               }}
             />
           </Box>
@@ -258,7 +171,7 @@ const ResetPassword = ({ open, onCloseDialog }) => {
               Cancel
             </Button>
             <Box ml={2}>
-              <Button variant="contained" color="primary" onClick={onSubmit}>
+              <Button variant="contained" color="primary" type="submit">
                 Reset
               </Button>
             </Box>

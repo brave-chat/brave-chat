@@ -16,8 +16,8 @@
 }
 .cancel-btn {
   color: #fff;
-  position: absolute;
   left: 10px;
+  cursor: pointer;
   top: 10px;
   z-index: 1;
 }
