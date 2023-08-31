@@ -1,26 +1,51 @@
 import React, { useState } from "react";
-import { Box } from "@mui/material";
-import clsx from "clsx";
-import moment from "moment";
-import "../style.css";
+import { Box, useTheme } from "@mui/material";
 import CustomImage from "../../CustomImage";
 import MediaViewer from "../../MediaViewer";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import parse from "html-react-parser";
 import { checkHtml } from "../../Helper";
-
+import moment from "moment";
 import { Server } from "../../../utils";
 
 const SentMessageCell = ({ conversation }) => {
   const [position, setPosition] = useState(-1);
+  const theme = useTheme();
+
   const handleClose = () => {
     setPosition(-1);
   };
+
   return (
-    <Box className={clsx("chat-msg-item", "sent-msg-item")}>
-      <Box className="chat-msg-content">
-        <Box className="chat-bubble">
+    <Box
+      sx={{
+        padding: "0px 20px",
+        marginTop: "30px",
+        display: "flex",
+        marginRight: theme.spacing(3),
+        justifyContent: "flex-end",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          marginLeft: "24px",
+          alignItems: "flex-end",
+        }}
+      >
+        <Box
+          sx={{
+            backgroundColor: theme.palette.background.paper,
+            color: theme.palette.text.primary,
+            padding: "1px 16px",
+            borderRadius: "8px 8px 0 8px",
+            maxWidth: "600px",
+            fontSize: "16px",
+            marginBottom: "8px",
+          }}
+        >
           {conversation.content.length > 0 ? (
             checkHtml(conversation.content) ? (
               parse(conversation.content)
@@ -67,13 +92,22 @@ const SentMessageCell = ({ conversation }) => {
               />
               <MediaViewer
                 position={position}
-                medias={{ preview: conversation.media.preview, name: "image" }}
+                medias={{
+                  preview: conversation.media.preview,
+                  name: "image",
+                }}
                 handleClose={handleClose}
               />
             </Box>
           )}
         </Box>
-        <Box className="chat-time">
+        <Box
+          sx={{
+            fontSize: "12px",
+            letterSpacing: "0.4px",
+            color: theme.palette.text.primary,
+          }}
+        >
           {moment(conversation.creation_date).format("hh:mm:ss")}
         </Box>
       </Box>

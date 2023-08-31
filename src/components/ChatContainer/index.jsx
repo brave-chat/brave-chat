@@ -1,11 +1,8 @@
 import React, { useEffect } from "react";
 import { Box } from "@mui/material";
-import "../style.css";
 import { useDispatch, useSelector } from "react-redux";
 import { onUserSelect, onRoomSelect } from "../../redux/appReducer/actions";
-
 import { getConversation, getRoomConversation } from "../../api/Axios";
-
 import Conversation from "../Conversation";
 import RoomConversation from "../RoomConversation";
 import ContentHeader from "../ContentHeader";
@@ -13,7 +10,6 @@ import RoomContentHeader from "../RoomContentHeader";
 import CustomImage from "../CustomImage";
 import ChatFooter from "../ChatFooter";
 import ContentLoader from "../ContentLoader";
-
 import {
   conversation,
   selectedUser,
@@ -22,15 +18,17 @@ import {
   authUser,
 } from "../../redux/appReducer/selectors";
 import { initiateRoomSocket, initiateChatSocket } from "../../api/Socket";
+import { useTheme } from "@mui/material/styles";
 
 const ChatContainer = () => {
   const dispatch = useDispatch();
   const thisConversation = useSelector(conversation);
   const thisRoomConversation = useSelector(roomConversation);
   const currentAuthUser = useSelector(authUser);
-
   const receiver = useSelector(selectedUser);
   const room = useSelector(selectedRoom);
+  const theme = useTheme();
+
   useEffect(() => {
     if (receiver && room) {
       dispatch(onUserSelect(null));
@@ -46,15 +44,30 @@ const ChatContainer = () => {
 
   if (!receiver && !room) {
     return (
-      <Box className="chat-box-root">
-        <Box mb={2}>
-          <CustomImage src={"/logo.png"} />
-        </Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flex: 1,
+        }}
+      >
+        <CustomImage src={"/logo.png"} />
       </Box>
     );
   }
+
   return (
-    <Box className="in-build-app-main-content">
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: theme.palette.background.default,
+        width: "100%",
+        height: "100%",
+        transition: "all 0.3s ease",
+      }}
+    >
       {receiver && (
         <>
           <ContentHeader user={receiver} />

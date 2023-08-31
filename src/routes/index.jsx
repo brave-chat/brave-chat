@@ -39,6 +39,8 @@ export const lightTheme = createTheme({
       primary: "#ffffff",
       default: "#ffffff", // White
       paper: "#f5f5f5", // Light Gray
+      chatFooter: "#ffffff",
+      chatHeader: "#f5f5f5",
     },
   },
 });
@@ -74,6 +76,8 @@ export const darkTheme = createTheme({
       primary: "#000000",
       default: "#2d2b2b", // Dark Gray
       paper: "#1f1f1f", // Slightly Lighter Dark Gray
+      chatFooter: "#171616",
+      chatHeader: "#171616",
     },
   },
 });

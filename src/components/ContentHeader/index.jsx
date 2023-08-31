@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Box } from "@mui/material";
 import CustomAvatar from "../CustomAvatar";
-import "../style.css";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
@@ -15,7 +14,7 @@ import DropdownMenu from "../DropdownMenu";
 import ProfileDetail from "../Sidebar/ProfileDetail";
 import { removeContact, deleteMessages } from "../../api/Axios";
 import { leaveContactSocket } from "../../api/Socket";
-import clsx from "clsx";
+import { useTheme } from "@mui/material/styles";
 
 import Popover from "@mui/material/Popover";
 const actions = [
@@ -26,16 +25,23 @@ const actions = [
 
 const ContentHeader = ({ user }) => {
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [favouriteColor] = React.useState("primary");
+  const [favouriteColor, setFavouriteColor] = React.useState(
+    theme.palette.primary.main
+  );
   const open = Boolean(anchorEl);
   const id = open ? "user-popover" : undefined;
   const divRef = React.useRef();
 
   useEffect(() => {
-    //setFavouriteColor(user.favourite === "true" ? "primary" : "")
-  }, [user]);
+    setFavouriteColor(
+      user.favourite === "true"
+        ? theme.palette.primary.main
+        : theme.palette.common.main
+    );
+  }, [user, theme]);
 
   const toggleButton = (event) => {
     event.preventDefault();
@@ -56,7 +62,6 @@ const ContentHeader = ({ user }) => {
         break;
     }
   };
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -70,32 +75,38 @@ const ContentHeader = ({ user }) => {
     dispatch(leaveContactSocket());
   };
 
-  const getStatusColor = () => {
-    if (!user.chat_status) {
-      return "#c1c1c1";
-    }
-    switch (user.chat_status.toLowerCase()) {
-      case "online":
-        return "#8dcd03";
-      case "busy":
-        return "#ff8c00";
-      case "offline":
-        return "#c1c1c1";
-      case "don't disturb":
-        return "#e00930";
-      default:
-        return "#c1c1c1";
-    }
-  };
+  const statusColor = !user.chat_status
+    ? theme.palette.text.secondary
+    : user.chat_status.toLowerCase() === "online"
+    ? theme.palette.success.main
+    : user.chat_status.toLowerCase() === "busy"
+    ? theme.palette.warning.main
+    : user.chat_status.toLowerCase() === "offline"
+    ? theme.palette.text.secondary
+    : theme.palette.error.main;
+
   return (
-    <Box className="app-content-header" ref={divRef}>
-      <IconButton className="back-btn" onClick={handleButtonClose}>
+    <Box
+      sx={{
+        backgroundColor: theme.palette.background.chatHeader,
+        padding: "11px 20px 10px 20px",
+        borderBottom: `1px solid ${theme.palette.divider}`,
+        display: "flex",
+        alignItems: "center",
+      }}
+      ref={divRef}
+    >
+      <IconButton
+        sx={{
+          marginRight: theme.spacing(1),
+        }}
+        onClick={handleButtonClose}
+      >
         <KeyboardBackspaceIcon />
       </IconButton>
       <Popover
         id={id}
         open={open}
-        className="user-popover"
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
@@ -107,14 +118,43 @@ const ContentHeader = ({ user }) => {
           horizontal: "right",
         }}
       >
-        <Box p={{ xs: 4, md: 6 }}>
-          <Box className="user-root">
+        <Box
+          p={{
+            xs: 4,
+            md: 6,
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
             <CustomAvatar src={user.profile_picture} onClick={handleClick} />
-            <Box className={clsx("user-info", "custom-user-info")}>
-              <Typography className="user-title" component="h3" variant="h6">
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                marginLeft: theme.spacing(1),
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: 18,
+                  fontWeight: "bold",
+                  lineHeight: "1.2",
+                  color: theme.palette.text.primary,
+                }}
+              >
                 {user.first_name + " " + user.last_name}
               </Typography>
-              <Typography className="user-sub-title" component="span">
+              <Typography
+                sx={{
+                  fontSize: 14,
+                  color: theme.palette.text.primary,
+                }}
+              >
                 {user.bio ? user.bio.substring(0, 30) + "..." : ""}
               </Typography>
             </Box>
@@ -124,47 +164,99 @@ const ContentHeader = ({ user }) => {
             user={user}
             userStatus={user.chat_status}
             setUserStatus={() => {}}
-            statusColor={getStatusColor()}
+            statusColor={statusColor}
           />
         </Box>
       </Popover>
-      <Box display="flex" alignItems="center">
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
         <CustomAvatar
           color="random"
           src={user.profile_picture}
           alt={user.first_name}
         />
-        <Box pl={4}>
-          <Box display="flex" alignItems="center">
-            <Typography className="title-root" component="div" variant="h5">
+        <Box
+          sx={{
+            paddingLeft: theme.spacing(2),
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: 20,
+                fontWeight: "bold",
+                color: theme.palette.text.primary,
+              }}
+            >
               {user.first_name}
             </Typography>
-            <Button ml={2} onClick={toggleButton}>
+            <Button
+              sx={{
+                marginLeft: theme.spacing(2),
+              }}
+              onClick={toggleButton}
+            >
               {favouriteColor ? (
                 <FavoriteIcon
-                  className="star-icon-root"
-                  color={favouriteColor}
+                  sx={{
+                    fontSize: 28,
+                    color: favouriteColor,
+                  }}
                 />
               ) : (
                 <FavoriteBorderIcon
-                  className="star-icon-root"
-                  color="primary"
+                  sx={{
+                    fontSize: 28,
+                    color: theme.palette.primary.main,
+                  }}
                 />
               )}
             </Button>
           </Box>
-          <Box display="flex" alignItems="center">
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
             <Box
-              className="header-status-dot"
-              backgroundColor={getStatusColor()}
+              sx={{
+                width: theme.spacing(2.5),
+                height: theme.spacing(2.5),
+                backgroundColor: statusColor,
+                borderRadius: "50%",
+                marginRight: theme.spacing(2),
+                marginLeft: theme.spacing(-4),
+                zIndex: 999,
+              }}
             />
-            <Box component="span" ml={1.5} fontSize={12} color="#fff">
+            <Typography
+              sx={{
+                fontSize: 15,
+                color: theme.palette.text.primary,
+              }}
+            >
               {user.chat_status ? user.chat_status : "  "}
-            </Box>
+            </Typography>
           </Box>
         </Box>
       </Box>
-      <Box ml="auto">
+      <Box
+        sx={{
+          marginLeft: "auto",
+        }}
+      >
         <DropdownMenu
           TriggerComponent={
             <IconButton>

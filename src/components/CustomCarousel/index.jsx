@@ -4,8 +4,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import PropTypes from "prop-types";
-import clsx from "clsx";
-import "./style.css";
 
 const getCarouselSetting = (settings) => {
   return {
@@ -24,7 +22,50 @@ const CustomCarousel = ({ data, renderRow, settings, ...rest }) => {
   return (
     <Box {...rest}>
       <Slider
-        className={clsx("slider-root", "bottom", { outline: true })}
+        sx={{
+          position: "relative",
+          ".slick-dots": {
+            left: 0,
+            right: 0,
+            zIndex: 2,
+          },
+          ".slick-prev": {
+            left: "20px",
+            backgroundColor: "#7c7c7c",
+            border: "2px solid #7c7c7c",
+            zIndex: 10,
+            "&::before": {
+              color: "rgba(0, 0, 0, 0.87)",
+            },
+          },
+          ".slick-next": {
+            right: "20px",
+            color: "#7c7c7c",
+          },
+          ".slick-dots li, li button, li button::before": {
+            width: "10px",
+            height: "10px",
+            lineHeight: "1",
+          },
+          ".slick-dots li button::before": {
+            fontSize: "0px",
+            content: '""',
+            backgroundColor: "#7c7c7c",
+            borderRadius: "50%",
+            boxSizing: "border-box",
+          },
+          ".slick-dots li.slick-active button::before": {
+            backgroundColor: "#333333",
+          },
+          ".outline .slick-dots li button::before": {
+            backgroundColor: "transparent",
+            border: "2px solid #7c7c7c",
+          },
+          "li.slick-active button::before": {
+            backgroundColor: "transparent",
+            borderColor: "#333333",
+          },
+        }}
         {...carouselSettings}
       >
         {data.map === "function"

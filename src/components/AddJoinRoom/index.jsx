@@ -14,19 +14,16 @@ import TitleIcon from "@mui/icons-material/Title";
 import DescriptionIcon from "@mui/icons-material/Description";
 import { useTheme } from "@mui/material/styles";
 
-import "./style.css";
-
 const AddJoinRoom = ({ join, open, onCloseDialog }) => {
   const [roomName, setRoomName] = useState("");
   const [roomDescription, setRoomDescription] = useState("");
-
   const [roomError, setRoomError] = useState("");
   const [roomDescriptionError, setRoomDescriptionError] = useState("");
-
   const dispatch = useDispatch();
   const theme = useTheme();
 
-  const onSubmit = () => {
+  const onSubmit = (event) => {
+    event.preventDefault();
     if (!roomName) {
       setRoomError("Room name must be valid!");
     } else if (join) {
@@ -39,105 +36,123 @@ const AddJoinRoom = ({ join, open, onCloseDialog }) => {
   };
 
   return (
-    <Dialog open={open} onClose={onCloseDialog} className="dialog-root">
-      <DialogTitle className="dialog-title-root">
+    <Dialog open={open} onClose={onCloseDialog}>
+      <DialogTitle
+        sx={{
+          fontSize: 16,
+          color: theme.palette.text.primary,
+          backgroundColor: theme.palette.grey[500],
+          border: `3px solid ${theme.palette.primary.main}`,
+        }}
+      >
         {join ? "Join" : "Create"} a Room.
       </DialogTitle>
-      <DialogContent dividers>
-        <Box
-          alignItems="center"
-          m={{ xs: 2, md: 6 }}
-          pt={{ xs: 4, md: 0 }}
-          pb={{ xs: 4, md: 0 }}
-        >
-          <Typography
-            variant="body1"
-            sx={{
-              color: "common.white",
-              ml: theme.spacing(1),
-              mb: 0,
-            }}
-          >
-            Room Name
-            <span style={{ color: "red", marginLeft: "5px" }}>*</span>
-          </Typography>
-          <AppTextInput
-            fullWidth
-            size={""}
-            className="text-field-root"
-            variant="outlined"
-            value={roomName}
-            onChange={(e) => {
-              setRoomName(e.target.value);
-              setRoomError("");
-            }}
-            helperText={roomError}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start" variant="standard">
-                  <IconButton aria-label="Room" edge="end" disabled>
-                    <TitleIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Box>
-
-        {!join ? (
+      <DialogContent
+        sx={{ backgroundColor: theme.palette.background.primary }}
+        dividers
+      >
+        <Box component="form" onSubmit={onSubmit}>
           <Box
             alignItems="center"
             m={{ xs: 2, md: 6 }}
             pt={{ xs: 4, md: 0 }}
             pb={{ xs: 4, md: 0 }}
+            sx={{
+              color: theme.palette.text.primary,
+              ml: theme.spacing(1),
+              mb: 0,
+            }}
           >
-            <Typography
-              variant="body1"
-              sx={{
-                color: "common.white",
-                ml: theme.spacing(1),
-                mb: 0,
-              }}
-            >
-              Room Description
-              <span style={{ color: "red", marginLeft: "5px" }}>*</span>
+            <Typography variant="body1">
+              Room Name
+              <span
+                style={{ color: theme.palette.error.main, marginLeft: "5px" }}
+              >
+                *
+              </span>
             </Typography>
             <AppTextInput
               fullWidth
-              size={""}
-              className="text-field-root"
+              size=""
               variant="outlined"
-              value={roomDescription}
+              value={roomName}
               onChange={(e) => {
-                setRoomDescription(e.target.value);
-                setRoomDescriptionError("");
+                setRoomName(e.target.value);
+                setRoomError("");
               }}
-              helperText={roomDescriptionError}
+              helperText={roomError}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start" variant="standard">
-                    <IconButton
-                      aria-label="Room Description"
-                      edge="end"
-                      disabled
-                    >
-                      <DescriptionIcon />
+                    <IconButton aria-label="Room" edge="end" disabled>
+                      <TitleIcon
+                        style={{ color: theme.palette.text.primary }}
+                      />
                     </IconButton>
                   </InputAdornment>
                 ),
               }}
             />
           </Box>
-        ) : null}
-        <ContentLoader variant="info" />
-        <Box display="flex" justifyContent="flex-end" mb={2}>
-          <Button onClick={onCloseDialog} color="secondary">
-            Cancel
-          </Button>
-          <Box ml={2}>
-            <Button variant="contained" color="primary" onClick={onSubmit}>
-              Add
+
+          {!join && (
+            <Box
+              alignItems="center"
+              m={{ xs: 2, md: 6 }}
+              pt={{ xs: 4, md: 0 }}
+              pb={{ xs: 4, md: 0 }}
+              sx={{
+                color: theme.palette.text.primary,
+                ml: theme.spacing(1),
+                mb: 0,
+              }}
+            >
+              <Typography variant="body1">
+                Room Description
+                <span
+                  style={{ color: theme.palette.error.main, marginLeft: "5px" }}
+                >
+                  *
+                </span>
+              </Typography>
+              <AppTextInput
+                fullWidth
+                size=""
+                variant="outlined"
+                value={roomDescription}
+                onChange={(e) => {
+                  setRoomDescription(e.target.value);
+                  setRoomDescriptionError("");
+                }}
+                helperText={roomDescriptionError}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start" variant="standard">
+                      <IconButton
+                        aria-label="Room Description"
+                        edge="end"
+                        disabled
+                      >
+                        <DescriptionIcon
+                          style={{ color: theme.palette.text.primary }}
+                        />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Box>
+          )}
+          <ContentLoader variant="info" />
+          <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
+            <Button onClick={onCloseDialog} color="secondary">
+              Cancel
             </Button>
+            <Box sx={{ ml: 2 }}>
+              <Button variant="contained" color="primary" type="submit">
+                Add
+              </Button>
+            </Box>
           </Box>
         </Box>
       </DialogContent>

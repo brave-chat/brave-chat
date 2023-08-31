@@ -204,11 +204,6 @@
   right: 0px;
   color: #000;
 }
-.MuiIconButton-root,
-.MuiSvgIcon-root {
-  font-size: 18px;
-  color: rgba(255, 255, 255, 0.6);
-}
 
 .profile-list-title {
   font-size: 10px;
