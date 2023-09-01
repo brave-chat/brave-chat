@@ -35,9 +35,6 @@ dependencies:
   axios:
     specifier: ^0.27.2
     version: 0.27.2
-  clsx:
-    specifier: ^2.0.0
-    version: 2.0.0
   emoji-picker-react:
     specifier: ^4.4.7
     version: 4.4.12(react@18.2.0)
