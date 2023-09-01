@@ -12,24 +12,27 @@ export const lightTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#1976D2", // Dark Blue
+      main: "#1976D2",
       contrastText: "#fff",
+      status: "#8dcd03",
     },
     secondary: {
-      main: "#FF9100", // Orange
+      main: "#FF9100",
       contrastText: "#fff",
     },
     error: {
-      main: "#FF5252", // Red
+      main: "#FF5252",
+      status: "#c1c1c1",
     },
     warning: {
-      main: "#FFC107", // Amber
+      main: "#FFC107",
+      status: "#ff8c00",
     },
     info: {
-      main: "#2196F3", // Blue
+      main: "#2196F3",
     },
     success: {
-      main: "#4CAF50", // Green
+      main: "#4CAF50",
     },
     text: {
       primary: "#000",
@@ -37,10 +40,13 @@ export const lightTheme = createTheme({
     },
     background: {
       primary: "#ffffff",
-      default: "#ffffff", // White
-      paper: "#f5f5f5", // Light Gray
+      default: "#ffffff",
+      paper: "#f5f5f5",
       chatFooter: "#ffffff",
       chatHeader: "#f5f5f5",
+    },
+    action: {
+      hover: "#c8c8c8",
     },
   },
 });
@@ -51,6 +57,7 @@ export const darkTheme = createTheme({
     primary: {
       main: "#1976D2",
       contrastText: "#fff",
+      status: "#8dcd03",
     },
     secondary: {
       main: "#FF9100",
@@ -58,9 +65,11 @@ export const darkTheme = createTheme({
     },
     error: {
       main: "#FF5252",
+      status: "#c1c1c1",
     },
     warning: {
       main: "#FFC107",
+      status: "#ff8c00",
     },
     info: {
       main: "#2196F3",
@@ -69,18 +78,33 @@ export const darkTheme = createTheme({
       main: "#4CAF50",
     },
     text: {
-      primary: "#ffffff", // White
-      secondary: "#aaaaaa", // Light Gray
+      primary: "#ffffff",
+      secondary: "#aaaaaa",
     },
     background: {
       primary: "#000000",
-      default: "#2d2b2b", // Dark Gray
-      paper: "#1f1f1f", // Slightly Lighter Dark Gray
+      default: "#2d2b2b",
+      paper: "#1f1f1f",
       chatFooter: "#171616",
       chatHeader: "#171616",
     },
+    action: {
+      hover: "#2f2f2f",
+    },
   },
 });
+
+const getBadgeStatusClass = () => {
+  if (data.user_status === "online") {
+    return theme.palette.primary.status;
+  }
+
+  if (data.user_status === "away") {
+    return theme.palette.warning.status;
+  }
+
+  return theme.palette.error.status;
+};
 
 const AppRoutes = () => {
   const [currentAuthUser, setCurrentAuthUser] = useState(useSelector(authUser));

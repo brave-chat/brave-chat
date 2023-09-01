@@ -1,7 +1,6 @@
 import React from "react";
 import CustomList from "../../CustomList";
 import ChatUserCell from "../ChatUserCell";
-import "../style.css";
 import NoRecordFound from "../NoRecordFound";
 
 const ChatUserList = ({ users, width, currentUser, onUserSelect }) => {

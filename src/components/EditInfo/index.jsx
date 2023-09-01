@@ -81,7 +81,7 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
           fontSize: "16px",
           color: "common.white",
           backgroundColor: "grey",
-          border: "3px solid " + theme.palette.primary.main,
+          border: `3px solid ${theme.palette.primary.main}`,
         }}
       >
         Edit Personal Information.
@@ -123,7 +123,9 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
                     startAdornment: (
                       <InputAdornment position="start" variant="standard">
                         <IconButton aria-label="First Name" edge="end" disabled>
-                          <PermIdentityIcon />
+                          <PermIdentityIcon
+                            style={{ color: theme.palette.text.primary }}
+                          />
                         </IconButton>
                       </InputAdornment>
                     ),
@@ -132,6 +134,7 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
                     width: "100%",
                     backgroundColor: theme.palette.background.paper,
                     borderColor: theme.palette.text.primary,
+                    fontSize: "16px",
                   }}
                 />
               </Grid>
@@ -164,7 +167,9 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
                     startAdornment: (
                       <InputAdornment position="start" variant="standard">
                         <IconButton aria-label="Last Name" edge="end" disabled>
-                          <PersonIcon />
+                          <PersonIcon
+                            style={{ color: theme.palette.text.primary }}
+                          />
                         </IconButton>
                       </InputAdornment>
                     ),
@@ -173,6 +178,7 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
                     width: "100%",
                     marginRight: theme.spacing(2),
                     backgroundColor: theme.palette.background.paper,
+                    fontSize: "16px",
                   }}
                 />
               </Grid>
@@ -213,7 +219,9 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
                     startAdornment: (
                       <InputAdornment position="start" variant="standard">
                         <IconButton aria-label="Bio" edge="end" disabled>
-                          <ThreePIcon />
+                          <ThreePIcon
+                            style={{ color: theme.palette.text.primary }}
+                          />
                         </IconButton>
                       </InputAdornment>
                     ),
@@ -222,6 +230,7 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
                     width: "100%",
                     marginRight: theme.spacing(2),
                     backgroundColor: theme.palette.background.paper,
+                    fontSize: "16px",
                   }}
                 />
               </Grid>
@@ -248,21 +257,52 @@ const EditPersonalInformation = ({ open, onCloseDialog }) => {
                     setErrorValues({ ...errorValues, phoneNumberError: "" });
                   }}
                   helperText={errorValues.phoneNumberError}
-                  specialLabelClass="special-label"
-                  dropdownClass="country-list"
-                  searchClass="search"
-                  selectedFlagClass="selected-flag"
-                  flagDropdownClass="flag-dropdown"
-                  countryListClass="country-list"
-                  countryCodeEditable={false}
-                  inputProps={{
-                    style: {
-                      color: theme.palette.text.primary,
-                      width: "100%",
-                      marginRight: theme.spacing(2),
-                      backgroundColor: theme.palette.background.paper,
-                      height: "1.4375em",
-                    },
+                  style={{
+                    width: "100%",
+                    marginRight: theme.spacing(2),
+                    color: theme.palette.text.primary,
+                    backgroundColor: theme.palette.background.paper,
+                    height: "1.4375em",
+                    fontSize: "16px",
+                  }}
+                  containerStyle={{ overflow: "hidden" }}
+                  inputStyle={{
+                    height: "1.4375em",
+                    fontSize: "16px",
+                    backgroundColor: theme.palette.background.paper,
+                    width: "100%",
+                  }}
+                  buttonStyle={{
+                    backgroundColor: theme.palette.background.main,
+                    top: "18px",
+                    left: "12px",
+                  }}
+                  specialLabelStyle={{
+                    backgroundColor: theme.palette.background.paper,
+                    lineHeight: "1em",
+                    top: "-22px",
+                    left: "-0.6px",
+                    fontSize: "16px",
+                  }}
+                  selectedFlagStyle={{ top: "-12px" }}
+                  countryListStyle={{
+                    color: theme.palette.text.primary,
+                    backgroundColor: theme.palette.background.main,
+                  }}
+                  countryListItemStyle={{
+                    color: theme.palette.text.primary,
+                    backgroundColor: theme.palette.background.main,
+                  }}
+                  flagDropDownStyle={{
+                    color: theme.palette.text.primary,
+                    backgroundColor: theme.palette.background.main,
+                  }}
+                  flagDropDownListItemStyle={{
+                    color: theme.palette.text.primary,
+                    backgroundColor: theme.palette.background.main,
+                  }}
+                  searchStyle={{
+                    backgroundColor: theme.palette.background.main,
                   }}
                 />
               </Grid>

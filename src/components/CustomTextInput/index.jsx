@@ -32,7 +32,7 @@ const CustomTextInput = ({
   );
 };
 
-CustomTextInput.prototype = {
+CustomTextInput.propTypes = {
   type: PropTypes.string,
   name: PropTypes.string,
   id: PropTypes.string,

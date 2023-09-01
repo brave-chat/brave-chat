@@ -25,6 +25,6 @@ const EmojiPicker = ({ onPickEmoji }) => {
 
 export default EmojiPicker;
 
-EmojiPicker.prototype = {
+EmojiPicker.propTypes = {
   onPickEmoji: PropTypes.func,
 };

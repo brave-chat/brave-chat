@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import "../style.css";
 import { useDispatch, useSelector } from "react-redux";
 import SidebarHeader from "./SidebarHeader";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatIcon from "@mui/icons-material/Chat";
 import Badge from "@mui/material/Badge";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
-import { onUserSelect } from "../../redux/appReducer/actions";
-import { getChatUsers, getContactUsers, getRoomsUser } from "../../api/Axios";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import ContactList from "./ContactList";
@@ -20,9 +17,13 @@ import {
   contacts,
   rooms,
 } from "../../redux/appReducer/selectors";
+import { onUserSelect } from "../../redux/appReducer/actions";
+import { getChatUsers, getContactUsers, getRoomsUser } from "../../api/Axios";
+import { useTheme } from "@mui/material/styles";
 
 const Sidebar = () => {
   const currentUsers = useSelector(users);
+  const theme = useTheme();
   let thisCurrentUser = useSelector(currentUser);
   const currentContacts = useSelector(contacts);
   const currentRooms = useSelector(rooms);
@@ -70,15 +71,58 @@ const Sidebar = () => {
       dispatch(getRoomsUser(searchText));
     }
   }, [dispatch, searchText, value]);
+
   return (
-    <Box className="in-build-app-sidebar">
+    <Box
+      sx={{
+        width: "360px",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: theme.palette.background.paper,
+        color: theme.palette.text.primary,
+        overflow: "hidden",
+        boxShadow: theme.shadows[3],
+        "@media screen and (max-width: 900px)": {
+          width: "300px",
+        },
+        "@media screen and (max-width: 1536px)": {
+          width: "340px",
+        },
+        "@media screen and (max-width: 767px)": {
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+          backgroundColor: theme.palette.background.paper,
+          left: 0,
+          top: 0,
+          zIndex: 3,
+        },
+        "@media screen and (max-width: 1200px)": {
+          ".chat-box-title": {
+            fontSize: "20px",
+          },
+        },
+        "@media screen and (min-width: 0px)": {
+          ".title-root": {
+            fontSize: "14px",
+          },
+          ".star-icon-root": {
+            fontSize: "18px",
+          },
+        },
+      }}
+    >
       <SidebarHeader
         user={thisCurrentUser}
         searchText={searchText}
         setSearchText={setSearchText}
       />
       <Tabs
-        className="tab-container"
+        sx={{
+          backgroundColor: theme.palette.background.default,
+          borderBottom: `1px solid ${theme.palette.divider}`,
+        }}
         value={value}
         indicatorColor="primary"
         textColor="primary"
@@ -99,19 +143,34 @@ const Sidebar = () => {
               <ChatIcon />
             </Badge>
           }
-          className="tab-root"
+          sx={{
+            fontSize: 12,
+            letterSpacing: "1.25px",
+            minWidth: "20px",
+            width: "33.3%",
+          }}
           label="Chats"
           value={1}
         />
         <Tab
           icon={<FavoriteIcon />}
-          className="tab-root"
+          sx={{
+            fontSize: 12,
+            letterSpacing: "1.25px",
+            minWidth: "20px",
+            width: "33.3%",
+          }}
           label="Contacts"
           value={2}
         />
         <Tab
           icon={<MeetingRoomIcon />}
-          className="tab-root"
+          sx={{
+            fontSize: 12,
+            letterSpacing: "1.25px",
+            minWidth: "20px",
+            width: "33.3%",
+          }}
           label="Rooms"
           value={3}
         />
