@@ -13,7 +13,6 @@ const NoRecordFound = ({ content, ...restProps }) => {
       sx={{
         color: theme.palette.text.primary,
         backgroundColor: theme.palette.background.main,
-        height: "100%",
       }}
       {...restProps}
     >

@@ -1,12 +1,13 @@
 import React from "react";
-import { Box } from "@mui/material";
-import { useDispatch } from "react-redux";
-import Typography from "@mui/material/Typography";
-import clsx from "clsx";
-import "../style.css";
+import { Box, Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import { onRoomSelect } from "../../../redux/appReducer/actions";
+import { useTheme } from "@mui/material/styles";
+import { selectedRoom } from "../../../redux/appReducer/selectors";
 
 const RoomCell = ({ data, currentUser }) => {
+  const roomSelected = useSelector(selectedRoom);
+  const theme = useTheme();
   const dispatch = useDispatch();
 
   const updateSelectedRoom = () => {
@@ -15,18 +16,52 @@ const RoomCell = ({ data, currentUser }) => {
 
   return (
     <Box
-      className={clsx("room-cell-item", {
-        active: true,
-      })}
+      sx={{
+        padding: "16px",
+        borderBottom: "1px solid rgba(0, 0, 0, 0.06)",
+        display: "flex",
+        alignItems: "center",
+        cursor: "pointer",
+        backgroundColor: theme.palette.background.main,
+        ":hover, &.active": {
+          backgroundColor: theme.palette.action.hover,
+        },
+        ...(roomSelected &&
+          roomSelected.room_name === data.room_name && {
+            backgroundColor: theme.palette.action.hover,
+          }),
+      }}
       onClick={updateSelectedRoom}
     >
-      <Box className="room-cell-info">
+      <Box>
         <Box display="flex" alignItems="center">
-          <Typography component="div" className="title-root">
+          <Typography
+            component="div"
+            sx={{
+              position: "relative",
+              fontSize: "22px",
+              color: theme.palette.text.primary,
+              "&:hover": {
+                color: "#fff",
+              },
+            }}
+          >
             # {data.room_name}
           </Typography>
         </Box>
-        <Typography className="room-root">{data.description}</Typography>
+        <Typography
+          sx={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            fontSize: "22px",
+            color: theme.palette.text.secondary,
+            paddingRight: "10px",
+            width: "100%",
+          }}
+        >
+          {data.description}
+        </Typography>
       </Box>
     </Box>
   );
