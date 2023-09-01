@@ -1,6 +1,5 @@
 import React from "react";
 import Logo from "./Logo";
-import "./style.css";
 import GitHubButton from "react-github-btn";
 import { selectedTheme } from "../../redux/appReducer/selectors";
 import { Box, IconButton } from "@mui/material";
@@ -22,14 +21,14 @@ const NavBar = () => {
 
   return (
     <header className="landing-header">
-      <div className="inner-container">
+      <Box className="inner-container">
         <nav className="inner-nav-bar">
           <Box sx={{ display: { md: "block", sm: "none", xs: "none" } }}>
             <Logo logoSource={"./logo.png"} />
           </Box>
           <ul className="nav-bar-ul">
             <li className="nav-item">
-              <div className="nav-github-btn">
+              <Box className="nav-github-btn">
                 <GitHubButton
                   data-color-scheme="dark: dark;"
                   href="https://github.com/brave-chat/brave-chat"
@@ -39,10 +38,10 @@ const NavBar = () => {
                 >
                   Star us on GitHub
                 </GitHubButton>
-              </div>
+              </Box>
             </li>
             <li className="nav-item">
-              <div className="nav-github-btn">
+              <Box className="nav-github-btn">
                 {theme.palette.mode === "light" ? (
                   <Box
                     element="span"
@@ -85,11 +84,11 @@ const NavBar = () => {
                     <Brightness4Icon sx={{ color: "common.white" }} />
                   )}
                 </IconButton>
-              </div>
+              </Box>
             </li>
           </ul>
         </nav>
-      </div>
+      </Box>
     </header>
   );
 };

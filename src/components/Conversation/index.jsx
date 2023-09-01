@@ -32,6 +32,7 @@ const Conversation = ({ conversation, selectedUser }) => {
       sx={{
         position: "relative",
         flex: 1,
+        textAlign: "center",
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-end",
@@ -45,7 +46,7 @@ const Conversation = ({ conversation, selectedUser }) => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            maxWidth: 700,
+            width: { sm: "100vw", xs: "100vw", md: "300px" },
             margin: "0 auto",
             padding: theme.spacing(2),
             backgroundColor: theme.palette.background.default,
@@ -86,6 +87,9 @@ const Conversation = ({ conversation, selectedUser }) => {
       )}
       <ScrollToBottom className="messages">
         <CustomList
+          sx={{
+            width: { sm: "100vw", xs: "100vw", md: "100%" },
+          }}
           data={conversation}
           renderRow={(conversation, index) => {
             if (conversation.type === "sent") {

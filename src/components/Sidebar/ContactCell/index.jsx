@@ -3,22 +3,24 @@ import { Badge, Box } from "@mui/material";
 import { useDispatch } from "react-redux";
 import CustomAvatar from "../../CustomAvatar";
 import Typography from "@mui/material/Typography";
-import clsx from "clsx";
-import "../style.css";
 import { onUserSelect } from "../../../redux/appReducer/actions";
+import { useTheme } from "@mui/material/styles";
+import { useSelector } from "react-redux";
+import { selectedUser } from "../../../redux/appReducer/selectors";
 
 const ContactCell = ({ data, currentUser }) => {
   const dispatch = useDispatch();
-  const getBadgeStatusClass = () => {
+  const theme = useTheme();
+  const userSelected = useSelector(selectedUser);
+
+  const getBadgeStatusColor = () => {
     if (data.chat_status === "online") {
-      return "badge-online";
+      return "#8dcd03";
     }
-
     if (data.chat_status === "busy") {
-      return "badge-busy";
+      return "#ff8c00";
     }
-
-    return "badge-offline";
+    return "#c1c1c1";
   };
 
   const updateChatSelectedUser = () => {
@@ -27,30 +29,73 @@ const ContactCell = ({ data, currentUser }) => {
 
   return (
     <Box
-      className={clsx("chat-cell-item", {
-        active: currentUser && currentUser.id === data.id,
-      })}
+      sx={{
+        padding: "16px",
+        borderBottom: "1px solid rgba(0, 0, 0, 0.06)",
+        display: "flex",
+        alignItems: "center",
+        cursor: "pointer",
+        backgroundColor: theme.palette.background.main,
+        ":hover, &.active": {
+          backgroundColor: theme.palette.action.hover,
+        },
+        ...(userSelected &&
+          userSelected.email === data.email && {
+            backgroundColor: theme.palette.action.hover,
+          }),
+      }}
       onClick={updateChatSelectedUser}
     >
-      <Box className={"chat-avatar-root"}>
+      <Box sx={{ position: "relative" }}>
         <Badge
-          classes={{ root: "status-dot", badge: getBadgeStatusClass() }}
+          sx={{
+            root: {
+              width: "10px",
+              height: "10px",
+              borderRadius: "50%",
+              border: "solid 1px #fff",
+              position: "absolute",
+              right: "4px",
+              top: "6px",
+              zIndex: 1,
+              backgroundColor: getBadgeStatusColor(),
+            },
+          }}
           variant="dot"
         >
           <CustomAvatar src={data.profile_picture} alt={data.first_name} />
         </Badge>
       </Box>
-      <Box className="chat-cell-info">
+      <Box sx={{ width: "calc(100% - 40px)", paddingLeft: "16px" }}>
         <Box display="flex" alignItems="center">
           <Typography
             component="div"
             variant="subtitle2"
-            className="title-root"
+            sx={{
+              position: "relative",
+              fontSize: "22px",
+              color: theme.palette.text.primary,
+              "&:hover, &.active": {
+                color: theme.palette.text.primary,
+              },
+            }}
           >
             {data.first_name}
           </Typography>
         </Box>
-        <Typography className="chat-root">{data.bio}</Typography>
+        <Typography
+          sx={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            fontSize: "12px",
+            color: theme.palette.text.primary,
+            paddingRight: "10px",
+            width: "calc(100% - 24px)",
+          }}
+        >
+          {data.bio}
+        </Typography>
       </Box>
     </Box>
   );

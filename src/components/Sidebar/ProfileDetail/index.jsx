@@ -1,23 +1,24 @@
 import React from "react";
-import { Box } from "@mui/material";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  Typography,
+  Button,
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DialpadIcon from "@mui/icons-material/Dialpad";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Typography from "@mui/material/Typography";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import EmailIcon from "@mui/icons-material/Email";
 import PersonIcon from "@mui/icons-material/Person";
-import Button from "@mui/material/Button";
-import clsx from "clsx";
 import UserStatus from "../UserStatus";
 import { useDispatch } from "react-redux";
 import { JWTAuth, setCurrentUserStatus } from "../../../api/Axios";
 import EditPersonalInformation from "../../EditInfo";
 import ResetPassword from "../../ResetPassword";
-import "../style.css";
+import { useTheme } from "@mui/material/styles";
 
 const ProfileDetail = ({
   currentUser,
@@ -29,6 +30,8 @@ const ProfileDetail = ({
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [edit, setEdit] = React.useState(false);
   const [showPasswordDialog, setShowPasswordDialog] = React.useState(false);
+  const theme = useTheme();
+  const dispatch = useDispatch();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -41,9 +44,11 @@ const ProfileDetail = ({
   const handleEditClose = () => {
     setEdit(false);
   };
+
   const handleShowPasswordDialog = () => {
     setShowPasswordDialog(false);
   };
+
   const onResetSubmit = () => {
     setShowPasswordDialog(true);
   };
@@ -56,18 +61,18 @@ const ProfileDetail = ({
     }
   };
 
-  const dispatch = useDispatch();
-
   const onSubmit = () => {
     dispatch(JWTAuth.onLogout());
     window.location.reload();
   };
+
   const handleEdit = () => {
     setEdit(true);
   };
+
   const getStatusColor = () => {
     if (!userStatus) {
-      return "#c1c1c1";
+      return theme.palette.grey[400];
     }
     switch (userStatus.toLowerCase()) {
       case "online":
@@ -77,81 +82,108 @@ const ProfileDetail = ({
       case "don't disturb":
         return "#E00930";
       default:
-        return "#C1C1C1";
+        return theme.palette.grey[400];
     }
   };
 
   return (
     <Box>
-      <List dense className="profile-list-title">
+      <List
+        dense
+        sx={{
+          borderBottom: `1px solid ${theme.palette.divider}`,
+          color: theme.palette.text.primary,
+        }}
+      >
         <ListItem
-          className="pointer"
+          sx={{
+            cursor: currentUser ? "pointer" : "default",
+            color: theme.palette.text.primary,
+          }}
           onClick={currentUser ? handleClick : undefined}
         >
-          <ListItemIcon className="list-icon-root">
+          <ListItemIcon sx={{ minWidth: "10px", marginRight: "20px" }}>
             <Box
-              className="profile-status-dot"
-              backgroundColor={getStatusColor()}
+              sx={{
+                width: "16px",
+                height: "16px",
+                backgroundColor: getStatusColor(),
+                borderRadius: "50%",
+                color: theme.palette.text.primary,
+              }}
             />
           </ListItemIcon>
-          <ListItemText className="text-color" primary={userStatus} />
+          <ListItemText
+            sx={{ color: theme.palette.text.primary }}
+            primary={userStatus}
+          />
         </ListItem>
       </List>
-      <Typography className="profile-list-title">
+      <Typography
+        variant="h6"
+        sx={{
+          mt: 2,
+          mb: 1,
+          textTransform: "uppercase",
+          fontSize: "10px",
+          letterSpacing: "1.5px",
+          color: theme.palette.text.primary,
+        }}
+      >
         Personal Information
       </Typography>
       {currentUser && (
-        <ListItem className="pointer">
-          <ListItemIcon className="list-icon-root" onClick={handleEdit}>
+        <ListItem sx={{ cursor: "pointer" }} onClick={handleEdit}>
+          <ListItemIcon sx={{ minWidth: "10px", marginRight: "20px" }}>
             <EditIcon />
           </ListItemIcon>
-          <ListItemText className="text-color" primary="Edit" />
+          <ListItemText sx={{ color: "text.primary" }} primary="Edit" />
         </ListItem>
       )}
 
-      <List dense className={clsx("personal-list-root", "personal-list-root")}>
+      <List dense sx={{ paddingY: 0, color: theme.palette.text.primary }}>
         <ListItem>
-          <ListItemIcon className="list-icon-root">
+          <ListItemIcon sx={{ minWidth: "10px", marginRight: "20px" }}>
             <PermIdentityIcon />
           </ListItemIcon>
           <ListItemText
-            className="text-color"
+            sx={{ color: theme.palette.text.primary }}
             primary="First Name"
             secondary={user.first_name}
           />
         </ListItem>
         <ListItem>
-          <ListItemIcon className="list-icon-root">
+          <ListItemIcon sx={{ minWidth: "10px", marginRight: "20px" }}>
             <PersonIcon />
           </ListItemIcon>
           <ListItemText
-            className="text-color"
+            sx={{ color: theme.palette.text.primary }}
             primary="Last Name"
             secondary={user.first_name}
           />
         </ListItem>
         <ListItem>
-          <ListItemIcon className="list-icon-root">
+          <ListItemIcon sx={{ minWidth: "10px", marginRight: "20px" }}>
             <EmailIcon />
           </ListItemIcon>
           <ListItemText
-            className="text-color"
+            sx={{ color: theme.palette.text.primary }}
             primary="Email Address"
             secondary={user.email}
           />
         </ListItem>
         <ListItem>
-          <ListItemIcon className="list-icon-root">
+          <ListItemIcon sx={{ minWidth: "10px", marginRight: "20px" }}>
             <DialpadIcon />
           </ListItemIcon>
           <ListItemText
-            className="text-color"
+            sx={{ color: theme.palette.text.primary }}
             primary="Phone Number"
             secondary={user.phone_number}
           />
         </ListItem>
         {currentUser && (
-          <ListItem className="sign-out-root">
+          <ListItem sx={{ borderBottom: "none" }}>
             <Box ml={0}>
               <Box>
                 <Button

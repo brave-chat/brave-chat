@@ -1,12 +1,3 @@
-@media screen and (min-width: 960px) {
-  .user-sub-title {
-    font-size: 12px;
-  }
-  .menu-root .MuiMenu-list {
-    padding: 24px;
-  }
-}
-
 .chat-cell-item {
   padding: 16px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
@@ -31,7 +22,6 @@
 }
 .chat-cell-item:hover .title-root,
 .chat-cell-item .active .title-root {
-  color: #fff;
 }
 
 .chat-cell-info {
@@ -246,7 +236,9 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding: 16px;
   margin-bottom: 12px;
+  justify-content: space-between;
 }
 .header-avatar-root {
   cursor: pointer;
@@ -266,7 +258,6 @@
 
 .user-info,
 .room-info {
-  margin-left: 16px;
   transition: all 0.3s ease;
   opacity: 1;
   visibility: visible;
@@ -280,10 +271,7 @@
   align-items: center;
   white-space: nowrap;
 }
-.user-title,
-.room-title .MuiSvgIcon-root {
-  margin-left: 16px;
-}
+
 .user-sub-title,
 .room-sub-title {
   font-size: 11px;
@@ -330,13 +318,11 @@
 
 .menu-item-root {
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  color: rgba(0, 0, 0, 0.38);
   padding-left: 0px;
   padding-right: 0px;
 }
 .menu-item-root::hover,
 .menu-item-root .active {
-  color: rgba(0, 0, 0, 0.87);
   background-color: transparent;
 }
 ,
@@ -356,25 +342,25 @@
 #user-popover > .MuiPaper-root {
   border: 3px solid blue;
   border-radius: 20px;
-  background-color: #000;
-  color: #fff;
 }
 #user-popover > .MuiPaper-root > .MuiBox-root ul li {
-  color: #fff;
 }
 
 #user-popover > .MuiPaper-root > .MuiBox-root ul li p {
-  color: #fff;
 }
 #user-popover > .MuiPaper-root > .MuiBox-root p {
-  color: #fff;
 }
 
 #user-popover > .MuiPaper-root > .MuiBox-root ul li span {
-  color: #fff;
 }
 
 .MuiPaper-root > .MuiList-root {
-  background-color: #000;
-  color: #fff;
+}
+@media screen and (min-width: 960px) {
+  .user-sub-title {
+    font-size: 12px;
+  }
+  .menu-root .MuiMenu-list {
+    padding: 24px;
+  }
 }

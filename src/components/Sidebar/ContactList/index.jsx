@@ -8,38 +8,64 @@ import NoRecordFound from "../NoRecordFound";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { fetchSuccess } from "../../../redux/appReducer/actions";
 import { useDispatch } from "react-redux";
-
-import "../style.css";
+import { useTheme } from "@mui/material/styles";
 
 const ContactList = ({ contacts, currentUser }) => {
+  const theme = useTheme();
   const [addContact, setAddContact] = React.useState(false);
   const dispatch = useDispatch();
+
   const handleAddContacClose = () => {
     setAddContact(false);
   };
+
   const handleAddContact = () => {
     dispatch(fetchSuccess(""));
     setAddContact(true);
   };
+
   return (
     <Box>
       <Box
         m={2}
         display="flex"
-        className="add-contact"
-        justifyContent="center"
+        sx={{
+          color: theme.palette.text.primary,
+          cursor: "pointer",
+          justifyContent: "center",
+          "&:hover": {
+            color: theme.palette.text.secondary,
+          },
+        }}
         onClick={handleAddContact}
       >
         <AddCircleOutlineIcon />
       </Box>
       {contacts.length > 0 ? (
-        <PerfectScrollbar className="perfect-scroll-bar-root">
+        <PerfectScrollbar
+          sx={{
+            height: "100vh",
+          }}
+        >
           <CustomList
             data={contacts}
             renderRow={(data) => {
               if (data.header) {
                 return (
-                  <Box key={data.id} className="chat-cell-header">
+                  <Box
+                    key={data.id}
+                    sx={{
+                      color: theme.palette.text.primary,
+                      borderBottom: "1px solid rgba(2, 2, 2, 0.04)",
+                      padding: "13px",
+                      fontWeight: "bold",
+                      fontSize: "15px",
+                      textTransform: "uppercase",
+                      letterSpacing: "1.5px",
+                      borderTop: "2px solid grey",
+                      borderBottom: "2px solid grey",
+                    }}
+                  >
                     {data.title}
                   </Box>
                 );

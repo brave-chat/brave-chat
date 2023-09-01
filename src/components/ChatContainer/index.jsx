@@ -46,13 +46,18 @@ const ChatContainer = () => {
     return (
       <Box
         sx={{
-          display: "flex",
+          display: { md: "flex", sm: "none", xs: "none" },
           justifyContent: "center",
           alignItems: "center",
           flex: 1,
+          backgroundColor: theme.palette.background.default,
         }}
       >
-        <CustomImage src={"/logo.png"} />
+        {theme.palette.mode === "light" ? (
+          <CustomImage src={"/dark-logo.png"} />
+        ) : (
+          <CustomImage src={"/logo.png"} />
+        )}
       </Box>
     );
   }
@@ -66,6 +71,7 @@ const ChatContainer = () => {
         width: "100%",
         height: "100%",
         transition: "all 0.3s ease",
+        zIndex: 999,
       }}
     >
       {receiver && (

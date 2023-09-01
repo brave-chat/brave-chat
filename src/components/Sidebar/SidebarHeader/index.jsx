@@ -1,35 +1,28 @@
 import React from "react";
-import { Box, InputBase, Typography } from "@mui/material";
+import { Box, InputBase, Typography, IconButton, Badge } from "@mui/material";
 import CustomAvatar from "../../CustomAvatar";
-import clsx from "clsx";
 import SearchIcon from "@mui/icons-material/Search";
-import "../style.css";
 import Popover from "@mui/material/Popover";
 import ProfileDetail from "../ProfileDetail";
 import { uploadProfilePicture } from "../../../api/Axios";
 import { useDropzone } from "react-dropzone";
-import IconButton from "@mui/material/IconButton";
-import { useTheme } from "@mui/material/styles";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { onUpdateTheme } from "../../../redux/appReducer/actions";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { selectedTheme } from "../../../redux/appReducer/selectors";
+import { useTheme } from "@mui/material/styles";
 
 const SidebarHeader = ({ user, searchText, setSearchText }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [userStatus, setUserStatus] = React.useState(user.chat_status);
   const themeMode = useSelector(selectedTheme);
   const theme = useTheme();
+  const dispatch = useDispatch();
 
   const onToggleTheme = (event) => {
     event.preventDefault();
     dispatch(onUpdateTheme(themeMode === "light" ? "dark" : "light"));
-  };
-
-  const dispatch = useDispatch();
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
   };
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -46,7 +39,7 @@ const SidebarHeader = ({ user, searchText, setSearchText }) => {
 
   const getStatusColor = () => {
     if (!userStatus) {
-      return "#c1c1c1";
+      return theme.palette.grey[400];
     }
     switch (userStatus.toLowerCase()) {
       case "online":
@@ -56,25 +49,82 @@ const SidebarHeader = ({ user, searchText, setSearchText }) => {
       case "don't disturb":
         return "#E00930";
       default:
-        return "#C1C1C1";
+        return theme.palette.grey[400];
     }
   };
 
   return (
-    <Box className="side-bar-header-root">
-      <Box className="user-root">
-        <Box onClick={handleClick} className="header-avatar-root">
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: theme.palette.background.paper,
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          padding: "10px",
+          marginBottom: "12px",
+          justifyContent: "space-between",
+        }}
+      >
+        <Box
+          onClick={(e) => setAnchorEl(e.currentTarget)}
+          sx={{
+            marginleft: "0px",
+            cursor: "pointer",
+            position: "relative",
+          }}
+        >
           <CustomAvatar src={user.profile_picture} />
           <Box
-            className="header-status-dot"
-            backgroundColor={getStatusColor()}
+            sx={{
+              width: "16px",
+              height: "16px",
+              backgroundColor: getStatusColor(),
+              borderRadius: "50%",
+              border: "solid 1px #fff",
+              position: "absolute",
+              right: "0px",
+              bottom: "0px",
+              zIndex: 1,
+            }}
           />
         </Box>
-        <Box className={clsx("user-info", "custom-user-info")}>
-          <Typography className="user-title" component="h3" variant="h6">
+        <Box
+          sx={{
+            transition: "all 0.3s ease",
+            opacity: 1,
+            visibility: "visible",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Typography
+            sx={{
+              color: theme.palette.text.primary,
+              marginBottom: "0px",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              whiteSpace: "nowrap",
+            }}
+            component="h3"
+            variant="h6"
+          >
             {user.first_name}
           </Typography>
-          <Typography className="user-sub-title" component="span">
+          <Typography
+            sx={{
+              fontSize: "13px",
+              color: theme.palette.text.secondary,
+              letterSpacing: "0.4px",
+            }}
+            component="span"
+          >
             {user.bio ? user.bio : ""}
           </Typography>
         </Box>
@@ -82,34 +132,87 @@ const SidebarHeader = ({ user, searchText, setSearchText }) => {
           onClick={onToggleTheme}
           sx={{
             top: theme.spacing(0.2),
-            left: theme.spacing(6),
           }}
         >
           {theme.palette.mode === "light" ? (
             <Brightness7Icon
-              sx={{ fontSize: 28, fontWeight: "bold", color: "common.white" }}
+              sx={{
+                fontSize: "28px",
+                fontWeight: "bold",
+                color: theme.palette.text.primary,
+              }}
             />
           ) : (
             <Brightness4Icon
-              sx={{ fontSize: 28, fontWeight: "bold", color: "common.white" }}
+              sx={{
+                fontSize: "28px",
+                fontWeight: "bold",
+                color: theme.palette.text.primary,
+              }}
             />
           )}
         </IconButton>
       </Box>
-      <Box className="search-root">
+      <Box
+        sx={{
+          position: "relative",
+          width: "100%",
+          backgroundColor: theme.palette.background.default,
+        }}
+      >
         <InputBase
-          placeholder={"Search here..."}
+          placeholder="Search here..."
           inputProps={{ "aria-label": "search" }}
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
+          sx={{
+            width: "100%",
+            padding: "5px 15px 5px 35px",
+            height: "36px",
+            borderRadius: "4px",
+            border: `1px solid ${theme.palette.divider}`,
+            color: theme.palette.text.primary,
+            fontSize: "12px",
+            backgroundColor: theme.palette.background.paper,
+            transition: "all 0.3s ease",
+            "&:focus": {
+              borderColor: theme.palette.text.primary,
+            },
+          }}
         />
-        <SearchIcon />
+        <SearchIcon
+          sx={{
+            position: "absolute",
+            left: "10px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            zIndex: 1,
+            color: theme.palette.text.primary,
+            fontSize: "20px",
+            padding: "10px 0",
+          }}
+        />
       </Box>
-
       <Popover
-        id={"user-popover"}
+        id="user-popover"
         open={Boolean(anchorEl)}
-        className="user-popover"
+        sx={{
+          ".MuiPaper-root": {
+            border: "3px solid blue",
+            borderRadius: "20px",
+            backgroundColor: theme.palette.background.paper,
+            color: theme.palette.text.primary,
+          },
+          ".MuiPaper-root .MuiBox-root ul li": {
+            color: theme.palette.text.primary,
+          },
+          ".MuiPaper-root .MuiBox-root ul li p": {
+            color: theme.palette.text.primary,
+          },
+          ".MuiPaper-root .MuiBox-root p": {
+            color: theme.palette.text.primary,
+          },
+        }}
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
@@ -122,18 +225,44 @@ const SidebarHeader = ({ user, searchText, setSearchText }) => {
         }}
       >
         <Box p={{ xs: 4, md: 6 }}>
-          <Box className="user-root">
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
             <input {...getInputProps()} />
-            <IconButton className="icon-btn-root" {...getRootProps()}>
+            <IconButton sx={{ marginBottom: "2px" }} {...getRootProps()}>
               <CustomAvatar
                 src={user.profile_picture ? user.profile_picture : ""}
               />
             </IconButton>
-            <Box className={clsx("user-info", "custom-user-info")}>
-              <Typography className="user-title" component="h3" variant="h6">
+            <Box
+              sx={{
+                transition: "all 0.3s ease",
+                opacity: 1,
+                visibility: "visible",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <Typography
+                sx={{
+                  color: theme.palette.text.primary,
+                  marginBottom: "0px",
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  whiteSpace: "nowrap",
+                }}
+                component="h3"
+                variant="h6"
+              >
                 {user.first_name}
               </Typography>
-              <Typography className="user-sub-title" component="span">
+              <Typography
+                sx={{
+                  fontSize: "11px",
+                  color: theme.palette.text.primary,
+                  letterSpacing: "0.4px",
+                }}
+                component="span"
+              >
                 {user.bio ? user.bio.substring(0, 30) + "..." : ""}
               </Typography>
             </Box>
