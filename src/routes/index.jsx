@@ -167,10 +167,6 @@ const AppRoutes = () => {
           <Route
             exact
             path="/"
-            element={<Navigate replace to="/landing" />}
-          ></Route>
-          <Route
-            path="/landing"
             element={<div className="landing">{<LandingPage />}</div>}
           ></Route>
           <Route
