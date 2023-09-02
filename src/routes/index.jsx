@@ -190,6 +190,7 @@ const AppRoutes = () => {
             element={<div className="login">{<Login />}</div>}
           ></Route>
           <Route
+            path="*"
             element={<div className="page-404">{<PageNotFound />}</div>}
           ></Route>
           <Route path="/forgot-password" element={<ForgetPassword />}></Route>

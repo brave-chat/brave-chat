@@ -21,6 +21,7 @@ import { onUpdateTheme } from "../../redux/appReducer/actions";
 import { isValidEmail } from "../../components/Helper";
 import AppTextInput from "../../components/AppTextInput";
 import NavBar from "../../components/NavBar";
+import ParticlesBackground from "../../components/ParticlesBackground";
 
 const ForgetPassword = () => {
   const dispatch = useDispatch();
@@ -73,6 +74,7 @@ const ForgetPassword = () => {
       onSubmit={onClick}
     >
       <NavBar />
+      <ParticlesBackground />
       <ContentLoader variant="info" />
 
       <Box
