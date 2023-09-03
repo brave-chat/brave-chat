@@ -75,7 +75,7 @@ const Sidebar = () => {
   return (
     <Box
       sx={{
-        width: "360px",
+        width: { md: "360px", xs: "100vw", sm: "360px" },
         height: "100%",
         display: "flex",
         flexDirection: "column",
@@ -83,14 +83,7 @@ const Sidebar = () => {
         color: theme.palette.text.primary,
         overflow: "hidden",
         boxShadow: theme.shadows[3],
-        "@media screen and (max-width: 900px)": {
-          width: "300px",
-        },
-        "@media screen and (max-width: 1536px)": {
-          width: "340px",
-        },
         "@media screen and (max-width: 767px)": {
-          width: "100%",
           height: "100%",
           position: "absolute",
           backgroundColor: theme.palette.background.paper,

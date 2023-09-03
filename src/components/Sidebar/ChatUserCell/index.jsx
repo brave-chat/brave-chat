@@ -17,16 +17,21 @@ const ChatUserCell = ({ data, currentUser, onUserSelect }) => {
   const momentDate = moment.utc().format("YYYY-MM-DD");
 
   const getBadgeStatusClass = () => {
-    if (data.chat_status === "online") {
-      return "badge-online";
+    if (!data.chat_status) {
+      return theme.palette.grey[400];
     }
-
-    if (data.chat_status === "busy") {
-      return "badge-busy";
+    switch (data.chat_status.toLowerCase()) {
+      case "online":
+        return "#8DCD03";
+      case "busy":
+        return "#FF8C00";
+      case "don't disturb":
+        return "#E00930";
+      default:
+        return theme.palette.grey[400];
     }
-
-    return "badge-offline";
   };
+
   return (
     <Box
       sx={{
@@ -47,12 +52,20 @@ const ChatUserCell = ({ data, currentUser, onUserSelect }) => {
       onClick={() => onUserSelect(data)}
     >
       <Box sx={{ position: "relative" }}>
-        <Badge
-          classes={{ root: "status-dot", badge: getBadgeStatusClass() }}
-          variant="dot"
-        >
-          <CustomAvatar src={data.profile_picture} alt={data.first_name} />
-        </Badge>
+        <CustomAvatar src={data.profile_picture} alt={data.first_name} />
+        <Box
+          sx={{
+            width: "16px",
+            height: "16px",
+            backgroundColor: getBadgeStatusClass(),
+            borderRadius: "50%",
+            border: "solid 1px #fff",
+            position: "absolute",
+            right: "0px",
+            bottom: "0px",
+            zIndex: 1,
+          }}
+        />
       </Box>
       <Box sx={{ width: "calc(100% - 40px)", paddingLeft: theme.spacing(2) }}>
         <Box sx={{ display: "flex", alignItems: "center" }}>

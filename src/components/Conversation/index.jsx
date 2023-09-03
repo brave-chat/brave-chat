@@ -32,7 +32,6 @@ const Conversation = ({ conversation, selectedUser }) => {
       sx={{
         position: "relative",
         flex: 1,
-        textAlign: "center",
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-end",
@@ -45,6 +44,7 @@ const Conversation = ({ conversation, selectedUser }) => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            textAlign: "center",
             justifyContent: "center",
             width: { sm: "100vw", xs: "100vw", md: "300px" },
             margin: "0 auto",

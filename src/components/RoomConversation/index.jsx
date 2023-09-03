@@ -14,7 +14,6 @@ const RoomConversation = ({ conversation, selectedRoom }) => {
       sx={{
         position: "relative",
         flex: 1,
-        textAlign: "center",
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-end",

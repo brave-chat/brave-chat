@@ -67,12 +67,17 @@ const RoomList = ({ rooms, currentUser }) => {
       </Box>
       {rooms.length > 0 ? (
         <PerfectScrollbar
-          sx={{
-            height: "100vh",
+          style={{
+            overflowY: "auto",
+            maxHeight: "100vh",
+            position: "absolute",
           }}
         >
           <CustomList
             data={rooms}
+            sx={{
+              width: { md: "360px", xs: "100vw", sm: "360px" },
+            }}
             renderRow={(data) => {
               if (data.header) {
                 return (

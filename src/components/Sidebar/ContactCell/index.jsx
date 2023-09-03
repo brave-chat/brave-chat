@@ -13,16 +13,21 @@ const ContactCell = ({ data, currentUser }) => {
   const theme = useTheme();
   const userSelected = useSelector(selectedUser);
 
-  const getBadgeStatusColor = () => {
-    if (data.chat_status === "online") {
-      return "#8dcd03";
+  const getBadgeStatusClass = () => {
+    if (!data.chat_status) {
+      return theme.palette.grey[400];
     }
-    if (data.chat_status === "busy") {
-      return "#ff8c00";
+    switch (data.chat_status.toLowerCase()) {
+      case "online":
+        return "#8DCD03";
+      case "busy":
+        return "#FF8C00";
+      case "don't disturb":
+        return "#E00930";
+      default:
+        return theme.palette.grey[400];
     }
-    return "#c1c1c1";
   };
-
   const updateChatSelectedUser = () => {
     dispatch(onUserSelect(data));
   };
@@ -47,24 +52,20 @@ const ContactCell = ({ data, currentUser }) => {
       onClick={updateChatSelectedUser}
     >
       <Box sx={{ position: "relative" }}>
-        <Badge
+        <Box
           sx={{
-            root: {
-              width: "10px",
-              height: "10px",
-              borderRadius: "50%",
-              border: "solid 1px #fff",
-              position: "absolute",
-              right: "4px",
-              top: "6px",
-              zIndex: 1,
-              backgroundColor: getBadgeStatusColor(),
-            },
+            width: "16px",
+            height: "16px",
+            backgroundColor: getBadgeStatusClass(),
+            borderRadius: "50%",
+            border: "solid 1px #fff",
+            position: "absolute",
+            right: "0px",
+            bottom: "0px",
+            zIndex: 1,
           }}
-          variant="dot"
-        >
-          <CustomAvatar src={data.profile_picture} alt={data.first_name} />
-        </Badge>
+        />
+        <CustomAvatar src={data.profile_picture} alt={data.first_name} />
       </Box>
       <Box sx={{ width: "calc(100% - 40px)", paddingLeft: "16px" }}>
         <Box display="flex" alignItems="center">
