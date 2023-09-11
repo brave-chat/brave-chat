@@ -42,8 +42,8 @@ dependencies:
     specifier: ^3.0.4
     version: 3.0.16(react@18.2.0)
   million:
-    specifier: 2.6.0-beta.10
-    version: 2.6.0-beta.10
+    specifier: 2.6.0-beta.13
+    version: 2.6.0-beta.13
   moment:
     specifier: ^2.29.4
     version: 2.29.4
@@ -3200,8 +3200,8 @@ packages:
       - supports-color
     dev: false
 
-  /million@2.6.0-beta.10:
-    resolution: {integrity: sha512-4iI3lLQxAJp8E1ohNbsvwR7O8YieSkc5bhEqwH9cXxcU94OWluu7oDk7BgoMJRjJIWinq+mKkb1F4L6jTH3d+A==}
+  /million@2.6.0-beta.13:
+    resolution: {integrity: sha512-EtC207FeKGJI2ohO615zS9uNPotxz3yCtXoF6Dkm5O9cQ8ep/4TJmueoR9cYy2SzUVPA34MPrYKk3J2Nw8cqMQ==}
     dependencies:
       '@babel/core': 7.22.11
       '@babel/generator': 7.22.10
